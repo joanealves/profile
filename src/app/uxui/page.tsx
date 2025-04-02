@@ -19,7 +19,11 @@ import {
     ImageIcon,
     TextIcon,
     CheckIcon,
-    Cross2Icon
+    Cross2Icon,
+    MagicWandIcon,
+    FontStyleIcon,
+    AspectRatioIcon,
+    ColorWheelIcon
 } from "@radix-ui/react-icons";
 
 // Interfaces para tipagem
@@ -36,6 +40,7 @@ interface DesignElement {
     type: string;
     label: string;
     color: string;
+    icon?: React.ReactNode;
 }
 
 interface DroppedElement {
@@ -75,23 +80,38 @@ const projectsData: Project[] = [
     }
 ];
 
-// Componentes de design arrastáveis
+// Componentes de design arrastáveis (expandido)
 const designElements: DesignElement[] = [
-    { id: "btn-1", type: "button", label: "Botão Primário", color: "bg-blue-500" },
-    { id: "btn-2", type: "button", label: "Botão Secundário", color: "bg-gray-500" },
-    { id: "card-1", type: "card", label: "Card Info", color: "bg-indigo-500" },
-    { id: "input-1", type: "input", label: "Campo de Texto", color: "bg-gray-600" },
-    { id: "toggle-1", type: "toggle", label: "Toggle Switch", color: "bg-green-500" }
+    { id: "btn-1", type: "button", label: "Botão Primário", color: "bg-blue-500", icon: <MagicWandIcon /> },
+    { id: "btn-2", type: "button", label: "Botão Secundário", color: "bg-gray-500", icon: <MagicWandIcon /> },
+    { id: "card-1", type: "card", label: "Card Info", color: "bg-indigo-500", icon: <LayoutIcon /> },
+    { id: "input-1", type: "input", label: "Campo de Texto", color: "bg-gray-600", icon: <TextIcon /> },
+    { id: "toggle-1", type: "toggle", label: "Toggle Switch", color: "bg-green-500", icon: <LayoutIcon /> },
+    { id: "img-1", type: "image", label: "Placeholder Imagem", color: "bg-purple-500", icon: <ImageIcon /> },
+    { id: "text-1", type: "text", label: "Título H1", color: "bg-yellow-600", icon: <FontStyleIcon /> },
+    { id: "text-2", type: "text", label: "Parágrafo", color: "bg-yellow-500", icon: <TextIcon /> },
+    { id: "icon-1", type: "icon", label: "Ícone UI", color: "bg-pink-500", icon: <AspectRatioIcon /> },
+    { id: "shape-1", type: "shape", label: "Forma Geométrica", color: "bg-orange-500", icon: <ColorWheelIcon /> }
 ];
 
 // Componente para o cursor personalizado
 interface CustomCursorProps {
     mousePosition: MousePosition;
+    isDragging: boolean;
+    draggedElement: string | null;
 }
 
-const CustomCursor: React.FC<CustomCursorProps> = ({ mousePosition }) => {
+const CustomCursor: React.FC<CustomCursorProps> = ({ mousePosition, isDragging, draggedElement }) => {
     const [cursorText, setCursorText] = useState("");
-    const [isInteracting, setIsInteracting] = useState(false);
+
+    // Determinar qual texto mostrar no cursor (se necessário)
+    useEffect(() => {
+        if (isDragging && draggedElement) {
+            setCursorText("+");
+        } else {
+            setCursorText("");
+        }
+    }, [isDragging, draggedElement]);
 
     return (
         <motion.div
@@ -103,9 +123,13 @@ const CustomCursor: React.FC<CustomCursorProps> = ({ mousePosition }) => {
         >
             <motion.div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-xs
-                ${isInteracting ? "bg-blue-500" : "bg-white border-2 border-blue-500"}`}
+                ${isDragging ? "bg-blue-500" : "bg-white border-2 border-blue-500"}`}
+                animate={{
+                    scale: isDragging ? 1.2 : 1,
+                    opacity: isDragging ? 0.9 : 0.7
+                }}
             >
-                {cursorText && <span className="text-white">{cursorText}</span>}
+                {cursorText && <span className="text-white text-lg">{cursorText}</span>}
             </motion.div>
         </motion.div>
     );
@@ -114,11 +138,17 @@ const CustomCursor: React.FC<CustomCursorProps> = ({ mousePosition }) => {
 // Componente para elemento de design arrastável
 interface DraggableDesignElementProps {
     element: DesignElement;
+    onDragStart: (id: string) => void;
     onDrag: (id: string, info: PanInfo) => void;
     onDragEnd: (id: string, info: PanInfo) => void;
 }
 
-const DraggableDesignElement: React.FC<DraggableDesignElementProps> = ({ element, onDrag, onDragEnd }) => {
+const DraggableDesignElement: React.FC<DraggableDesignElementProps> = ({
+    element,
+    onDragStart,
+    onDrag,
+    onDragEnd
+}) => {
     const x = useMotionValue(0);
     const y = useMotionValue(0);
 
@@ -127,13 +157,165 @@ const DraggableDesignElement: React.FC<DraggableDesignElementProps> = ({ element
             drag
             dragMomentum={false}
             style={{ x, y }}
+            onDragStart={() => onDragStart(element.id)}
             onDrag={(_, info) => onDrag(element.id, info)}
-            onDragEnd={(_, info) => onDragEnd(element.id, info)}
+            onDragEnd={(_, info) => {
+                onDragEnd(element.id, info);
+                // Reset position after drag ends
+                x.set(0);
+                y.set(0);
+            }}
             whileDrag={{ scale: 1.05, zIndex: 20 }}
             className={`${element.color} rounded-md p-3 mb-3 cursor-grab active:cursor-grabbing shadow-lg text-white flex items-center`}
         >
-            <DragHandleDots2Icon className="mr-2" />
+            {element.icon ? <span className="mr-2">{element.icon}</span> : <DragHandleDots2Icon className="mr-2" />}
             {element.label}
+        </motion.div>
+    );
+};
+
+// Componente para renderizar o elemento posicionado no canvas
+interface CanvasElementProps {
+    item: DroppedElement;
+    onRemoveElement: (instanceId: string) => void;
+    onStartDrag: (instanceId: string) => void;
+    onDragElement: (instanceId: string, newX: number, newY: number) => void;
+}
+
+const CanvasElement: React.FC<CanvasElementProps> = ({
+    item,
+    onRemoveElement,
+    onStartDrag,
+    onDragElement
+}) => {
+    const elementRef = useRef<HTMLDivElement>(null);
+    const [isDragging, setIsDragging] = useState(false);
+
+    // Cria motion values para controlar a posição
+    const x = useMotionValue(item.x);
+    const y = useMotionValue(item.y);
+
+    // Atualiza os motion values quando os props mudam
+    useEffect(() => {
+        x.set(item.x);
+        y.set(item.y);
+    }, [item.x, item.y]);
+
+    // Renderiza o elemento de design baseado no tipo
+    const renderElementContent = () => {
+        switch (item.element.type) {
+            case 'button':
+                return (
+                    <div className={`flex justify-between items-center w-full`}>
+                        <span className="mr-2">{item.element.icon || <MagicWandIcon />}</span>
+                        {item.element.label}
+                        <button
+                            onClick={() => onRemoveElement(item.instanceId)}
+                            className="ml-3 rounded-full bg-white/10 p-1 hover:bg-white/30"
+                        >
+                            <Cross2Icon />
+                        </button>
+                    </div>
+                );
+            case 'card':
+                return (
+                    <div className="w-48">
+                        <div className="flex justify-between items-center mb-2">
+                            <span>{item.element.label}</span>
+                            <button
+                                onClick={() => onRemoveElement(item.instanceId)}
+                                className="rounded-full bg-white/10 p-1 hover:bg-white/30"
+                            >
+                                <Cross2Icon />
+                            </button>
+                        </div>
+                        <div className="bg-black/30 p-2 rounded mt-2 text-sm">
+                            Conteúdo do card
+                        </div>
+                    </div>
+                );
+            case 'input':
+                return (
+                    <div className="w-40">
+                        <div className="flex justify-between items-center mb-2">
+                            <span>{item.element.label}</span>
+                            <button
+                                onClick={() => onRemoveElement(item.instanceId)}
+                                className="rounded-full bg-white/10 p-1 hover:bg-white/30"
+                            >
+                                <Cross2Icon />
+                            </button>
+                        </div>
+                        <div className="bg-black/30 p-2 rounded mt-1 text-sm border border-white/20">
+                            Nome
+                        </div>
+                    </div>
+                );
+            case 'image':
+                return (
+                    <div className="w-40">
+                        <div className="flex justify-between items-center mb-2">
+                            <span>{item.element.label}</span>
+                            <button
+                                onClick={() => onRemoveElement(item.instanceId)}
+                                className="rounded-full bg-white/10 p-1 hover:bg-white/30"
+                            >
+                                <Cross2Icon />
+                            </button>
+                        </div>
+                        <div className="bg-black/30 h-24 flex items-center justify-center border border-white/20 rounded">
+                            <ImageIcon className="w-8 h-8 text-white/50" />
+                        </div>
+                    </div>
+                );
+            default:
+                return (
+                    <div className="flex justify-between items-center">
+                        {item.element.label}
+                        <button
+                            onClick={() => onRemoveElement(item.instanceId)}
+                            className="ml-3 rounded-full bg-white/10 p-1 hover:bg-white/30"
+                        >
+                            <Cross2Icon />
+                        </button>
+                    </div>
+                );
+        }
+    };
+
+    return (
+        <motion.div
+            ref={elementRef}
+            drag
+            dragMomentum={false}
+            style={{ x, y }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            className={`absolute ${item.element.color} rounded-md p-3 shadow-lg text-white cursor-move hover:shadow-xl transition-shadow`}
+            onDragStart={() => {
+                setIsDragging(true);
+                onStartDrag(item.instanceId);
+            }}
+            onDrag={(_, info) => {
+                // Calcula a nova posição sem sair do canvas
+                const newX = Math.max(0, Math.min(info.point.x - (elementRef.current?.offsetWidth || 0) / 2,
+                    (elementRef.current?.parentElement?.offsetWidth || 0) - (elementRef.current?.offsetWidth || 0)));
+                const newY = Math.max(0, Math.min(info.point.y - (elementRef.current?.offsetHeight || 0) / 2,
+                    (elementRef.current?.parentElement?.offsetHeight || 0) - (elementRef.current?.offsetHeight || 0)));
+
+                // Atualiza a posição no componente pai
+                onDragElement(item.instanceId, newX, newY);
+            }}
+            onDragEnd={() => {
+                setIsDragging(false);
+            }}
+            whileDrag={{
+                zIndex: 30,
+                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)"
+            }}
+        >
+            {renderElementContent()}
         </motion.div>
     );
 };
@@ -142,46 +324,52 @@ const DraggableDesignElement: React.FC<DraggableDesignElementProps> = ({ element
 interface DesignCanvasProps {
     droppedElements: DroppedElement[];
     onRemoveElement: (instanceId: string) => void;
+    onStartDragElement: (instanceId: string) => void;
+    onDragElement: (instanceId: string, newX: number, newY: number) => void;
 }
 
-const DesignCanvas: React.FC<DesignCanvasProps> = ({ droppedElements, onRemoveElement }) => {
+const DesignCanvas: React.FC<DesignCanvasProps> = ({
+    droppedElements,
+    onRemoveElement,
+    onStartDragElement,
+    onDragElement
+}) => {
     return (
-        <div className="bg-gray-700 rounded-lg p-6 min-h-96 relative">
+        <div className="bg-gray-700 rounded-lg p-6 min-h-96 relative overflow-hidden">
             <div className="absolute top-4 left-4 opacity-20 text-lg">Canvas de Design</div>
 
             {/* Grade de referência */}
             <div className="absolute inset-0 grid grid-cols-12 gap-1 pointer-events-none">
                 {Array(12).fill(0).map((_, i) => (
-                    <div key={i} className="h-full border-l border-white/10" />
+                    <div key={`col-${i}`} className="h-full border-l border-white/10" />
                 ))}
                 {Array(12).fill(0).map((_, i) => (
-                    <div key={i} className="w-full border-t border-white/10" />
+                    <div key={`row-${i}`} className="w-full border-t border-white/10" />
                 ))}
             </div>
 
             {/* Elementos posicionados no canvas */}
             <AnimatePresence>
                 {droppedElements.map((item) => (
-                    <motion.div
-                        key={`${item.id}-${item.instanceId}`}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0, scale: 0.8 }}
-                        className={`absolute ${item.element.color} rounded-md p-3 shadow-lg text-white`}
-                        style={{ left: item.x, top: item.y, zIndex: 10 }}
-                    >
-                        <div className="flex justify-between items-center">
-                            {item.element.label}
-                            <button
-                                onClick={() => onRemoveElement(item.instanceId)}
-                                className="ml-3 rounded-full bg-white/10 p-1 hover:bg-white/30"
-                            >
-                                <Cross2Icon />
-                            </button>
-                        </div>
-                    </motion.div>
+                    <CanvasElement
+                        key={item.instanceId}
+                        item={item}
+                        onRemoveElement={onRemoveElement}
+                        onStartDrag={onStartDragElement}
+                        onDragElement={onDragElement}
+                    />
                 ))}
             </AnimatePresence>
+
+            {/* Mensagem quando o canvas está vazio */}
+            {droppedElements.length === 0 && (
+                <div className="absolute inset-0 flex items-center justify-center text-gray-400 pointer-events-none">
+                    <div className="text-center">
+                        <LayoutIcon className="w-12 h-12 mx-auto mb-4 opacity-30" />
+                        <p>Arraste elementos do painel esquerdo para começar a desenhar</p>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
@@ -232,10 +420,28 @@ const ProjectShowcase: React.FC = () => {
     );
 };
 
+// Componente auxiliar para ferramentas de design
+const DesignTools: React.FC = () => {
+    return (
+        <div className="bg-gray-800 rounded-lg p-4 mb-6">
+            <h3 className="text-sm font-medium mb-3 text-gray-300">Ferramentas</h3>
+            <div className="flex flex-wrap gap-2">
+                {["Seleção", "Alinhar", "Distribuir", "Agrupar", "Camadas"].map((tool) => (
+                    <Button key={tool} variant="outline" size="sm" className="text-xs">
+                        {tool}
+                    </Button>
+                ))}
+            </div>
+        </div>
+    );
+};
+
 export default function UXUI() {
     const [activeTab, setActiveTab] = useState("process");
     const [mousePosition, setMousePosition] = useState<MousePosition>({ x: 0, y: 0 });
     const [droppedElements, setDroppedElements] = useState<DroppedElement[]>([]);
+    const [isDragging, setIsDragging] = useState(false);
+    const [draggedElementId, setDraggedElementId] = useState<string | null>(null);
     const canvasRef = useRef<HTMLDivElement>(null);
 
     // Acompanhar posição do mouse
@@ -248,49 +454,86 @@ export default function UXUI() {
         return () => window.removeEventListener("mousemove", handleMouseMove);
     }, []);
 
+    // Iniciar o arrastar
+    const handleDragStart = (id: string) => {
+        setIsDragging(true);
+        setDraggedElementId(id);
+    };
+
     // Gerenciar arrastar e soltar
     const handleDrag = (id: string, info: PanInfo) => {
-        // Implementação futura para indicadores visuais durante o arrastar
+        // Mostrar indicador visual durante o arrastar
+        setIsDragging(true);
+        setDraggedElementId(id);
+
+        // Para efeitos visuais adicionais durante o arrastar
+        // (já implementados através do whileDrag no componente)
     };
 
     const handleDragEnd = (id: string, info: PanInfo) => {
         if (!canvasRef.current) return;
 
         const canvasBounds = canvasRef.current.getBoundingClientRect();
-        const x = info.point.x - canvasBounds.left;
-        const y = info.point.y - canvasBounds.top;
 
         // Verificar se o elemento foi solto dentro do canvas
         if (
-            x >= 0 &&
-            x <= canvasBounds.width &&
-            y >= 0 &&
-            y <= canvasBounds.height
+            info.point.x >= canvasBounds.left &&
+            info.point.x <= canvasBounds.right &&
+            info.point.y >= canvasBounds.top &&
+            info.point.y <= canvasBounds.bottom
         ) {
+            // Calcular posição relativa ao canvas
+            const x = info.point.x - canvasBounds.left;
+            const y = info.point.y - canvasBounds.top;
+
             const element = designElements.find(el => el.id === id);
             if (element) {
+                // Adicionar novo elemento com posição precisa
                 setDroppedElements(prev => [
                     ...prev,
                     {
                         instanceId: `${id}-${Date.now()}`,
                         element,
                         x,
-                        y,
-                        id // Adicionando id para compatibilidade com a key do React
+                        y
                     }
                 ]);
             }
         }
+
+        // Resetar estado após o drop
+        setIsDragging(false);
+        setDraggedElementId(null);
     };
 
     const handleRemoveElement = (instanceId: string) => {
         setDroppedElements(prev => prev.filter(item => item.instanceId !== instanceId));
     };
 
+    // Manipular início de arrastar elemento do canvas
+    const handleStartDragElement = (instanceId: string) => {
+        setIsDragging(true);
+    };
+
+    // Manipular arrastar elemento dentro do canvas
+    const handleDragElement = (instanceId: string, newX: number, newY: number) => {
+        setDroppedElements(prev =>
+            prev.map(item =>
+                item.instanceId === instanceId
+                    ? { ...item, x: newX, y: newY }
+                    : item
+            )
+        );
+    };
+
     return (
         <div className="bg-gray-900 text-white min-h-screen relative">
             {/* Cursor personalizado */}
-            <CustomCursor mousePosition={mousePosition} />
+            <CustomCursor
+                mousePosition={mousePosition}
+                isDragging={isDragging}
+                draggedElement={draggedElementId}
+            />
 
             <header className="p-6 flex justify-between items-center bg-gray-900/90 backdrop-blur-md sticky top-0 z-20">
                 <Link href="/">
@@ -344,7 +587,7 @@ export default function UXUI() {
                     </TabsList>
 
                     <TabsContent value="process" className="space-y-12">
-                        {/* Processo de Design - Mantendo o conteúdo original e melhorando */}
+                        {/* Processo de Design */}
                         <motion.div
                             className="grid grid-cols-1 md:grid-cols-2 gap-8"
                             initial={{ opacity: 0 }}
@@ -454,6 +697,7 @@ export default function UXUI() {
                                     <DraggableDesignElement
                                         key={element.id}
                                         element={element}
+                                        onDragStart={handleDragStart}
                                         onDrag={handleDrag}
                                         onDragEnd={handleDragEnd}
                                     />
@@ -479,6 +723,8 @@ export default function UXUI() {
                                 <DesignCanvas
                                     droppedElements={droppedElements}
                                     onRemoveElement={handleRemoveElement}
+                                    onStartDragElement={handleStartDragElement}
+                                    onDragElement={handleDragElement}
                                 />
 
                                 <div className="mt-4 flex gap-4 justify-end">
