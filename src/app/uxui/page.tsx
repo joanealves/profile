@@ -190,6 +190,8 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
 }) => {
     const elementRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState(false);
+    const [editableText, setEditableText] = useState("Nome");
+    const [isEditing, setIsEditing] = useState(false);
 
     // Cria motion values para controlar a posição
     const x = useMotionValue(item.x);
@@ -201,6 +203,23 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
         y.set(item.y);
     }, [item.x, item.y]);
 
+    // Guarda a posição atual do canvas para cálculos
+    const [canvasBounds, setCanvasBounds] = useState({ left: 0, top: 0, width: 0, height: 0 });
+    
+    // Atualiza bounds quando o elemento é renderizado
+    useEffect(() => {
+        if (elementRef.current && elementRef.current.parentElement) {
+            const parentBounds = elementRef.current.parentElement.getBoundingClientRect();
+            setCanvasBounds({
+                left: parentBounds.left,
+                top: parentBounds.top,
+                width: parentBounds.width,
+                height: parentBounds.height
+            });
+        }
+    }, []);
+
+    // Renderiza o elemento de design baseado no tipo
     // Renderiza o elemento de design baseado no tipo
     const renderElementContent = () => {
         switch (item.element.type) {
@@ -210,7 +229,10 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
                         <span className="mr-2">{item.element.icon || <MagicWandIcon />}</span>
                         {item.element.label}
                         <button
-                            onClick={() => onRemoveElement(item.instanceId)}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onRemoveElement(item.instanceId);
+                            }}
                             className="ml-3 rounded-full bg-white/10 p-1 hover:bg-white/30"
                         >
                             <Cross2Icon />
@@ -223,7 +245,10 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
                         <div className="flex justify-between items-center mb-2">
                             <span>{item.element.label}</span>
                             <button
-                                onClick={() => onRemoveElement(item.instanceId)}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    onRemoveElement(item.instanceId);
+                                }}
                                 className="rounded-full bg-white/10 p-1 hover:bg-white/30"
                             >
                                 <Cross2Icon />
@@ -240,14 +265,38 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
                         <div className="flex justify-between items-center mb-2">
                             <span>{item.element.label}</span>
                             <button
-                                onClick={() => onRemoveElement(item.instanceId)}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    onRemoveElement(item.instanceId);
+                                }}
                                 className="rounded-full bg-white/10 p-1 hover:bg-white/30"
                             >
                                 <Cross2Icon />
                             </button>
                         </div>
-                        <div className="bg-black/30 p-2 rounded mt-1 text-sm border border-white/20">
-                            Nome
+                        <div
+                            className="bg-black/30 p-2 rounded mt-1 text-sm border border-white/20"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                if (!isDragging) {
+                                    setIsEditing(true);
+                                }
+                            }}
+                        >
+                            {isEditing ? (
+                                <input
+                                    type="text"
+                                    value={editableText}
+                                    onChange={(e) => setEditableText(e.target.value)}
+                                    onBlur={() => setIsEditing(false)}
+                                    onKeyDown={(e) => e.key === 'Enter' && setIsEditing(false)}
+                                    className="bg-transparent w-full outline-none text-white"
+                                    autoFocus
+                                    onClick={(e) => e.stopPropagation()}
+                                />
+                            ) : (
+                                editableText
+                            )}
                         </div>
                     </div>
                 );
@@ -257,7 +306,10 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
                         <div className="flex justify-between items-center mb-2">
                             <span>{item.element.label}</span>
                             <button
-                                onClick={() => onRemoveElement(item.instanceId)}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    onRemoveElement(item.instanceId);
+                                }}
                                 className="rounded-full bg-white/10 p-1 hover:bg-white/30"
                             >
                                 <Cross2Icon />
@@ -268,12 +320,54 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
                         </div>
                     </div>
                 );
+            case 'text':
+                return (
+                    <div className="w-40">
+                        <div className="flex justify-between items-center mb-2">
+                            <span>{item.element.label}</span>
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    onRemoveElement(item.instanceId);
+                                }}
+                                className="rounded-full bg-white/10 p-1 hover:bg-white/30"
+                            >
+                                <Cross2Icon />
+                            </button>
+                        </div>
+                        <div
+                            className="p-2 rounded mt-1 text-sm"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                if (!isDragging) {
+                                    setIsEditing(true);
+                                }
+                            }}
+                        >
+                            {isEditing ? (
+                                <textarea
+                                    value={editableText}
+                                    onChange={(e) => setEditableText(e.target.value)}
+                                    onBlur={() => setIsEditing(false)}
+                                    className="bg-black/30 w-full outline-none text-white resize-none"
+                                    autoFocus
+                                    onClick={(e) => e.stopPropagation()}
+                                />
+                            ) : (
+                                <p>{editableText}</p>
+                            )}
+                        </div>
+                    </div>
+                );
             default:
                 return (
                     <div className="flex justify-between items-center">
                         {item.element.label}
                         <button
-                            onClick={() => onRemoveElement(item.instanceId)}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                onRemoveElement(item.instanceId);
+                            }}
                             className="ml-3 rounded-full bg-white/10 p-1 hover:bg-white/30"
                         >
                             <Cross2Icon />
@@ -282,7 +376,6 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
                 );
         }
     };
-
     return (
         <motion.div
             ref={elementRef}
@@ -298,13 +391,24 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
                 onStartDrag(item.instanceId);
             }}
             onDrag={(_, info) => {
-                // Calcula a nova posição sem sair do canvas
-                const newX = Math.max(0, Math.min(info.point.x - (elementRef.current?.offsetWidth || 0) / 2,
-                    (elementRef.current?.parentElement?.offsetWidth || 0) - (elementRef.current?.offsetWidth || 0)));
-                const newY = Math.max(0, Math.min(info.point.y - (elementRef.current?.offsetHeight || 0) / 2,
-                    (elementRef.current?.parentElement?.offsetHeight || 0) - (elementRef.current?.offsetHeight || 0)));
+                if (!elementRef.current || !elementRef.current.parentElement) return;
 
-                // Atualiza a posição no componente pai
+                const canvasWidth = elementRef.current.parentElement.offsetWidth;
+                const canvasHeight = elementRef.current.parentElement.offsetHeight;
+                const elementWidth = elementRef.current.offsetWidth;
+                const elementHeight = elementRef.current.offsetHeight;
+
+                // Calcular nova posição mantendo o elemento dentro do canvas
+                const newX = Math.max(0, Math.min(
+                    info.point.x - canvasBounds.left,
+                    canvasWidth - elementWidth
+                ));
+                const newY = Math.max(0, Math.min(
+                    info.point.y - canvasBounds.top,
+                    canvasHeight - elementHeight
+                ));
+
+                // Atualizar posição no componente pai
                 onDragElement(item.instanceId, newX, newY);
             }}
             onDragEnd={() => {
@@ -319,7 +423,6 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
         </motion.div>
     );
 };
-
 // Componente para área de canvas
 interface DesignCanvasProps {
     droppedElements: DroppedElement[];
@@ -517,15 +620,28 @@ export default function UXUI() {
 
     // Manipular arrastar elemento dentro do canvas
     const handleDragElement = (instanceId: string, newX: number, newY: number) => {
-        setDroppedElements(prev =>
-            prev.map(item =>
-                item.instanceId === instanceId
-                    ? { ...item, x: newX, y: newY }
-                    : item
-            )
-        );
-    };
+        // Garantir que os valores estão dentro dos limites
+        if (canvasRef.current) {
+            const canvasWidth = canvasRef.current.offsetWidth;
+            const canvasHeight = canvasRef.current.offsetHeight;
 
+            // Encontrar o elemento atual
+            const currentElement = droppedElements.find(item => item.instanceId === instanceId);
+            if (!currentElement) return;
+
+            // Ajustar para garantir que fique dentro do canvas (com margem de segurança)
+            const boundedX = Math.max(0, Math.min(newX, canvasWidth - 50));
+            const boundedY = Math.max(0, Math.min(newY, canvasHeight - 50));
+
+            setDroppedElements(prev =>
+                prev.map(item =>
+                    item.instanceId === instanceId
+                        ? { ...item, x: boundedX, y: boundedY }
+                        : item
+                )
+            );
+        }
+    };
     return (
         <div className="bg-gray-900 text-white min-h-screen relative">
             {/* Cursor personalizado */}
