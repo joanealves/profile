@@ -148,9 +148,8 @@ export default function Portfolio() {
   ];
 
   const skills = [
-    "React", "TypeScript", "Next.js",
-    "Django", "FastAPI", "Tailwind",
-    "UX/UI Design", "Framer Motion"
+    "JavaScript", "React", "TypeScript", "Next.js",
+    "Tailwind", "Vite", "UX/UI Design", "Figma", "Framer Motion", "Python", "Django", "FastAPI", "Node", "PHP"
   ];
 
   const contactLinks = [
@@ -195,7 +194,8 @@ export default function Portfolio() {
                 { label: "Sobre", href: "#about" },
                 { label: "Projetos", href: "#projects" },
                 { label: "Skills", href: "#skills" },
-                { label: "Contato", href: "#contact" }
+                { label: "Contato", href: "#contact" },
+                { label: "UX/UI", href: "/uxui" }
               ].map(({ label, href }) => (
                 <li key={label}>
                   <motion.a
