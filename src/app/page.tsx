@@ -392,8 +392,7 @@ export default function Portfolio() {
             variants={fadeInUpVariants}
             custom={1}
           >
-            Desenvolvedora Full Stack com paixão por criar interfaces intuitivas e eficientes.
-            Combino expertise técnica em React, TypeScript, Django e FastAPI com um olhar atento ao design UX/UI.
+            Meu caminho na tecnologia começou pelo design. Trabalhei em agências, criando visuais e identidades para marcas. Foi nesse universo que conheci o UX/UI e me apaixonei por entender como as pessoas interagem com interfaces digitais. Durante a pandemia, me aprofundei ainda mais, fiz cursos, bootcamps e comecei a programar para dar vida às minhas ideias. Hoje, como desenvolvedora Full Stack, combino design e código para criar produtos intuitivos, acessíveis e funcionais.
           </motion.p>
         </motion.section>
 
