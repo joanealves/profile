@@ -7,6 +7,8 @@ import {
   LinkedInLogoIcon,
   EnvelopeClosedIcon,
   ChatBubbleIcon,
+  HamburgerMenuIcon,
+  Cross1Icon,
 } from "@radix-ui/react-icons";
 import {
   Card,
@@ -14,6 +16,9 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
+
+import Image from "next/image";
+
 
 import NeuralNetworkBackground from "../components/NeuralNetworkBackground";
 
@@ -25,7 +30,7 @@ const fadeInUpVariants = {
     y: 0,
     transition: {
       duration: 0.7,
-      ease: [0.25, 0.1, 0.25, 1.0], 
+      ease: [0.25, 0.1, 0.25, 1.0],
       delay: custom * 0.1
     }
   })
@@ -121,13 +126,31 @@ const ProjectCard = ({
 
 export default function Portfolio() {
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const headerOpacity = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
 
   useEffect(() => {
     // Set loaded state after component mounts to enable animations
     setIsLoaded(true);
-  }, []);
+
+    // Previne o scroll quando o menu está aberto
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isMenuOpen]);
+
+  // Fecha o menu mobile quando um item é clicado
+  const handleNavItemClick = (id: string) => {
+    setIsMenuOpen(false);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const projects = [
     {
@@ -149,7 +172,7 @@ export default function Portfolio() {
 
   const skills = [
     "JavaScript", "React", "TypeScript", "Next.js",
-    "Tailwind", "Vite", "UX/UI Design", "Figma", "Framer Motion", "Python", "Django", "FastAPI", "Node", "PHP"
+    "Tailwind", "Vite", "UX/UI Design", "Figma", "Framer Motion", "Python", "Django", "FastAPI", "Node", "PHP", "Banco de Dados", "Sql", "Postgres", "Api", "Git"
   ];
 
   const contactLinks = [
@@ -170,10 +193,47 @@ export default function Portfolio() {
     },
     {
       href: "https://wa.me/5531985201743",
-      icon: <ChatBubbleIcon />,  
+      icon: <ChatBubbleIcon />,
       label: "WhatsApp"
     }
   ];
+
+  const navItems = [
+    { label: "Sobre", href: "#about" },
+    { label: "Projetos", href: "#projects" },
+    { label: "Skills", href: "#skills" },
+    { label: "Contato", href: "#contact" },
+    { label: "UX/UI", href: "/uxui" }
+  ];
+
+  // Variantes para animação do menu mobile
+  const mobileMenuVariants = {
+    closed: {
+      opacity: 0,
+      x: "100%",
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 40
+      }
+    },
+    open: {
+      opacity: 1,
+      x: "0%",
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 40,
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const mobileNavItemVariants = {
+    closed: { opacity: 0, x: 20 },
+    open: { opacity: 1, x: 0 }
+  };
 
   return (
     <div className="bg-gray-900 text-white min-h-screen relative">
@@ -187,16 +247,21 @@ export default function Portfolio() {
           style={{ opacity: headerOpacity }}
           role="banner"
         >
-          <h1 className="text-2xl font-bold">Joane Alves</h1>
-          <nav aria-label="Navegação Principal">
+          <div className="flex items-center">
+            <Image
+              src="/Logo.png"
+              alt="Logo Joane Alves"
+              width={40}
+              height={40}
+              className="mr-2"
+            />
+            <h1 className="text-2xl font-bold">Joane Alves</h1>
+          </div>
+
+          {/* Menu Desktop */}
+          <nav className="hidden md:block" aria-label="Navegação Principal">
             <ul className="flex gap-6">
-              {[
-                { label: "Sobre", href: "#about" },
-                { label: "Projetos", href: "#projects" },
-                { label: "Skills", href: "#skills" },
-                { label: "Contato", href: "#contact" },
-                { label: "UX/UI", href: "/uxui" }
-              ].map(({ label, href }) => (
+              {navItems.map(({ label, href }) => (
                 <li key={label}>
                   <motion.a
                     href={href}
@@ -210,7 +275,63 @@ export default function Portfolio() {
               ))}
             </ul>
           </nav>
+
+          {/* Botão Menu Mobile */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden text-white p-2"
+            aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={isMenuOpen}
+          >
+            {isMenuOpen ? <Cross1Icon width={24} height={24} /> : <HamburgerMenuIcon width={24} height={24} />}
+          </button>
         </motion.header>
+
+        {/* Menu Mobile - Overlay com blur e cor*/}
+        <motion.div
+          className={`fixed inset-0 bg-black/70 backdrop-blur-md md:hidden z-40 ${isMenuOpen ? "block" : "hidden"}`}
+          onClick={() => setIsMenuOpen(false)}
+          animate={isMenuOpen ? "open" : "closed"}
+          initial="closed"
+          variants={{
+            open: { opacity: 1 },
+            closed: { opacity: 0, display: "none" }
+          }}
+        />
+
+        {/* Menu Mobile - Sidebar com fundo escuro e opaco */}
+        <motion.nav
+          className={`fixed top-0 right-0 bottom-0 w-64 bg-gray-900 shadow-xl border-l border-gray-800 z-50 md:hidden p-6 pt-20 ${isMenuOpen ? "block" : "hidden"}`}
+          animate={isMenuOpen ? "open" : "closed"}
+          initial="closed"
+          variants={mobileMenuVariants}
+          aria-hidden={!isMenuOpen}
+        >
+          <button
+            className="absolute top-6 right-6 text-white"
+            onClick={() => setIsMenuOpen(false)}
+            aria-label="Fechar menu"
+          >
+            <Cross1Icon width={24} height={24} />
+          </button>
+
+          <ul className="flex flex-col gap-6">
+            {navItems.map(({ label, href }) => (
+              <motion.li key={label} variants={mobileNavItemVariants}>
+                <a
+                  href={href}
+                  className="text-xl font-medium text-white hover:text-purple-400 transition-colors block py-2"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavItemClick(href.substring(1));
+                  }}
+                >
+                  {label}
+                </a>
+              </motion.li>
+            ))}
+          </ul>
+        </motion.nav>
 
         {/* Hero Section with Staggered Animation */}
         <motion.section
