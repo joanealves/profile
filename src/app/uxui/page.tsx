@@ -844,10 +844,11 @@ export default function UXUI() {
                                 />
 
                                 <div className="mt-4 flex gap-4 justify-end">
-                                    <Button variant="outline" onClick={() => setDroppedElements([])}>
-                                        Limpar Canvas
-                                    </Button>
-                                    <Button variant="default">
+                                    <Button className="border border-purple-500 text-purple-400 bg-opacity-10 backdrop-blur-md hover:bg-purple-600 hover:text-white transition-all" onClick={() => setDroppedElements([])}>
+    Limpar Canvas
+</Button>
+
+                                    <Button className="bg-gradient-to-r from-green-500 to-green-700 text-white hover:from-green-600 hover:to-green-800">
                                         Exportar Design
                                     </Button>
                                 </div>
