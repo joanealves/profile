@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, AnimatePresence, PanInfo } from "framer-motion";
+import html2canvas from 'html2canvas';
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
@@ -180,13 +181,17 @@ interface CanvasElementProps {
     onRemoveElement: (instanceId: string) => void;
     onStartDrag: (instanceId: string) => void;
     onDragElement: (instanceId: string, newX: number, newY: number) => void;
+    isFocused?: boolean;
+    onFocus: (instanceId: string) => void;
 }
 
 const CanvasElement: React.FC<CanvasElementProps> = ({
     item,
     onRemoveElement,
     onStartDrag,
-    onDragElement
+    onDragElement,
+    isFocused = false,
+    onFocus
 }) => {
     const elementRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState(false);
@@ -201,11 +206,11 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
     useEffect(() => {
         x.set(item.x);
         y.set(item.y);
-    }, [item.x, item.y]);
+    }, [item.x, item.y, x, y]);
 
     // Guarda a posição atual do canvas para cálculos
     const [canvasBounds, setCanvasBounds] = useState({ left: 0, top: 0, width: 0, height: 0 });
-    
+
     // Atualiza bounds quando o elemento é renderizado
     useEffect(() => {
         if (elementRef.current && elementRef.current.parentElement) {
@@ -217,10 +222,25 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
                 height: parentBounds.height
             });
         }
+
+        // Atualizar as dimensões quando a janela for redimensionada
+        const handleResize = () => {
+            if (elementRef.current && elementRef.current.parentElement) {
+                const parentBounds = elementRef.current.parentElement.getBoundingClientRect();
+                setCanvasBounds({
+                    left: parentBounds.left,
+                    top: parentBounds.top,
+                    width: parentBounds.width,
+                    height: parentBounds.height
+                });
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Renderiza o elemento de design baseado no tipo
-    // Renderiza o elemento de design baseado no tipo
+    // Renderiza o elemento baseado no tipo
     const renderElementContent = () => {
         switch (item.element.type) {
             case 'button':
@@ -376,19 +396,26 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
                 );
         }
     };
+
     return (
         <motion.div
             ref={elementRef}
             drag
             dragMomentum={false}
-            style={{ x, y }}
+            style={{
+                x,
+                y,
+                zIndex: isDragging ? 9999 : (isFocused ? 100 : 50) // CORRIGIDO: Aumentei todos os z-index
+            }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.8 }}
-            className={`absolute ${item.element.color} rounded-md p-3 shadow-lg text-white cursor-move hover:shadow-xl transition-shadow`}
+            className={`absolute ${item.element.color} rounded-md p-3 shadow-lg text-white cursor-move hover:shadow-xl transition-shadow ${isFocused ? 'ring-2 ring-white/60' : ''}`}
+            onClick={() => onFocus(item.instanceId)}
             onDragStart={() => {
                 setIsDragging(true);
                 onStartDrag(item.instanceId);
+                onFocus(item.instanceId);
             }}
             onDrag={(_, info) => {
                 if (!elementRef.current || !elementRef.current.parentElement) return;
@@ -415,30 +442,36 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
                 setIsDragging(false);
             }}
             whileDrag={{
-                zIndex: 30,
-                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)"
+                zIndex: 9999,
+                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.5)",
+                scale: 1.02
             }}
         >
             {renderElementContent()}
         </motion.div>
     );
 };
+
 // Componente para área de canvas
 interface DesignCanvasProps {
     droppedElements: DroppedElement[];
     onRemoveElement: (instanceId: string) => void;
     onStartDragElement: (instanceId: string) => void;
     onDragElement: (instanceId: string, newX: number, newY: number) => void;
+    onFocusElement: (instanceId: string) => void;
+    focusedElementId: string | null;
 }
 
 const DesignCanvas: React.FC<DesignCanvasProps> = ({
     droppedElements,
     onRemoveElement,
     onStartDragElement,
-    onDragElement
+    onDragElement,
+    onFocusElement,
+    focusedElementId
 }) => {
     return (
-        <div className="bg-gray-700 rounded-lg p-6 min-h-96 relative overflow-hidden">
+        <div className="bg-gray-700 rounded-lg p-6 min-h-[500px] h-[calc(100vh-300px)] relative overflow-hidden z-10"> {/* CORRIGIDO: Aumentei altura mínima e adicionei altura responsiva */}
             <div className="absolute top-4 left-4 opacity-20 text-lg">Canvas de Design</div>
 
             {/* Grade de referência */}
@@ -460,6 +493,8 @@ const DesignCanvas: React.FC<DesignCanvasProps> = ({
                         onRemoveElement={onRemoveElement}
                         onStartDrag={onStartDragElement}
                         onDragElement={onDragElement}
+                        isFocused={focusedElementId === item.instanceId}
+                        onFocus={onFocusElement}
                     />
                 ))}
             </AnimatePresence>
@@ -476,6 +511,7 @@ const DesignCanvas: React.FC<DesignCanvasProps> = ({
         </div>
     );
 };
+
 
 // Componente para showcase de projetos
 const ProjectShowcase: React.FC = () => {
@@ -545,6 +581,7 @@ export default function UXUI() {
     const [droppedElements, setDroppedElements] = useState<DroppedElement[]>([]);
     const [isDragging, setIsDragging] = useState(false);
     const [draggedElementId, setDraggedElementId] = useState<string | null>(null);
+    const [focusedElementId, setFocusedElementId] = useState<string | null>(null);
     const canvasRef = useRef<HTMLDivElement>(null);
 
     // Acompanhar posição do mouse
@@ -568,9 +605,6 @@ export default function UXUI() {
         // Mostrar indicador visual durante o arrastar
         setIsDragging(true);
         setDraggedElementId(id);
-
-        // Para efeitos visuais adicionais durante o arrastar
-        // (já implementados através do whileDrag no componente)
     };
 
     const handleDragEnd = (id: string, info: PanInfo) => {
@@ -591,16 +625,22 @@ export default function UXUI() {
 
             const element = designElements.find(el => el.id === id);
             if (element) {
+                // Criar instância única
+                const instanceId = `${id}-${Date.now()}`;
+
                 // Adicionar novo elemento com posição precisa
                 setDroppedElements(prev => [
                     ...prev,
                     {
-                        instanceId: `${id}-${Date.now()}`,
+                        instanceId,
                         element,
                         x,
                         y
                     }
                 ]);
+
+                // Focar no novo elemento
+                setFocusedElementId(instanceId);
             }
         }
 
@@ -609,13 +649,20 @@ export default function UXUI() {
         setDraggedElementId(null);
     };
 
+
     const handleRemoveElement = (instanceId: string) => {
         setDroppedElements(prev => prev.filter(item => item.instanceId !== instanceId));
+
+        // Se o elemento removido estava em foco, remove o foco
+        if (focusedElementId === instanceId) {
+            setFocusedElementId(null);
+        }
     };
 
     // Manipular início de arrastar elemento do canvas
     const handleStartDragElement = (instanceId: string) => {
         setIsDragging(true);
+        setFocusedElementId(instanceId);
     };
 
     // Manipular arrastar elemento dentro do canvas
@@ -642,8 +689,88 @@ export default function UXUI() {
             );
         }
     };
+
+    // Função para exportar o canvas
+    const exportCanvas = async () => {
+        if (!canvasRef.current) return;
+
+        try {
+            // Feedback visual de que está processando
+            const exportBtn = document.getElementById('export-btn');
+            if (exportBtn) {
+                exportBtn.innerText = 'Exportando...';
+                exportBtn.setAttribute('disabled', 'true');
+            }
+
+            // Encontrar o elemento canvas diretamente
+            const canvasElement = canvasRef.current.querySelector('.bg-gray-700') as HTMLElement;
+            if (!canvasElement) return;
+
+            // Adicionar classe temporária para melhorar a exportação
+            canvasElement.classList.add('exporting');
+
+            // Usar html2canvas para capturar o conteúdo do canvas
+            const canvas = await html2canvas(canvasElement, {
+                backgroundColor: '#374151', // bg-gray-700
+                scale: 2, // Qualidade da exportação
+                logging: false,
+                useCORS: true,
+                allowTaint: true, // Permitir conteúdo de outras origens
+                foreignObjectRendering: true // Melhor renderização de elementos complexos
+            });
+
+            // Remover classe temporária
+            canvasElement.classList.remove('exporting');
+
+            // Converter para URL de dados
+            const image = canvas.toDataURL('image/png');
+
+            // Criar link para download
+            const link = document.createElement('a');
+            link.download = `design-canvas-${new Date().toISOString().split('T')[0]}.png`;
+            link.href = image;
+            link.click();
+
+            // Restaurar o botão
+            if (exportBtn) {
+                exportBtn.innerText = 'Exportar Design';
+                exportBtn.removeAttribute('disabled');
+            }
+        } catch (error) {
+            console.error('Erro ao exportar o canvas:', error);
+            alert('Ocorreu um erro ao exportar o design. Por favor, tente novamente.');
+
+            // Restaurar o botão em caso de erro
+            const exportBtn = document.getElementById('export-btn');
+            if (exportBtn) {
+                exportBtn.innerText = 'Exportar Design';
+                exportBtn.removeAttribute('disabled');
+            }
+        }
+    };
+
     return (
         <div className="bg-gray-900 text-white min-h-screen relative">
+            {/* Estilos globais para efeitos dos botões */}
+            <style jsx global>{`
+                .exporting {
+                    pointer-events: none;
+                }
+                .canvas-button:active {
+                    transform: translateY(1px);
+                }
+                .canvas-element-focused {
+                    outline: 2px solid rgba(255, 255, 255, 0.5);
+                }
+                /* Adicione estas regras para melhorar o comportamento do drag */
+                .react-draggable {
+                    z-index: 100 !important;
+                }
+                .react-draggable-dragging {
+                    z-index: 9999 !important;
+                }
+            `}</style>
+
             {/* Cursor personalizado */}
             <CustomCursor
                 mousePosition={mousePosition}
@@ -835,18 +962,20 @@ export default function UXUI() {
                             </div>
 
                             {/* Canvas de design interativo */}
-                            <div className="col-span-1 lg:col-span-4" ref={canvasRef}>
+                            <div className="col-span-1 lg:col-span-4" ref={canvasRef} style={{ position: 'relative', zIndex: 1 }}>
                                 <DesignCanvas
                                     droppedElements={droppedElements}
                                     onRemoveElement={handleRemoveElement}
                                     onStartDragElement={handleStartDragElement}
                                     onDragElement={handleDragElement}
+                                    onFocusElement={setFocusedElementId}  
+                                    focusedElementId={focusedElementId}
                                 />
 
                                 <div className="mt-4 flex gap-4 justify-end">
                                     <Button className="border border-purple-500 text-purple-400 bg-opacity-10 backdrop-blur-md hover:bg-purple-600 hover:text-white transition-all" onClick={() => setDroppedElements([])}>
-    Limpar Canvas
-</Button>
+                                    Limpar Canvas
+                                </Button>
 
                                     <Button className="bg-gradient-to-r from-green-500 to-green-700 text-white hover:from-green-600 hover:to-green-800">
                                         Exportar Design
