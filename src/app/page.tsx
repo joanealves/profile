@@ -22,6 +22,7 @@ import Image from "next/image";
 
 import EnhancedSkillsSection from "../components/EnhancedSkillsSection";
 import NeuralNetworkBackground from "../components/NeuralNetworkBackground";
+import Footer from "../components/Footer";
 
 // Variantes de animação aprimoradas
 const fadeInUpVariants = {
@@ -490,11 +491,7 @@ export default function Portfolio() {
             ))}
           </motion.div>
         </motion.section>
-
-        {/* Footer */}
-        <footer className="p-6 text-center text-gray-400 bg-gray-950">
-          <p>© {new Date().getFullYear()} Joane Alves - Todos os direitos reservados.</p>
-        </footer>
+<Footer />
       </div>
     </div>
   );
