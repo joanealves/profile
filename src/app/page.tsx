@@ -20,6 +20,7 @@ import {
 import Image from "next/image";
 
 
+import EnhancedSkillsSection from "../components/EnhancedSkillsSection";
 import NeuralNetworkBackground from "../components/NeuralNetworkBackground";
 
 // Variantes de animação aprimoradas
@@ -372,6 +373,7 @@ export default function Portfolio() {
         </motion.section>
 
         {/* About Section */}
+        {/* About Section */}
         <motion.section
           id="about"
           className="p-12 text-center container mx-auto"
@@ -380,22 +382,39 @@ export default function Portfolio() {
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainerVariants}
         >
-          <motion.h2
-            className="text-3xl font-bold mb-6"
-            variants={fadeInUpVariants}
-            custom={0}
-          >
-            Sobre Mim
-          </motion.h2>
-          <motion.p
-            className="text-gray-400 max-w-2xl mx-auto text-lg"
-            variants={fadeInUpVariants}
-            custom={1}
-          >
-            Meu caminho na tecnologia começou pelo design. Trabalhei em agências, criando visuais e identidades para marcas. Foi nesse universo que conheci o UX/UI e me apaixonei por entender como as pessoas interagem com interfaces digitais. Durante a pandemia, me aprofundei ainda mais, fiz cursos, bootcamps e comecei a programar para dar vida às minhas ideias. Hoje, como desenvolvedora Full Stack, combino design e código para criar produtos intuitivos, acessíveis e funcionais.
-          </motion.p>
-        </motion.section>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8">
+            <div className="md:w-3/4 lg:w-4/5">
+              <motion.h2
+                className="text-3xl font-bold mb-6"
+                variants={fadeInUpVariants}
+                custom={0}
+              >
+                Sobre Mim
+              </motion.h2>
+              <motion.p
+                className="text-gray-400 max-w-2xl mx-auto text-lg"
+                variants={fadeInUpVariants}
+                custom={1}
+              >
+                Meu caminho na tecnologia começou pelo design. Trabalhei em agências, criando visuais e identidades para marcas. Foi nesse universo que conheci o UX/UI e me apaixonei por entender como as pessoas interagem com interfaces digitais. Durante a pandemia, me aprofundei ainda mais, fiz cursos, bootcamps e comecei a programar para dar vida às minhas ideias. Hoje, como desenvolvedora Full Stack, combino design e código para criar produtos intuitivos, acessíveis e funcionais.
+              </motion.p>
+            </div>
 
+            <motion.div
+              className="md:w-1/4 lg:w-1/5 flex justify-center"
+              variants={fadeInUpVariants}
+              custom={2}
+            >
+              <div className="overflow-hidden rounded-full w-32 h-32 shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105">
+                <img
+                  src="/perfil.jpg"
+                  alt="Minha foto"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </motion.section>
         {/* Project Section with View Animations */}
         <section
           id="projects"
@@ -425,49 +444,7 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Skills Section with Animation */}
-        <motion.section
-          id="skills"
-          className="p-12 text-center container mx-auto"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainerVariants}
-        >
-          <motion.h2
-            className="text-3xl font-bold mb-8"
-            variants={fadeInUpVariants}
-            custom={0}
-          >
-            Skills
-          </motion.h2>
-          <motion.div
-            className="flex flex-wrap justify-center gap-4"
-            variants={fadeInUpVariants}
-            custom={1}
-          >
-            {skills.map((skill, index) => (
-              <motion.span
-                key={skill}
-                className="bg-gray-700 px-4 py-2 rounded-full text-sm"
-                whileHover={{
-                  backgroundColor: "#553C9A",
-                  scale: 1.05,
-                  transition: { duration: 0.2 }
-                }}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{
-                  opacity: 1,
-                  y: 0,
-                  transition: { delay: 0.1 * index, duration: 0.5 }
-                }}
-                viewport={{ once: true }}
-              >
-                {skill}
-              </motion.span>
-            ))}
-          </motion.div>
-        </motion.section>
+       <EnhancedSkillsSection />
 
         {/* Contact Section */}
         <motion.section

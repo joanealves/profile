@@ -795,12 +795,12 @@ export default function UXUI() {
 
             <main className="container mx-auto p-8">
                 <motion.div
-                    className="flex flex-col md:flex-row md:items-center justify-between mb-12"
+                    className="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-8"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                 >
-                    <div>
+                    <div className="flex-1">
                         <h1 className="text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-600">
                             UX/UI Design
                         </h1>
@@ -809,7 +809,42 @@ export default function UXUI() {
                             Minha abordagem para criar interfaces que encantam usuários
                             e resolvem problemas reais.
                         </p>
+
+                        <motion.div
+                            className="md:hidden flex items-center gap-3 text-gray-400 mb-6"
+                            whileHover={{ scale: 1.05 }}
+                        >
+                            <div className="flex items-center gap-2 border border-gray-700 rounded-full px-4 py-2">
+                                <span className="inline-block w-3 h-3 rounded-full bg-green-500"></span>
+                                Disponível para Projetos
+                            </div>
+                        </motion.div>
                     </div>
+
+                    {/* Nova seção com sua foto */}
+                    <motion.div
+                        className="relative flex-shrink-0"
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.3, duration: 0.6 }}
+                        whileHover={{
+                            scale: 1.03,
+                            boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2)"
+                        }}
+                    >
+                        <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur opacity-70 group-hover:opacity-100 transition duration-1000"></div>
+
+                        <div className="relative w-64 h-64 overflow-hidden rounded-2xl border-2 border-gray-700">
+                            <Image
+                                src="/perfil.jpg" 
+                                alt="Joane Alves - UX/UI Designer"
+                                fill
+                                className="object-cover transition-all duration-500 hover:scale-105"
+                                priority
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-30 hover:opacity-10 transition-opacity duration-300"></div>
+                        </div>
+                    </motion.div>
 
                     <motion.div
                         className="hidden md:flex items-center gap-3 text-gray-400"
@@ -968,14 +1003,14 @@ export default function UXUI() {
                                     onRemoveElement={handleRemoveElement}
                                     onStartDragElement={handleStartDragElement}
                                     onDragElement={handleDragElement}
-                                    onFocusElement={setFocusedElementId}  
+                                    onFocusElement={setFocusedElementId}
                                     focusedElementId={focusedElementId}
                                 />
 
                                 <div className="mt-4 flex gap-4 justify-end">
                                     <Button className="border border-purple-500 text-purple-400 bg-opacity-10 backdrop-blur-md hover:bg-purple-600 hover:text-white transition-all" onClick={() => setDroppedElements([])}>
-                                    Limpar Canvas
-                                </Button>
+                                        Limpar Canvas
+                                    </Button>
 
                                     <Button className="bg-gradient-to-r from-green-500 to-green-700 text-white hover:from-green-600 hover:to-green-800">
                                         Exportar Design
