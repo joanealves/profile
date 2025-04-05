@@ -69,6 +69,32 @@ const HeroSection = () => {
                     Ver Projetos
                 </Button>
             </motion.div>
+
+            {/* Scroll Indicator */}
+            <motion.div
+                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-300 flex flex-col items-center cursor-pointer"
+                onClick={() => {
+                    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                variants={fadeInUpVariants}
+                custom={3}
+            >
+                <span className="text-sm mb-2">Scroll</span>
+                <motion.div
+                    animate={{
+                        y: [0, 10, 0],
+                        transition: {
+                            duration: 1.5,
+                            repeat: Infinity,
+                            repeatType: "loop"
+                        }
+                    }}
+                >
+                    <div className="w-6 h-10 border-2 border-gray-300 rounded-full flex justify-center pt-2">
+                        <div className="w-1 h-2 bg-gray-300 rounded-full"></div>
+                    </div>
+                </motion.div>
+            </motion.div>
         </motion.section>
     );
 };
