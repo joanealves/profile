@@ -821,30 +821,6 @@ export default function UXUI() {
                         </motion.div>
                     </div>
 
-                    {/* Nova seção com sua foto */}
-                    <motion.div
-                        className="relative flex-shrink-0"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.3, duration: 0.6 }}
-                        whileHover={{
-                            scale: 1.03,
-                            boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2)"
-                        }}
-                    >
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur opacity-70 group-hover:opacity-100 transition duration-1000"></div>
-
-                        <div className="relative w-64 h-64 overflow-hidden rounded-2xl border-2 border-gray-700">
-                            <Image
-                                src="/perfil.jpg" 
-                                alt="Joane Alves - UX/UI Designer"
-                                fill
-                                className="object-cover transition-all duration-500 hover:scale-105"
-                                priority
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-30 hover:opacity-10 transition-opacity duration-300"></div>
-                        </div>
-                    </motion.div>
 
                     <motion.div
                         className="hidden md:flex items-center gap-3 text-gray-400"

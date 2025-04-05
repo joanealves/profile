@@ -9,12 +9,15 @@ import {
   ChatBubbleIcon,
   HamburgerMenuIcon,
   Cross1Icon,
+  ArrowRightIcon,
+  ExternalLinkIcon
 } from "@radix-ui/react-icons";
 import {
   Card,
   CardContent,
   CardHeader,
-  CardTitle
+  CardTitle,
+  CardFooter
 } from "@/components/ui/card";
 
 import Image from "next/image";
@@ -22,6 +25,7 @@ import Image from "next/image";
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import AboutSection from "../components/AboutSection";
+import ProjectsSection from "../components/ProjectsSection"
 import EnhancedSkillsSection from "../components/EnhancedSkillsSection";
 import NeuralNetworkBackground from "../components/NeuralNetworkBackground";
 import Footer from "../components/Footer";
@@ -51,70 +55,78 @@ const staggerContainerVariants = {
   }
 };
 
-const cardHoverVariants = {
-  rest: { scale: 1, boxShadow: "0px 0px 0px rgba(0,0,0,0)" },
-  hover: {
-    scale: 1.03,
-    boxShadow: "0px 10px 15px rgba(0,0,0,0.1)",
-    transition: { duration: 0.3, ease: "easeOut" }
-  }
-};
-
-interface ProjectCardProps {
+// Interface para projetos
+interface Project {
   title: string;
   description: string;
   technologies: string[];
-  index: number;
+  image?: string;
+  githubUrl?: string;
+  liveUrl?: string;
 }
 
-const ProjectCard = ({
-  title,
-  description,
-  technologies,
-  index
-}: ProjectCardProps) => {
-  const delay = index * 0.1;
+// Interface para links de contato
+interface ContactLink {
+  href: string;
+  icon: React.ReactNode;
+  label: string;
+}
 
+// Componente ProjectCard melhorado
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
   return (
     <motion.div
+      className="h-full"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-50px" }}
       custom={index}
-      whileHover="hover"
       variants={{
         hidden: { opacity: 0, y: 30 },
         visible: {
           opacity: 1,
           y: 0,
-          transition: {
-            duration: 0.7,
-            ease: [0.25, 0.1, 0.25, 1.0],
-            delay: delay
-          }
-        },
-        hover: {
-          scale: 1.03,
-          boxShadow: "0px 10px 15px rgba(0,0,0,0.1)",
-          transition: { duration: 0.3, ease: "easeOut" }
-        },
-        rest: {
-          scale: 1,
-          boxShadow: "0px 0px 0px rgba(0,0,0,0)"
+          transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1.0], delay: index * 0.1 }
         }
       }}
     >
-      <Card className="bg-gray-800 border-gray-700 h-full">
+      <Card className="bg-gray-800 border-gray-700 overflow-hidden h-full flex flex-col group">
+        <div className="relative w-full h-48 overflow-hidden">
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-purple-900 to-blue-900 flex items-center justify-center">
+              <span className="text-4xl font-bold opacity-30">{project.title.charAt(0)}</span>
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-gray-800 to-transparent opacity-0 group-hover:opacity-80 transition-opacity duration-300" />
+        </div>
+
         <CardHeader>
-          <CardTitle className="text-xl text-white">{title}</CardTitle>
+          <CardTitle className="text-xl text-white flex items-center">
+            {project.title}
+            <motion.div
+              className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity"
+              initial={{ x: -10 }}
+              whileHover={{ x: 0 }}
+            >
+              <ArrowRightIcon className="h-4 w-4" />
+            </motion.div>
+          </CardTitle>
         </CardHeader>
-        <CardContent>
-          <p className="text-gray-400 mb-4">{description}</p>
+
+        <CardContent className="flex-grow">
+          <p className="text-gray-400 mb-4">{project.description}</p>
           <div className="flex flex-wrap gap-2">
-            {technologies.map((tech) => (
+            {project.technologies.map((tech) => (
               <motion.span
                 key={tech}
-                className="bg-gray-700 text-xs px-2 py-1 rounded-full"
+                className="bg-gray-700 text-xs px-2 py-1 rounded-full text-gray-300"
                 whileHover={{ backgroundColor: "#4A5568", scale: 1.05 }}
                 transition={{ duration: 0.2 }}
               >
@@ -123,6 +135,23 @@ const ProjectCard = ({
             ))}
           </div>
         </CardContent>
+
+        <CardFooter className="pt-0 opacity-0 group-hover:opacity-100 transition-all duration-300 -mt-4 group-hover:mt-0">
+          <div className="flex gap-3">
+            {project.githubUrl && (
+              <Button size="sm" variant="outline" className="bg-gray-700 hover:bg-gray-600">
+                <GitHubLogoIcon className="mr-2 h-4 w-4" />
+                Código
+              </Button>
+            )}
+            {project.liveUrl && (
+              <Button size="sm" variant="outline" className="bg-purple-800 hover:bg-purple-700">
+                <ExternalLinkIcon className="mr-2 h-4 w-4" />
+                Demo
+              </Button>
+            )}
+          </div>
+        </CardFooter>
       </Card>
     </motion.div>
   );
@@ -150,27 +179,35 @@ export default function Portfolio() {
     };
   }, [isMenuOpen]);
 
-  // Fecha o menu mobile quando um item é clicado
   const handleNavItemClick = (id: string) => {
     setIsMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const projects = [
+  const projects: Project[] = [
     {
       title: "Sistema ERP",
-      description: "Plataforma integrada de gestão empresarial",
-      technologies: ["React", "Django", "TypeScript"]
+      description: "Plataforma integrada de gestão empresarial com módulos de faturamento, estoque e RH.",
+      technologies: ["React", "Django", "TypeScript", "PostgreSQL"],
+      image: "/erp-system.jpg", 
+      githubUrl: "https://github.com/yourusername/erp-project",
+      liveUrl: "https://"
     },
     {
       title: "Mapas Interativos",
-      description: "Aplicação de visualização geoespacial",
-      technologies: ["React", "Google Maps API", "TypeScript"]
+      description: "Aplicação de visualização geoespacial com análise de dados em tempo real.",
+      technologies: ["React", "Google Maps API", "TypeScript", "D3.js"],
+      image: "/maps-project.jpg",
+      githubUrl: "https://github.com/yourusername/maps-project",
+      liveUrl: "https://"
     },
     {
       title: "Plataforma CRM",
-      description: "Sistema de gerenciamento de relacionamento com clientes",
-      technologies: ["Next.js", "Shadcn UI", "Tailwind"]
+      description: "Sistema de gerenciamento de relacionamento com clientes com automação de marketing.",
+      technologies: ["Next.js", "Shadcn UI", "Tailwind", "MongoDB"],
+      image: "/crm-platform.jpg",
+      githubUrl: "https://github.com/yourusername/crm-platform",
+      liveUrl: "https://"
     }
   ];
 
@@ -179,7 +216,7 @@ export default function Portfolio() {
     "Tailwind", "Vite", "UX/UI Design", "Figma", "Framer Motion", "Python", "Django", "FastAPI", "Node", "PHP", "Banco de Dados", "Sql", "Postgres", "Api", "Git"
   ];
 
-  const contactLinks = [
+  const contactLinks: ContactLink[] = [
     {
       href: process.env.NEXT_PUBLIC_GITHUB_PROFILE || "https://github.com/joanealves",
       icon: <GitHubLogoIcon />,
@@ -192,8 +229,8 @@ export default function Portfolio() {
     },
     {
       href: `mailto:${process.env.NEXT_PUBLIC_EMAIL || "joane.desenvolvimentoweb@gmail.com"}`,
-              icon: <EnvelopeClosedIcon className="w-5 h-5" />,
-              label: "Email"
+      icon: <EnvelopeClosedIcon className="w-5 h-5" />,
+      label: "Email"
     },
     {
       href: "https://wa.me/5531985201743",
@@ -202,8 +239,6 @@ export default function Portfolio() {
     }
   ];
 
- 
-
   const mobileNavItemVariants = {
     closed: { opacity: 0, x: 20 },
     open: { opacity: 1, x: 0 }
@@ -211,46 +246,14 @@ export default function Portfolio() {
 
   return (
     <div className="bg-gray-900 text-white min-h-screen relative">
-      {/* Neural Network Background */}
       <NeuralNetworkBackground />
 
       <div className="relative z-10">
         <Header />
         <HeroSection />
-      
-        
-        <AboutSection />      
-
-        {/* Project Section with View Animations */}
-        <section
-          id="projects"
-          className="p-12 bg-gray-800"
-        >
-          <div className="container mx-auto">
-            <motion.h2
-              className="text-3xl font-bold mb-10 text-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              Projetos
-            </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {projects.map((project, index) => (
-                <ProjectCard
-                  key={project.title}
-                  title={project.title}
-                  description={project.description}
-                  technologies={project.technologies}
-                  index={index}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-       <EnhancedSkillsSection />
+        <AboutSection />
+        <ProjectsSection projects={projects} />
+        <EnhancedSkillsSection />
 
         {/* Contact Section */}
         <motion.section
@@ -280,7 +283,7 @@ export default function Portfolio() {
             variants={fadeInUpVariants}
             custom={2}
           >
-            {contactLinks.map(({ href, icon, label }, index) => (
+            {contactLinks.map(({ href, icon, label }) => (
               <motion.a
                 key={label}
                 href={href}
@@ -295,8 +298,8 @@ export default function Portfolio() {
               </motion.a>
             ))}
           </motion.div>
-      </motion.section>
-      
+        </motion.section>
+
         <Footer />
       </div>
     </div>
