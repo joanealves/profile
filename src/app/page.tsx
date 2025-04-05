@@ -19,7 +19,9 @@ import {
 
 import Image from "next/image";
 
-
+import Header from "../components/Header";
+import HeroSection from "../components/HeroSection";
+import AboutSection from "../components/AboutSection";
 import EnhancedSkillsSection from "../components/EnhancedSkillsSection";
 import NeuralNetworkBackground from "../components/NeuralNetworkBackground";
 import Footer from "../components/Footer";
@@ -189,9 +191,9 @@ export default function Portfolio() {
       label: "LinkedIn"
     },
     {
-      href: `mailto:${process.env.NEXT_PUBLIC_EMAIL}`,
-      icon: <EnvelopeClosedIcon />,
-      label: "Email"
+      href: `mailto:${process.env.NEXT_PUBLIC_EMAIL || "joane.desenvolvimentoweb@gmail.com"}`,
+              icon: <EnvelopeClosedIcon className="w-5 h-5" />,
+              label: "Email"
     },
     {
       href: "https://wa.me/5531985201743",
@@ -200,37 +202,7 @@ export default function Portfolio() {
     }
   ];
 
-  const navItems = [
-    { label: "Sobre", href: "#about" },
-    { label: "Projetos", href: "#projects" },
-    { label: "Skills", href: "#skills" },
-    { label: "Contato", href: "#contact" },
-    { label: "UX/UI", href: "/uxui" }
-  ];
-
-  // Variantes para animação do menu mobile
-  const mobileMenuVariants = {
-    closed: {
-      opacity: 0,
-      x: "100%",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 40
-      }
-    },
-    open: {
-      opacity: 1,
-      x: "0%",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 40,
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  };
+ 
 
   const mobileNavItemVariants = {
     closed: { opacity: 0, x: 20 },
@@ -243,179 +215,12 @@ export default function Portfolio() {
       <NeuralNetworkBackground />
 
       <div className="relative z-10">
-        {/* Header with scroll-based opacity */}
-        <motion.header
-          className="p-6 flex justify-between items-center sticky top-0 z-50 bg-gray-900/90 backdrop-blur-md"
-          style={{ opacity: headerOpacity }}
-          role="banner"
-        >
-          <div className="flex items-center">
-            <Image
-              src="/Logo.png"
-              alt="Logo Joane Alves"
-              width={40}
-              height={40}
-              className="mr-2"
-            />
-            <h1 className="text-2xl font-bold">Joane Alves</h1>
-          </div>
+        <Header />
+        <HeroSection />
+      
+        
+        <AboutSection />      
 
-          {/* Menu Desktop */}
-          <nav className="hidden md:block" aria-label="Navegação Principal">
-            <ul className="flex gap-6">
-              {navItems.map(({ label, href }) => (
-                <li key={label}>
-                  <motion.a
-                    href={href}
-                    className="hover:text-gray-400 transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  >
-                    {label}
-                  </motion.a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Botão Menu Mobile */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden text-white p-2"
-            aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
-            aria-expanded={isMenuOpen}
-          >
-            {isMenuOpen ? <Cross1Icon width={24} height={24} /> : <HamburgerMenuIcon width={24} height={24} />}
-          </button>
-        </motion.header>
-
-        {/* Menu Mobile - Overlay com blur e cor*/}
-        <motion.div
-          className={`fixed inset-0 bg-black/70 backdrop-blur-md md:hidden z-40 ${isMenuOpen ? "block" : "hidden"}`}
-          onClick={() => setIsMenuOpen(false)}
-          animate={isMenuOpen ? "open" : "closed"}
-          initial="closed"
-          variants={{
-            open: { opacity: 1 },
-            closed: { opacity: 0, display: "none" }
-          }}
-        />
-
-        {/* Menu Mobile - Sidebar com fundo escuro e opaco */}
-        <motion.nav
-          className={`fixed top-0 right-0 bottom-0 w-64 bg-gray-900 shadow-xl border-l border-gray-800 z-50 md:hidden p-6 pt-20 ${isMenuOpen ? "block" : "hidden"}`}
-          animate={isMenuOpen ? "open" : "closed"}
-          initial="closed"
-          variants={mobileMenuVariants}
-          aria-hidden={!isMenuOpen}
-        >
-          <button
-            className="absolute top-6 right-6 text-white"
-            onClick={() => setIsMenuOpen(false)}
-            aria-label="Fechar menu"
-          >
-            <Cross1Icon width={24} height={24} />
-          </button>
-
-          <ul className="flex flex-col gap-6">
-            {navItems.map(({ label, href }) => (
-              <motion.li key={label} variants={mobileNavItemVariants}>
-                <a
-                  href={href}
-                  className="text-xl font-medium text-white hover:text-purple-400 transition-colors block py-2"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavItemClick(href.substring(1));
-                  }}
-                >
-                  {label}
-                </a>
-              </motion.li>
-            ))}
-          </ul>
-        </motion.nav>
-
-        {/* Hero Section with Staggered Animation */}
-        <motion.section
-          className="relative flex flex-col items-center justify-center text-center h-[calc(100vh-4rem)] px-4 z-20"
-          initial="hidden"
-          animate={isLoaded ? "visible" : "hidden"}
-          variants={staggerContainerVariants}
-        >
-          <motion.h2
-            className="text-4xl md:text-6xl font-bold relative z-30"
-            variants={fadeInUpVariants}
-            custom={0}
-          >
-            Desenvolvedora Full Stack
-          </motion.h2>
-          <motion.p
-            className="mt-4 text-lg md:text-xl text-gray-300 max-w-xl relative z-30"
-            variants={fadeInUpVariants}
-            custom={1}
-          >
-            Especialista em Front-end, React e UX/UI Design, transformando ideias em experiências digitais incríveis.
-          </motion.p>
-          <motion.div
-            variants={fadeInUpVariants}
-            custom={2}
-            className="relative z-30"
-          >
-            <Button
-              className="mt-8 px-6 py-6 text-lg bg-purple-600 hover:bg-purple-700 transition-colors"
-              aria-label="Ver Projetos"
-              onClick={() => {
-                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              Ver Projetos
-            </Button>
-          </motion.div>
-        </motion.section>
-
-        {/* About Section */}
-        {/* About Section */}
-        <motion.section
-          id="about"
-          className="p-12 text-center container mx-auto"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainerVariants}
-        >
-          <div className="flex flex-col md:flex-row items-center justify-center gap-8">
-            <div className="md:w-3/4 lg:w-4/5">
-              <motion.h2
-                className="text-3xl font-bold mb-6"
-                variants={fadeInUpVariants}
-                custom={0}
-              >
-                Sobre Mim
-              </motion.h2>
-              <motion.p
-                className="text-gray-400 max-w-2xl mx-auto text-lg"
-                variants={fadeInUpVariants}
-                custom={1}
-              >
-                Meu caminho na tecnologia começou pelo design. Trabalhei em agências, criando visuais e identidades para marcas. Foi nesse universo que conheci o UX/UI e me apaixonei por entender como as pessoas interagem com interfaces digitais. Durante a pandemia, me aprofundei ainda mais, fiz cursos, bootcamps e comecei a programar para dar vida às minhas ideias. Hoje, como desenvolvedora Full Stack, combino design e código para criar produtos intuitivos, acessíveis e funcionais.
-              </motion.p>
-            </div>
-
-            <motion.div
-              className="md:w-1/4 lg:w-1/5 flex justify-center"
-              variants={fadeInUpVariants}
-              custom={2}
-            >
-              <div className="overflow-hidden rounded-full w-32 h-32 shadow-md transition-all duration-300 hover:shadow-lg hover:scale-105">
-                <img
-                  src="/perfil.jpg"
-                  alt="Minha foto"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </motion.div>
-          </div>
-        </motion.section>
         {/* Project Section with View Animations */}
         <section
           id="projects"
@@ -490,8 +295,9 @@ export default function Portfolio() {
               </motion.a>
             ))}
           </motion.div>
-        </motion.section>
-<Footer />
+      </motion.section>
+      
+        <Footer />
       </div>
     </div>
   );

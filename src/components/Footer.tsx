@@ -36,7 +36,7 @@ const contactLinks = [
         label: "LinkedIn"
     },
     {
-        href: `mailto:${process.env.NEXT_PUBLIC_EMAIL || "contact@example.com"}`,
+        href: `mailto:${process.env.NEXT_PUBLIC_EMAIL || "joane.desenvolvimentoweb@gmail.com"}`,
         icon: <EnvelopeClosedIcon className="w-5 h-5" />,
         label: "Email"
     },
