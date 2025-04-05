@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Estrutura para armazenar informações de cada skill
 interface Skill {
@@ -22,7 +22,7 @@ const ReactDemo = () => (
 const FramerMotionDemo = () => (
   <motion.div
     className="h-5 w-5 bg-purple-500 rounded-sm"
-    animate={{ 
+    animate={{
       scale: [1, 1.2, 1],
       rotate: [0, 180, 0],
     }}
@@ -58,204 +58,219 @@ const NextJSDemo = () => (
   </div>
 );
 
+// Interface para representar um ponto de conexão
+interface ConnectionPoint {
+  x: number;
+  y: number;
+}
+
+// Interface para representar uma conexão entre duas skills
+interface Connection {
+  from: ConnectionPoint;
+  to: ConnectionPoint;
+  color: string;
+}
+
 export const EnhancedSkillsSection = () => {
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [connections, setConnections] = useState<{start: DOMRect, ends: DOMRect[]}[]>([]);
-  const [skillElements, setSkillElements] = useState<{[key: string]: HTMLElement | null}>({});
-  
+  const [connections, setConnections] = useState<Connection[]>([]);
+  const [skillElements, setSkillElements] = useState<{ [key: string]: HTMLElement | null }>({});
+
   // Definição das skills com categorias e relações
   const skills: Skill[] = [
-    { 
-      name: "JavaScript", 
-      category: "Frontend", 
-      related: ["React", "TypeScript", "Node"], 
-      color: "#F7DF1E", 
-      demo: <div className="text-xs font-mono text-yellow-400">const sum = (a, b) {'=>'} a + b;</div> 
+    {
+      name: "JavaScript",
+      category: "Frontend",
+      related: ["React", "TypeScript", "Node"],
+      color: "#F7DF1E",
+      demo: <div className="text-xs font-mono text-yellow-400">const sum = (a, b) {'=>'} a + b;</div>
     },
-    { 
-      name: "React", 
-      category: "Frontend", 
-      related: ["JavaScript", "Next.js", "Framer Motion"], 
-      color: "#61DAFB", 
-      demo: <ReactDemo /> 
+    {
+      name: "React",
+      category: "Frontend",
+      related: ["JavaScript", "Next.js", "Framer Motion"],
+      color: "#61DAFB",
+      demo: <ReactDemo />
     },
-    { 
-      name: "TypeScript", 
-      category: "Frontend", 
-      related: ["JavaScript", "React", "Next.js"], 
-      color: "#3178C6", 
-      demo: <TypeScriptDemo /> 
+    {
+      name: "TypeScript",
+      category: "Frontend",
+      related: ["JavaScript", "React", "Next.js"],
+      color: "#3178C6",
+      demo: <TypeScriptDemo />
     },
-    { 
-      name: "Next.js", 
-      category: "Frontend", 
-      related: ["React", "TypeScript"], 
-      color: "#000000", 
-      demo: <NextJSDemo /> 
+    {
+      name: "Next.js",
+      category: "Frontend",
+      related: ["React", "TypeScript"],
+      color: "#000000",
+      demo: <NextJSDemo />
     },
-    { 
-      name: "Tailwind", 
-      category: "Frontend", 
-      related: ["CSS", "React"], 
-      color: "#06B6D4", 
-      demo: <TailwindDemo /> 
+    {
+      name: "Tailwind",
+      category: "Frontend",
+      related: ["CSS", "React"],
+      color: "#06B6D4",
+      demo: <TailwindDemo />
     },
-    { 
-      name: "Framer Motion", 
-      category: "Frontend", 
-      related: ["React"], 
-      color: "#0055FF", 
-      demo: <FramerMotionDemo /> 
+    {
+      name: "Framer Motion",
+      category: "Frontend",
+      related: ["React"],
+      color: "#0055FF",
+      demo: <FramerMotionDemo />
     },
-    { 
-      name: "Python", 
-      category: "Backend", 
-      related: ["Django", "FastAPI"], 
-      color: "#3776AB", 
-      demo: <div className="text-xs font-mono text-blue-400">def greet(): return "Hello"</div> 
+    {
+      name: "Python",
+      category: "Backend",
+      related: ["Django", "FastAPI"],
+      color: "#3776AB",
+      demo: <div className="text-xs font-mono text-blue-400">def greet(): return "Hello"</div>
     },
-    { 
-      name: "Django", 
-      category: "Backend", 
-      related: ["Python"], 
-      color: "#092E20", 
-      demo: <div className="text-xs font-mono text-green-700">@api_view(['GET'])</div> 
+    {
+      name: "Django",
+      category: "Backend",
+      related: ["Python"],
+      color: "#092E20",
+      demo: <div className="text-xs font-mono text-green-700">@api_view(['GET'])</div>
     },
-    { 
-      name: "FastAPI", 
-      category: "Backend", 
-      related: ["Python"], 
-      color: "#009688", 
-      demo: <div className="text-xs font-mono text-green-500">@app.get("/")</div> 
+    {
+      name: "FastAPI",
+      category: "Backend",
+      related: ["Python"],
+      color: "#009688",
+      demo: <div className="text-xs font-mono text-green-500">@app.get("/")</div>
     },
-    { 
-      name: "Node", 
-      category: "Backend", 
-      related: ["JavaScript"], 
-      color: "#339933", 
-      demo: <div className="text-xs font-mono text-green-400">app.listen(3000)</div> 
+    {
+      name: "Node",
+      category: "Backend",
+      related: ["JavaScript"],
+      color: "#339933",
+      demo: <div className="text-xs font-mono text-green-400">app.listen(3000)</div>
     },
-    { 
-      name: "SQL", 
-      category: "Database", 
-      related: ["Postgres"], 
-      color: "#4479A1", 
-      demo: <div className="text-xs font-mono text-blue-300">SELECT * FROM users</div> 
+    {
+      name: "SQL",
+      category: "Database",
+      related: ["Postgres"],
+      color: "#4479A1",
+      demo: <div className="text-xs font-mono text-blue-300">SELECT * FROM users</div>
     },
-    { 
-      name: "Postgres", 
-      category: "Database", 
-      related: ["SQL"], 
-      color: "#336791", 
-      demo: <div className="text-xs font-mono text-blue-400">CREATE TABLE users</div> 
+    {
+      name: "Postgres",
+      category: "Database",
+      related: ["SQL"],
+      color: "#336791",
+      demo: <div className="text-xs font-mono text-blue-400">CREATE TABLE users</div>
     },
-    { 
-      name: "Git", 
-      category: "Tools", 
-      related: [], 
-      color: "#F05032", 
-      demo: <div className="text-xs font-mono text-red-400">git commit -m "feat"</div> 
+    {
+      name: "Git",
+      category: "Tools",
+      related: [],
+      color: "#F05032",
+      demo: <div className="text-xs font-mono text-red-400">git commit -m "feat"</div>
     },
-    { 
-      name: "Figma", 
-      category: "Design", 
-      related: ["UX/UI Design"], 
-      color: "#F24E1E", 
+    {
+      name: "Figma",
+      category: "Design",
+      related: ["UX/UI Design"],
+      color: "#F24E1E",
       demo: <div className="flex items-center justify-center">
         <div className="h-2 w-2 bg-red-500 rounded-sm mr-1"></div>
         <div className="h-2 w-2 bg-purple-500 rounded-sm"></div>
-      </div> 
+      </div>
     },
-    { 
-      name: "UX/UI Design", 
-      category: "Design", 
-      related: ["Figma"], 
-      color: "#FF61F6", 
+    {
+      name: "UX/UI Design",
+      category: "Design",
+      related: ["Figma"],
+      color: "#FF61F6",
       demo: <div className="flex flex-col items-center justify-center">
         <div className="w-4 h-1 bg-purple-400 rounded-full mb-1"></div>
         <div className="w-3 h-1 bg-purple-300 rounded-full"></div>
-      </div> 
+      </div>
+    },
+    {
+      name: "CSS",
+      category: "Frontend",
+      related: ["Tailwind"],
+      color: "#1572B6",
+      demo: <div className="text-xs font-mono text-blue-500">.class {'{'}color: blue;{'}'}</div>
     }
+
   ];
 
-  // Efeito para calcular posições e conexões quando activeSkill muda
-  useEffect(() => {
-    if (!activeSkill || !containerRef.current) return;
-    
-    const activeElement = skillElements[activeSkill];
-    if (!activeElement) return;
-    
-    const activeBounds = activeElement.getBoundingClientRect();
-    const containerBounds = containerRef.current.getBoundingClientRect();
-    
-    // Encontrar a skill ativa no array
-    const activeSkillObj = skills.find(s => s.name === activeSkill);
-    if (!activeSkillObj) return;
-    
-    // Calcular conexões para skills relacionadas
-    const newConnections = activeSkillObj.related
-      .filter(relatedName => skillElements[relatedName])
-      .map(relatedName => {
-        const relatedElement = skillElements[relatedName];
-        if (!relatedElement) return null;
-        
-        const endBounds = relatedElement.getBoundingClientRect();
-        return {
-          start: {
-            x: activeBounds.left + activeBounds.width / 2 - containerBounds.left,
-            y: activeBounds.top + activeBounds.height / 2 - containerBounds.top,
-            width: 0,
-            height: 0,
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0
-          } as unknown as DOMRect,
-          end: {
-            x: endBounds.left + endBounds.width / 2 - containerBounds.left,
-            y: endBounds.top + endBounds.height / 2 - containerBounds.top,
-            width: 0,
-            height: 0,
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0
-          } as unknown as DOMRect
-        };
-      })
-      .filter(Boolean) as {start: DOMRect, end: DOMRect}[];
-    
-    // Agrupar para o formato esperado pelo componente SVG
-    if (newConnections.length > 0) {
-      setConnections([{
-        start: activeBounds,
-        ends: newConnections.map(c => c.end)
-      }]);
-    }
-  }, [activeSkill, skillElements]);
-
-  // Registrar referências aos elementos DOM de cada skill
-  const registerSkillElement = (name: string, element: HTMLElement | null) => {
-    setSkillElements(prev => ({
-      ...prev,
-      [name]: element
-    }));
+  // Função auxiliar para obter o centro de um elemento
+  const getElementCenter = (element: HTMLElement, containerRect: DOMRect): ConnectionPoint => {
+    const rect = element.getBoundingClientRect();
+    return {
+      x: rect.left + rect.width / 2 - containerRect.left,
+      y: rect.top + rect.height / 2 - containerRect.top
+    };
   };
 
-  // Agrupar skills por categoria para exibição
-  const categorizedSkills: {[key: string]: Skill[]} = skills.reduce((acc, skill) => {
+  // Calcular as conexões quando o activeSkill ou os elementos mudam
+  useEffect(() => {
+    if (!activeSkill || !containerRef.current) return;
+
+    const activeElement = skillElements[activeSkill];
+    if (!activeElement) return;
+
+    const containerRect = containerRef.current.getBoundingClientRect();
+
+    // Encontrar a skill ativa
+    const activeSkillObj = skills.find(s => s.name === activeSkill);
+    if (!activeSkillObj) return;
+
+    // Calcular as conexões
+    const newConnections: Connection[] = [];
+
+    activeSkillObj.related.forEach(relatedName => {
+      const relatedElement = skillElements[relatedName];
+      if (!relatedElement) return;
+
+      const fromPoint = getElementCenter(activeElement, containerRect);
+      const toPoint = getElementCenter(relatedElement, containerRect);
+
+      newConnections.push({
+        from: fromPoint,
+        to: toPoint,
+        color: activeSkillObj.color
+      });
+    });
+
+    setConnections(newConnections);
+  }, [activeSkill, skillElements]);
+
+  // Registrar os elementos DOM das skills
+  const registerSkillElement = (name: string, element: HTMLElement | null) => {
+    if (element) {
+      setSkillElements(prev => ({
+        ...prev,
+        [name]: element
+      }));
+    }
+  };
+
+  // Agrupar skills por categoria
+  const categorizedSkills: { [key: string]: Skill[] } = skills.reduce((acc, skill) => {
     if (!acc[skill.category]) {
       acc[skill.category] = [];
     }
     acc[skill.category].push(skill);
     return acc;
-  }, {} as {[key: string]: Skill[]});
+  }, {} as { [key: string]: Skill[] });
+
+  // Função para verificar se duas skills estão relacionadas
+  const areSkillsRelated = (skill1: string, skill2: string): boolean => {
+    const s1 = skills.find(s => s.name === skill1);
+    return s1 ? s1.related.includes(skill2) : false;
+  };
 
   return (
     <motion.section
       id="skills"
-      className="p-12 text-center container mx-auto relative overflow-hidden"
+      className="px-6 py-12 md:p-12 text-center container mx-auto relative overflow-hidden"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
@@ -284,56 +299,82 @@ export const EnhancedSkillsSection = () => {
           }
         }}
       >
-        Skills
+        Skills & Tecnologias
       </motion.h2>
-      
-      {/* Conexões SVG - Sobrepostas no top */}
-      <div className="absolute inset-0 pointer-events-none">
-        <svg className="w-full h-full">
-          {connections.map((connection, i) => 
-            connection.ends.map((end, j) => (
-              <motion.line
-                key={`line-${i}-${j}`}
-                x1={connection.start.x}
-                y1={connection.start.y}
-                x2={end.x}
-                y2={end.y}
-                stroke={skills.find(s => s.name === activeSkill)?.color || "#553C9A"}
-                strokeWidth="2"
-                strokeDasharray="5,5"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 0.7 }}
-                transition={{ duration: 0.5 }}
-              />
-            ))
-          )}
-        </svg>
-      </div>
-      
-      {/* Container para skills com referência para cálculo de posição */}
+
+      {/* Container com referência para cálculo de posições */}
       <div className="relative z-10" ref={containerRef}>
+        {/* Linhas de conexão SVG */}
+        <svg className="absolute inset-0 pointer-events-none">
+          <defs>
+            <marker
+              id="arrowhead"
+              markerWidth="6"
+              markerHeight="6"
+              refX="5"
+              refY="3"
+              orient="auto"
+            >
+              <polygon points="0 0, 6 3, 0 6" fill="currentColor" />
+            </marker>
+          </defs>
+
+          {connections.map((conn, i) => (
+            <motion.path
+              key={`connection-${i}`}
+              d={`M${conn.from.x},${conn.from.y} Q${(conn.from.x + conn.to.x) / 2},${(conn.from.y + conn.to.y) / 2 - 20} ${conn.to.x},${conn.to.y}`}
+              stroke={conn.color}
+              strokeWidth="2"
+              strokeDasharray="5,3"
+              fill="none"
+              markerEnd="url(#arrowhead)"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={{ pathLength: 1, opacity: 0.7 }}
+              transition={{ duration: 0.6 }}
+              style={{ color: conn.color }}
+            />
+          ))}
+        </svg>
+
+        {/* Skills agrupadas por categoria */}
         {Object.entries(categorizedSkills).map(([category, categorySkills]) => (
-          <div key={category} className="mb-8">
+          <motion.div
+            key={category}
+            className="mb-10"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1 }
+            }}
+          >
             <h3 className="text-xl font-semibold text-purple-400 mb-4">{category}</h3>
             <div className="flex flex-wrap justify-center gap-4">
               {categorySkills.map((skill, index) => (
                 <motion.div
                   key={skill.name}
-                  ref={el => registerSkillElement(skill.name, el)}
+                  ref={el => registerSkillElement(skill.name, el as HTMLElement)}
                   className="relative"
                   onMouseEnter={() => setActiveSkill(skill.name)}
                   onMouseLeave={() => setActiveSkill(null)}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                    transition: { delay: 0.1 * index, duration: 0.5 }
+                  variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: {
+                      opacity: 1,
+                      y: 0,
+                      transition: { delay: 0.1 * index, duration: 0.5 }
+                    }
                   }}
-                  viewport={{ once: true }}
                 >
                   <motion.div
-                    className="bg-gray-700 px-4 py-2 rounded-full text-sm cursor-pointer"
-                    style={{ borderColor: activeSkill === skill.name ? skill.color : 'transparent' }}
+                    className={`px-4 py-2 rounded-full text-sm cursor-pointer transition-all duration-200 ${activeSkill === skill.name ? 'bg-gray-800' : 'bg-gray-700'
+                      }`}
+                    style={{
+                      borderWidth: "2px",
+                      borderStyle: "solid",
+                      borderColor: activeSkill === skill.name ||
+                        (activeSkill && areSkillsRelated(activeSkill, skill.name))
+                        ? skill.color
+                        : 'transparent'
+                    }}
                     whileHover={{
                       backgroundColor: "#553C9A",
                       scale: 1.05,
@@ -342,32 +383,54 @@ export const EnhancedSkillsSection = () => {
                   >
                     {skill.name}
                   </motion.div>
-                  
-                  {/* Pop-up de demonstração */}
-                  {activeSkill === skill.name && (
-                    <motion.div
-                      className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 bg-gray-800 border border-gray-700 p-3 rounded-md shadow-lg w-40 z-20"
-                      initial={{ opacity: 0, y: 10, scale: 0.9 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      style={{ borderColor: skill.color }}
-                    >
-                      <div className="h-20 flex items-center justify-center mb-2">
-                        {skill.demo}
-                      </div>
-                      <div className="text-xs text-gray-400">
-                        {skill.related.length > 0 ? (
-                          <>Relacionado com: {skill.related.join(', ')}</>
-                        ) : (
-                          <>Tecnologia independente</>
-                        )}
-                      </div>
-                    </motion.div>
-                  )}
+
+                  {/* Card de detalhes da skill */}
+                  <AnimatePresence>
+                    {activeSkill === skill.name && (
+                      <motion.div
+                        className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 bg-gray-800 border-2 p-3 rounded-md shadow-lg w-48 z-20"
+                        initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.15 } }}
+                        style={{ borderColor: skill.color }}
+                      >
+                        {/* Triângulo indicador */}
+                        <div
+                          className="absolute left-1/2 -translate-x-1/2 bottom-0 translate-y-full w-0 h-0"
+                          style={{
+                            borderLeft: '8px solid transparent',
+                            borderRight: '8px solid transparent',
+                            borderTop: `8px solid ${skill.color}`
+                          }}
+                        />
+
+                        <div className="h-20 flex items-center justify-center mb-2 border-b border-gray-700 pb-2">
+                          {skill.demo}
+                        </div>
+
+                        <div className="text-xs">
+                          {skill.related.length > 0 ? (
+                            <div>
+                              <span className="text-gray-400 block mb-1">Relacionado com:</span>
+                              <div className="flex flex-wrap gap-1 justify-center">
+                                {skill.related.map(rel => (
+                                  <span key={rel} className="px-2 py-1 bg-gray-700 rounded-md text-white">
+                                    {rel}
+                                  </span>
+                                ))}
+                              </div>
+                            </div>
+                          ) : (
+                            <span className="text-gray-400">Tecnologia independente</span>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </motion.section>
