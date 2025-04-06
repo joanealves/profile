@@ -822,15 +822,7 @@ export default function UXUI() {
                     </div>
 
 
-                    <motion.div
-                        className="hidden md:flex items-center gap-3 text-gray-400"
-                        whileHover={{ scale: 1.05 }}
-                    >
-                        <div className="flex items-center gap-2 border border-gray-700 rounded-full px-4 py-2">
-                            <span className="inline-block w-3 h-3 rounded-full bg-green-500"></span>
-                            Disponível para Projetos
-                        </div>
-                    </motion.div>
+                    
                 </motion.div>
 
                 <Tabs defaultValue="process" className="w-full" onValueChange={setActiveTab}>

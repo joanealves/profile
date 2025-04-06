@@ -85,7 +85,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                     <div className="flex gap-3">
                         {project.githubUrl && (
                             <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                                <Button size="sm" variant="outline" className="bg-gray-700 hover:bg-gray-600 border-gray-600">
+                                <Button size="sm" variant="outline" className="bg-gray-700 hover:bg-gray-600 border-gray-600 text-white">
                                     <GitHubLogoIcon className="mr-2 h-4 w-4" />
                                     Código
                                 </Button>
@@ -93,7 +93,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                         )}
                         {project.liveUrl && (
                             <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                                <Button size="sm" variant="outline" className="bg-purple-800 hover:bg-purple-700 border-purple-700">
+                                <Button size="sm" variant="outline" className="bg-purple-800 hover:bg-purple-700 border-purple-700 text-white">
                                     <ExternalLinkIcon className="mr-2 h-4 w-4" />
                                     Demo
                                 </Button>
