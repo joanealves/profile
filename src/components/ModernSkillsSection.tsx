@@ -46,14 +46,6 @@ const ModernSkillsSection: React.FC = () => {
     ? skillsData.filter(skill => skill.category === activeCategory)
     : skillsData;
 
-  // Get related skills for the active skill
-  const relatedSkills = activeSkill
-    ? skillsData.filter(skill => 
-        skill.id === activeSkill || 
-        skill.related.includes(activeSkill) ||
-        skillsData.find(s => s.id === activeSkill)?.related.includes(skill.id)
-      )
-    : [];
 
   // Handle category selection
   const handleCategoryClick = (category: string) => {

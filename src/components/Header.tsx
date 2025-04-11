@@ -3,10 +3,6 @@ import React, { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import {
-  GitHubLogoIcon,
-  LinkedInLogoIcon,
-  EnvelopeClosedIcon,
-  ChatBubbleIcon,
   HamburgerMenuIcon,
   Cross1Icon,
 } from "@radix-ui/react-icons";

@@ -7,8 +7,6 @@ import {
   LinkedInLogoIcon,
   EnvelopeClosedIcon,
   ChatBubbleIcon,
-  HamburgerMenuIcon,
-  Cross1Icon,
   ArrowRightIcon,
   ExternalLinkIcon
 } from "@radix-ui/react-icons";
@@ -173,10 +171,10 @@ export default function Portfolio() {
     };
   }, [isMenuOpen]);
 
-  const handleNavItemClick = (id: string) => {
-    setIsMenuOpen(false);
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-  };
+  // const handleNavItemClick = (id: string) => {
+  //   setIsMenuOpen(false);
+  //   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  // };
 
   const projects: Project[] = [
     {
@@ -205,10 +203,10 @@ export default function Portfolio() {
     }
   ];
 
-  const skills = [
-    "JavaScript", "React", "TypeScript", "Next.js",
-    "Tailwind", "Vite", "UX/UI Design", "Figma", "Framer Motion", "Python", "Django", "FastAPI", "Node", "PHP", "Banco de Dados", "Sql", "Postgres", "Api", "Git"
-  ];
+  // const skills = [
+  //   "JavaScript", "React", "TypeScript", "Next.js",
+  //   "Tailwind", "Vite", "UX/UI Design", "Figma", "Framer Motion", "Python", "Django", "FastAPI", "Node", "PHP", "Banco de Dados", "Sql", "Postgres", "Api", "Git"
+  // ];
 
   const contactLinks: ContactLink[] = [
     {
