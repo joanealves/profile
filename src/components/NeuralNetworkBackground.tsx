@@ -32,7 +32,7 @@ const NeuralNetworkBackground: React.FC = () => {
                 this.originalX = this.x;
                 this.originalY = this.y;
                 this.radius = Math.random() * 2 + 1;
-                this.speedX = (Math.random() - 0.5) * 1.5;  movement
+                this.speedX = (Math.random() - 0.5) * 1.5;  // movement
                 this.speedY = (Math.random() - 0.5) * 1.5;
                 this.color = `rgba(135, 206, 250, ${Math.random() * 0.5 + 0.2})`;
             }
@@ -54,7 +54,7 @@ const NeuralNetworkBackground: React.FC = () => {
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < 100) {
-                        const force = 0.03; 
+                        const force = 0.03;
                         this.x -= dx * force;
                         this.y -= dy * force;
                     }
@@ -142,7 +142,7 @@ const NeuralNetworkBackground: React.FC = () => {
         animate();
 
         let lastTime = 0;
-        const throttleMs = 16; 
+        const throttleMs = 16;
 
         const handleMouseMove = (event: MouseEvent) => {
             const currentTime = Date.now();

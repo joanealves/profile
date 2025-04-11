@@ -26,7 +26,7 @@ import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
 import AboutSection from "../components/AboutSection";
 import ProjectsSection from "../components/ProjectsSection"
-import EnhancedSkillsSection from "../components/EnhancedSkillsSection";
+import ModernSkillsSection from "../components/ModernSkillsSection";
 import NeuralNetworkBackground from "../components/NeuralNetworkBackground";
 import Footer from "../components/Footer";
 
@@ -247,7 +247,7 @@ export default function Portfolio() {
         <HeroSection />
         <AboutSection />
         <ProjectsSection projects={projects} />
-        <EnhancedSkillsSection />
+        <ModernSkillsSection />
 
         {/* Contact Section */}
         <motion.section
