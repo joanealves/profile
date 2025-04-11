@@ -13,11 +13,9 @@ const NeuralNetworkBackground: React.FC = () => {
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        // Configurações das partículas
         const particleCount = 100;
         const connectionDistance = 120;
 
-        // Classe de Partícula
         class Particle {
             x: number;
             y: number;
@@ -34,7 +32,7 @@ const NeuralNetworkBackground: React.FC = () => {
                 this.originalX = this.x;
                 this.originalY = this.y;
                 this.radius = Math.random() * 2 + 1;
-                this.speedX = (Math.random() - 0.5) * 1.5; // Reduced speed for smoother movement
+                this.speedX = (Math.random() - 0.5) * 1.5;  movement
                 this.speedY = (Math.random() - 0.5) * 1.5;
                 this.color = `rgba(135, 206, 250, ${Math.random() * 0.5 + 0.2})`;
             }
@@ -47,24 +45,21 @@ const NeuralNetworkBackground: React.FC = () => {
             }
 
             update(width: number, height: number, mouseX?: number, mouseY?: number) {
-                // Movimento básico
                 this.x += this.speedX;
                 this.y += this.speedY;
 
-                // Interação com mouse (mais suave)
                 if (mouseX !== undefined && mouseY !== undefined) {
                     const dx = mouseX - this.x;
                     const dy = mouseY - this.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
 
                     if (distance < 100) {
-                        const force = 0.03; // Reduced force for more subtle effect
+                        const force = 0.03; 
                         this.x -= dx * force;
                         this.y -= dy * force;
                     }
                 }
 
-                // Bounce nas bordas com efeito de desaceleração
                 if (this.x < 0) {
                     this.x = 0;
                     this.speedX *= -0.9;
@@ -81,17 +76,14 @@ const NeuralNetworkBackground: React.FC = () => {
                     this.speedY *= -0.9;
                 }
 
-                // Subtle return to original path
                 this.speedX += (this.originalX - this.x) * 0.0001;
                 this.speedY += (this.originalY - this.y) * 0.0001;
 
-                // Apply friction to prevent excessive speed
                 this.speedX *= 0.99;
                 this.speedY *= 0.99;
             }
         }
 
-        // Create particles array - MOVIDO PARA ANTES DE SER USADO
         const initParticles = () => {
             if (!canvas) return;
 
@@ -101,28 +93,23 @@ const NeuralNetworkBackground: React.FC = () => {
             );
         };
 
-        // Set initial dimensions
         const setCanvasDimensions = () => {
             if (canvas) {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
 
-                // Agora initParticles já está declarada antes de ser usada
                 initParticles();
             }
         };
 
         setCanvasDimensions();
 
-        // Animation function
         const animate = () => {
             if (!canvas || !ctx) return;
 
-            // Clear canvas with slight trail effect
             ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Draw connections between nearby particles
             for (let i = 0; i < particlesRef.current.length; i++) {
                 for (let j = i + 1; j < particlesRef.current.length; j++) {
                     const dx = particlesRef.current[i].x - particlesRef.current[j].x;
@@ -140,7 +127,6 @@ const NeuralNetworkBackground: React.FC = () => {
                     }
                 }
 
-                // Update and draw each particle
                 particlesRef.current[i].update(
                     canvas.width,
                     canvas.height,
@@ -150,16 +136,13 @@ const NeuralNetworkBackground: React.FC = () => {
                 particlesRef.current[i].draw(ctx);
             }
 
-            // Request next frame
             animationFrameRef.current = requestAnimationFrame(animate);
         };
 
-        // Start animation
         animate();
 
-        // Throttled mouse move handler
         let lastTime = 0;
-        const throttleMs = 16; // ~60fps
+        const throttleMs = 16; 
 
         const handleMouseMove = (event: MouseEvent) => {
             const currentTime = Date.now();
@@ -169,16 +152,13 @@ const NeuralNetworkBackground: React.FC = () => {
             mousePositionRef.current = { x: event.clientX, y: event.clientY };
         };
 
-        // Handle window resize
         const handleResize = () => {
             setCanvasDimensions();
         };
 
-        // Add event listeners
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('resize', handleResize);
 
-        // Clean up on unmount
         return () => {
             window.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('resize', handleResize);

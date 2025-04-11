@@ -30,7 +30,6 @@ import EnhancedSkillsSection from "../components/EnhancedSkillsSection";
 import NeuralNetworkBackground from "../components/NeuralNetworkBackground";
 import Footer from "../components/Footer";
 
-// Variantes de animação aprimoradas
 const fadeInUpVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: (custom: number) => ({
@@ -55,7 +54,6 @@ const staggerContainerVariants = {
   }
 };
 
-// Interface para projetos
 interface Project {
   title: string;
   description: string;
@@ -65,14 +63,12 @@ interface Project {
   liveUrl?: string;
 }
 
-// Interface para links de contato
 interface ContactLink {
   href: string;
   icon: React.ReactNode;
   label: string;
 }
 
-// Componente ProjectCard melhorado
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
   return (
     <motion.div
@@ -164,10 +160,8 @@ export default function Portfolio() {
   const headerOpacity = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
 
   useEffect(() => {
-    // Set loaded state after component mounts to enable animations
     setIsLoaded(true);
 
-    // Previne o scroll quando o menu está aberto
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {

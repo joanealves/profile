@@ -11,7 +11,6 @@ import {
   Cross1Icon,
 } from "@radix-ui/react-icons";
 
-// Variantes para animação do menu mobile
 const mobileMenuVariants = {
   closed: {
     opacity: 0,
@@ -46,7 +45,6 @@ const Header = () => {
   const headerOpacity = useTransform(scrollYProgress, [0, 0.05], [0, 1]);
 
   useEffect(() => {
-    // Previne o scroll quando o menu está aberto
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -58,7 +56,6 @@ const Header = () => {
     };
   }, [isMenuOpen]);
 
-  // Fecha o menu mobile quando um item é clicado
   const handleNavItemClick = (id: string) => {
     setIsMenuOpen(false);
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -74,7 +71,6 @@ const Header = () => {
 
   return (
     <>
-      {/* Header with scroll-based opacity */}
       <motion.header
         className="p-6 flex justify-between items-center sticky top-0 z-50 bg-gray-900/90 backdrop-blur-md"
         style={{ opacity: headerOpacity }}
@@ -109,7 +105,6 @@ const Header = () => {
           </ul>
         </nav>
 
-        {/* Botão Menu Mobile */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
           className="md:hidden text-white p-2"
@@ -120,7 +115,6 @@ const Header = () => {
         </button>
       </motion.header>
 
-      {/* Menu Mobile - Overlay com blur e cor*/}
       <motion.div
         className={`fixed inset-0 bg-black/70 backdrop-blur-md md:hidden z-40 ${isMenuOpen ? "block" : "hidden"}`}
         onClick={() => setIsMenuOpen(false)}
@@ -132,7 +126,6 @@ const Header = () => {
         }}
       />
 
-      {/* Menu Mobile - Sidebar com fundo escuro e opaco */}
       <motion.nav
         className={`fixed top-0 right-0 bottom-0 w-64 bg-gray-900 shadow-xl border-l border-gray-800 z-50 md:hidden p-6 pt-20 ${isMenuOpen ? "block" : "hidden"}`}
         animate={isMenuOpen ? "open" : "closed"}
