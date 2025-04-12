@@ -60,7 +60,7 @@ const HeroSection = () => {
                 className="relative z-30"
             >
                 <Button
-                    className="mt-8 px-6 py-6 text-lg bg-purple-600 hover:bg-purple-700 transition-colors"
+                    className="mt-8 px-6 py-6 text-lg bg-purple-600 hover:bg-purple-500 transition-colors"
                     aria-label="Ver Projetos"
                     onClick={() => {
                         document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });

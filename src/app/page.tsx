@@ -179,19 +179,19 @@ export default function Portfolio() {
   const projects: Project[] = [
     {
       title: "Sistema ERP",
-      description: "Plataforma integrada de gestão empresarial com módulos de faturamento, estoque e RH.",
-      technologies: ["React", "Django", "TypeScript", "PostgreSQL"],
-      image: "/erp-system.jpg", 
-      githubUrl: "https://github.com/yourusername/erp-project",
+      description: "Plataforma de gestão empresarial para agendamentos. Ainda em desenvolvimento, agora para contar com módulos de faturamento, estoque.",
+      technologies: ["React", "Flask", "TypeScript", "SQL"],
+      image: "/erp.jpg", 
+      githubUrl: "https://github.com/joanealves/erp_salao",
       liveUrl: "https://"
     },
     {
       title: "Mapas Interativos",
-      description: "Aplicação de visualização geoespacial com análise de dados em tempo real.",
-      technologies: ["React", "Google Maps API", "TypeScript", "D3.js"],
-      image: "/maps-project.jpg",
-      githubUrl: "https://github.com/yourusername/maps-project",
-      liveUrl: "https://"
+      description: "Aplicação de visualização geoespacial para monitoramento de terremotos em tempo real. Aplicação em desenvolvimento",
+      technologies: ["React", "Mapbox", "OpenMap", "D3.js"],
+      image: "/maps-project.jpg.jpg",
+      githubUrl: "https://github.com/joanealves/geoview",
+      liveUrl: "https://geoview-2e33.vercel.app/"
     },
     {
       title: "Plataforma CRM",

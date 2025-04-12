@@ -45,7 +45,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                             className="object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                     ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-purple-900 to-blue-900 flex items-center justify-center">
+                        <div className="w-full h-full bg-gradient-to-br from-blue-600 to-blue-900 flex items-center justify-center">
                             <span className="text-4xl font-bold opacity-30">{project.title.charAt(0)}</span>
                         </div>
                     )}
@@ -93,7 +93,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
                         )}
                         {project.liveUrl && (
                             <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                                <Button size="sm" variant="outline" className="bg-purple-800 hover:bg-purple-700 border-purple-700 text-white">
+                                <Button size="sm" variant="outline" className="bg-blue-400 hover:bg-blue-300 border-blue-400 text-white">
                                     <ExternalLinkIcon className="mr-2 h-4 w-4" />
                                     Demo
                                 </Button>
@@ -121,7 +121,7 @@ const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
                     transition={{ duration: 0.5 }}
                 >
                     <h2 className="text-3xl font-bold mb-4">Projetos</h2>
-                    <div className="w-24 h-1 bg-purple-500 mx-auto mb-6"></div>
+                    <div className="w-24 h-1 bg-blue-400 mx-auto mb-6"></div>
                     <p className="text-gray-400 max-w-2xl mx-auto">
                         Confira alguns dos projetos que desenvolvi utilizando tecnologias modernas.
                     </p>
@@ -149,7 +149,7 @@ const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
                     >
                         <Button
                             onClick={() => setShowAll(!showAll)}
-                            className="px-4 py-2 rounded bg-purple-600 text-white border-2 border-purple-600 hover:bg-transparent hover:text-purple-600 transition-colors"
+                            className="px-4 py-2 rounded bg-blue-400 text-white border-2 border-blue-400 hover:bg-transparent hover:text-blue-400 transition-colors"
                         >
                             {showAll ? "Ver menos projetos" : "Ver mais projetos"}
                         </Button>

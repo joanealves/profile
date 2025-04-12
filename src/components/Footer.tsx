@@ -92,22 +92,15 @@ const Footer = () => {
                         {/* Links principais do site */}
                         <div>
                             <h4 className="text-white font-medium mb-2">Navegação</h4>
-                            <ul className="space-y-1">
+                            <ul className="grid grid-cols-2 gap-x-4 space-y-1">
                                 <li><a href="#about" className="hover:text-purple-400 transition-colors">Sobre</a></li>
                                 <li><a href="#projects" className="hover:text-purple-400 transition-colors">Projetos</a></li>
-                                <li><a href="#skills" className="hover:text-purple-400 transition-colors">Skills</a></li>
+                                <li><a href="/uxui" className="hover:text-purple-400 transition-colors">UX/UI</a></li>
                                 <li><a href="#contact" className="hover:text-purple-400 transition-colors">Contato</a></li>
                             </ul>
                         </div>
 
-                        <div>
-                            <h4 className="text-white font-medium mb-2">Portfólio</h4>
-                            <ul className="space-y-1">
-                                <li><a href="/uxui" className="hover:text-purple-400 transition-colors">UX/UI</a></li>
-                                <li><a href="#" className="hover:text-purple-400 transition-colors">Front-end</a></li>
-                                <li><a href="#" className="hover:text-purple-400 transition-colors">Back-end</a></li>
-                            </ul>
-                        </div>
+
                     </motion.div>
                 </div>
 
