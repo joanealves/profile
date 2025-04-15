@@ -27,7 +27,6 @@ import {
     ColorWheelIcon
 } from "@radix-ui/react-icons";
 
-// Interfaces para tipagem
 interface Project {
     id: number;
     title: string;
@@ -56,7 +55,6 @@ interface MousePosition {
     y: number;
 }
 
-// Mock data dos projetos
 const projectsData: Project[] = [
     {
         id: 1,
@@ -95,7 +93,6 @@ const designElements: DesignElement[] = [
     { id: "shape-1", type: "shape", label: "Forma Geométrica", color: "bg-orange-500", icon: <ColorWheelIcon /> }
 ];
 
-// Componente para o cursor personalizado
 interface CustomCursorProps {
     mousePosition: MousePosition;
     isDragging: boolean;
@@ -105,7 +102,6 @@ interface CustomCursorProps {
 const CustomCursor: React.FC<CustomCursorProps> = ({ mousePosition, isDragging, draggedElement }) => {
     const [cursorText, setCursorText] = useState("");
 
-    // Determinar qual texto mostrar no cursor (se necessário)
     useEffect(() => {
         if (isDragging && draggedElement) {
             setCursorText("+");
@@ -136,7 +132,6 @@ const CustomCursor: React.FC<CustomCursorProps> = ({ mousePosition, isDragging, 
     );
 };
 
-// Componente para elemento de design arrastável
 interface DraggableDesignElementProps {
     element: DesignElement;
     onDragStart: (id: string) => void;
@@ -162,7 +157,6 @@ const DraggableDesignElement: React.FC<DraggableDesignElementProps> = ({
             onDrag={(_, info) => onDrag(element.id, info)}
             onDragEnd={(_, info) => {
                 onDragEnd(element.id, info);
-                // Reset position after drag ends
                 x.set(0);
                 y.set(0);
             }}
@@ -175,7 +169,6 @@ const DraggableDesignElement: React.FC<DraggableDesignElementProps> = ({
     );
 };
 
-// Componente para renderizar o elemento posicionado no canvas
 interface CanvasElementProps {
     item: DroppedElement;
     onRemoveElement: (instanceId: string) => void;
@@ -208,10 +201,8 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
         y.set(item.y);
     }, [item.x, item.y, x, y]);
 
-    // Guarda a posição atual do canvas para cálculos
     const [canvasBounds, setCanvasBounds] = useState({ left: 0, top: 0, width: 0, height: 0 });
 
-    // Atualiza bounds quando o elemento é renderizado
     useEffect(() => {
         if (elementRef.current && elementRef.current.parentElement) {
             const parentBounds = elementRef.current.parentElement.getBoundingClientRect();
@@ -223,7 +214,6 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
             });
         }
 
-        // Atualizar as dimensões quando a janela for redimensionada
         const handleResize = () => {
             if (elementRef.current && elementRef.current.parentElement) {
                 const parentBounds = elementRef.current.parentElement.getBoundingClientRect();
@@ -240,7 +230,6 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // Renderiza o elemento baseado no tipo
     const renderElementContent = () => {
         switch (item.element.type) {
             case 'button':
@@ -405,7 +394,7 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
             style={{
                 x,
                 y,
-                zIndex: isDragging ? 9999 : (isFocused ? 100 : 50) // CORRIGIDO: Aumentei todos os z-index
+                zIndex: isDragging ? 9999 : (isFocused ? 100 : 50) 
             }}
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -425,7 +414,6 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
                 const elementWidth = elementRef.current.offsetWidth;
                 const elementHeight = elementRef.current.offsetHeight;
 
-                // Calcular nova posição mantendo o elemento dentro do canvas
                 const newX = Math.max(0, Math.min(
                     info.point.x - canvasBounds.left,
                     canvasWidth - elementWidth
@@ -435,7 +423,6 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
                     canvasHeight - elementHeight
                 ));
 
-                // Atualizar posição no componente pai
                 onDragElement(item.instanceId, newX, newY);
             }}
             onDragEnd={() => {
@@ -452,7 +439,6 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
     );
 };
 
-// Componente para área de canvas
 interface DesignCanvasProps {
     droppedElements: DroppedElement[];
     onRemoveElement: (instanceId: string) => void;
@@ -471,7 +457,7 @@ const DesignCanvas: React.FC<DesignCanvasProps> = ({
     focusedElementId
 }) => {
     return (
-        <div className="bg-gray-700 rounded-lg p-6 min-h-[500px] h-[calc(100vh-300px)] relative overflow-hidden z-10"> {/* CORRIGIDO: Aumentei altura mínima e adicionei altura responsiva */}
+        <div className="bg-gray-700 rounded-lg p-6 min-h-[500px] h-[calc(100vh-300px)] relative overflow-hidden z-10"> 
             <div className="absolute top-4 left-4 opacity-20 text-lg">Canvas de Design</div>
 
             {/* Grade de referência */}
@@ -484,7 +470,6 @@ const DesignCanvas: React.FC<DesignCanvasProps> = ({
                 ))}
             </div>
 
-            {/* Elementos posicionados no canvas */}
             <AnimatePresence>
                 {droppedElements.map((item) => (
                     <CanvasElement
@@ -499,7 +484,6 @@ const DesignCanvas: React.FC<DesignCanvasProps> = ({
                 ))}
             </AnimatePresence>
 
-            {/* Mensagem quando o canvas está vazio */}
             {droppedElements.length === 0 && (
                 <div className="absolute inset-0 flex items-center justify-center text-gray-400 pointer-events-none">
                     <div className="text-center">
@@ -513,7 +497,6 @@ const DesignCanvas: React.FC<DesignCanvasProps> = ({
 };
 
 
-// Componente para showcase de projetos
 const ProjectShowcase: React.FC = () => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
@@ -559,7 +542,6 @@ const ProjectShowcase: React.FC = () => {
     );
 };
 
-// Componente auxiliar para ferramentas de design
 const DesignTools: React.FC = () => {
     return (
         <div className="bg-gray-800 rounded-lg p-4 mb-6">
@@ -584,7 +566,6 @@ export default function UXUI() {
     const [focusedElementId, setFocusedElementId] = useState<string | null>(null);
     const canvasRef = useRef<HTMLDivElement>(null);
 
-    // Acompanhar posição do mouse
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
             setMousePosition({ x: e.clientX, y: e.clientY });
@@ -594,15 +575,12 @@ export default function UXUI() {
         return () => window.removeEventListener("mousemove", handleMouseMove);
     }, []);
 
-    // Iniciar o arrastar
     const handleDragStart = (id: string) => {
         setIsDragging(true);
         setDraggedElementId(id);
     };
 
-    // Gerenciar arrastar e soltar
     const handleDrag = (id: string, info: PanInfo) => {
-        // Mostrar indicador visual durante o arrastar
         setIsDragging(true);
         setDraggedElementId(id);
     };
@@ -612,23 +590,20 @@ export default function UXUI() {
 
         const canvasBounds = canvasRef.current.getBoundingClientRect();
 
-        // Verificar se o elemento foi solto dentro do canvas
         if (
             info.point.x >= canvasBounds.left &&
             info.point.x <= canvasBounds.right &&
             info.point.y >= canvasBounds.top &&
             info.point.y <= canvasBounds.bottom
         ) {
-            // Calcular posição relativa ao canvas
             const x = info.point.x - canvasBounds.left;
             const y = info.point.y - canvasBounds.top;
 
             const element = designElements.find(el => el.id === id);
             if (element) {
-                // Criar instância única
+
                 const instanceId = `${id}-${Date.now()}`;
 
-                // Adicionar novo elemento com posição precisa
                 setDroppedElements(prev => [
                     ...prev,
                     {
@@ -639,12 +614,10 @@ export default function UXUI() {
                     }
                 ]);
 
-                // Focar no novo elemento
                 setFocusedElementId(instanceId);
             }
         }
 
-        // Resetar estado após o drop
         setIsDragging(false);
         setDraggedElementId(null);
     };
@@ -653,30 +626,24 @@ export default function UXUI() {
     const handleRemoveElement = (instanceId: string) => {
         setDroppedElements(prev => prev.filter(item => item.instanceId !== instanceId));
 
-        // Se o elemento removido estava em foco, remove o foco
         if (focusedElementId === instanceId) {
             setFocusedElementId(null);
         }
     };
 
-    // Manipular início de arrastar elemento do canvas
     const handleStartDragElement = (instanceId: string) => {
         setIsDragging(true);
         setFocusedElementId(instanceId);
     };
 
-    // Manipular arrastar elemento dentro do canvas
     const handleDragElement = (instanceId: string, newX: number, newY: number) => {
-        // Garantir que os valores estão dentro dos limites
         if (canvasRef.current) {
             const canvasWidth = canvasRef.current.offsetWidth;
             const canvasHeight = canvasRef.current.offsetHeight;
 
-            // Encontrar o elemento atual
             const currentElement = droppedElements.find(item => item.instanceId === instanceId);
             if (!currentElement) return;
 
-            // Ajustar para garantir que fique dentro do canvas (com margem de segurança)
             const boundedX = Math.max(0, Math.min(newX, canvasWidth - 50));
             const boundedY = Math.max(0, Math.min(newY, canvasHeight - 50));
 
@@ -690,48 +657,39 @@ export default function UXUI() {
         }
     };
 
-    // Função para exportar o canvas
     const exportCanvas = async () => {
         if (!canvasRef.current) return;
 
         try {
-            // Feedback visual de que está processando
             const exportBtn = document.getElementById('export-btn');
             if (exportBtn) {
                 exportBtn.innerText = 'Exportando...';
                 exportBtn.setAttribute('disabled', 'true');
             }
 
-            // Encontrar o elemento canvas diretamente
             const canvasElement = canvasRef.current.querySelector('.bg-gray-700') as HTMLElement;
             if (!canvasElement) return;
 
-            // Adicionar classe temporária para melhorar a exportação
             canvasElement.classList.add('exporting');
 
-            // Usar html2canvas para capturar o conteúdo do canvas
             const canvas = await html2canvas(canvasElement, {
-                backgroundColor: '#374151', // bg-gray-700
-                scale: 2, // Qualidade da exportação
+                backgroundColor: '#374151', 
+                scale: 2, 
                 logging: false,
                 useCORS: true,
-                allowTaint: true, // Permitir conteúdo de outras origens
-                foreignObjectRendering: true // Melhor renderização de elementos complexos
+                allowTaint: true, 
+                foreignObjectRendering: true 
             });
 
-            // Remover classe temporária
             canvasElement.classList.remove('exporting');
 
-            // Converter para URL de dados
             const image = canvas.toDataURL('image/png');
 
-            // Criar link para download
             const link = document.createElement('a');
             link.download = `design-canvas-${new Date().toISOString().split('T')[0]}.png`;
             link.href = image;
             link.click();
 
-            // Restaurar o botão
             if (exportBtn) {
                 exportBtn.innerText = 'Exportar Design';
                 exportBtn.removeAttribute('disabled');
@@ -740,7 +698,6 @@ export default function UXUI() {
             console.error('Erro ao exportar o canvas:', error);
             alert('Ocorreu um erro ao exportar o design. Por favor, tente novamente.');
 
-            // Restaurar o botão em caso de erro
             const exportBtn = document.getElementById('export-btn');
             if (exportBtn) {
                 exportBtn.innerText = 'Exportar Design';
@@ -751,7 +708,6 @@ export default function UXUI() {
 
     return (
         <div className="bg-gray-900 text-white min-h-screen relative">
-            {/* Estilos globais para efeitos dos botões */}
             <style jsx global>{`
                 .exporting {
                     pointer-events: none;
@@ -771,7 +727,6 @@ export default function UXUI() {
                 }
             `}</style>
 
-            {/* Cursor personalizado */}
             <CustomCursor
                 mousePosition={mousePosition}
                 isDragging={isDragging}
@@ -821,8 +776,6 @@ export default function UXUI() {
                         </motion.div>
                     </div>
 
-
-                    
                 </motion.div>
 
                 <Tabs defaultValue="process" className="w-full" onValueChange={setActiveTab}>
@@ -833,7 +786,6 @@ export default function UXUI() {
                     </TabsList>
 
                     <TabsContent value="process" className="space-y-12">
-                        {/* Processo de Design */}
                         <motion.div
                             className="grid grid-cols-1 md:grid-cols-2 gap-8"
                             initial={{ opacity: 0 }}
@@ -932,7 +884,6 @@ export default function UXUI() {
 
                     <TabsContent value="interactive">
                         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
-                            {/* Painel lateral com elementos arrastáveis */}
                             <div className="col-span-1 bg-gray-800 rounded-lg p-4">
                                 <h3 className="text-lg font-medium mb-4 text-gray-300">Componentes</h3>
                                 <p className="text-sm text-gray-400 mb-6">
@@ -964,7 +915,6 @@ export default function UXUI() {
                                 </div>
                             </div>
 
-                            {/* Canvas de design interativo */}
                             <div className="col-span-1 lg:col-span-4" ref={canvasRef} style={{ position: 'relative', zIndex: 1 }}>
                                 <DesignCanvas
                                     droppedElements={droppedElements}
