@@ -764,6 +764,20 @@ export default function UXUI() {
                             Minha abordagem para criar interfaces que encantam usuários
                             e resolvem problemas reais.
                         </p>
+                        <p className="text-lg mb-6 text-gray-400 max-w-2x1">
+                            Para conhecer meu portifólio completo, interagir com projetos e aprender mais sobre meu processo de design
+                            visite:
+                        </p>
+
+                        <motion.a 
+                            href="https://ux-portifolio.vercel.app/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.05 } }
+                            className="inline-block bg-gradient-to-r from-green-400 to-green-600 text-white font-semibold px-6 py-3 rounded-full shadow-md hover:shadow-lg transition"
+                        >
+                            Acesse meu site de UX completo
+                        </motion.a>
 
                         <motion.div
                             className="md:hidden flex items-center gap-3 text-gray-400 mb-6"
