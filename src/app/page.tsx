@@ -176,7 +176,7 @@ export default function Portfolio() {
     {
       title: "Sistema ERP",
       description: "Plataforma de gestão empresarial para agendamentos. Ainda em desenvolvimento, agora para contar com módulos de faturamento, estoque.",
-      technologies: ["React", "Flask", "TypeScript", "SQL"],
+      technologies: ["React", "FastAPI", "TypeScript", "SQL"],
       image: "/erp.jpg", 
       githubUrl: "https://github.com/joanealves/erp_salao",
       liveUrl: "https://"
@@ -193,8 +193,8 @@ export default function Portfolio() {
       title: "Plataforma CRM",
       description: "Sistema de gerenciamento de relacionamento com clientes com automação de marketing.",
       technologies: ["Next.js", "Shadcn UI", "Tailwind", "MongoDB"],
-      image: "/crm-platform.jpg",
-      githubUrl: "https://github.com/yourusername/crm-platform",
+      image: "",
+      githubUrl: "",
       liveUrl: "https://"
     }
   ];

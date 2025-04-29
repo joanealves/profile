@@ -83,7 +83,6 @@ const Header = () => {
           <h1 className="text-2xl font-bold">Joane Alves</h1>
         </div>
 
-        {/* Menu Desktop */}
         <nav className="hidden md:block" aria-label="Navegação Principal">
           <ul className="flex gap-6">
             {navItems.map(({ label, href }) => (

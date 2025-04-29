@@ -32,7 +32,7 @@ const NeuralNetworkBackground: React.FC = () => {
                 this.originalX = this.x;
                 this.originalY = this.y;
                 this.radius = Math.random() * 2 + 1;
-                this.speedX = (Math.random() - 0.5) * 1.5;  // movement
+                this.speedX = (Math.random() - 0.5) * 1.5; 
                 this.speedY = (Math.random() - 0.5) * 1.5;
                 this.color = `rgba(135, 206, 250, ${Math.random() * 0.5 + 0.2})`;
             }

@@ -120,8 +120,10 @@ const ProjectsSection = ({ projects }: ProjectsSectionProps) => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-3xl font-bold mb-4">Projetos</h2>
-                    <div className="w-24 h-1 bg-blue-400 mx-auto mb-6"></div>
+                    <span className="relative inline-block text-4xl font-bold mb-6 text-gray-200 text-center">
+                       Projetos
+                        
+                    </span>
                     <p className="text-gray-400 max-w-2xl mx-auto">
                         Confira alguns dos projetos que desenvolvi utilizando tecnologias modernas.
                     </p>

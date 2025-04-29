@@ -14,7 +14,6 @@ const ModernSkillsSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
 
-  // Skills data
   const skillsData: Skill[] = [
     { id: "react", name: "React", category: "Frontend", experience: 90, related: ["javascript", "typescript", "nextjs"], color: "#61DAFB" },
     { id: "javascript", name: "JavaScript", category: "Frontend", experience: 80, related: ["react", "typescript", "nodejs"], color: "#F7DF1E" },
@@ -38,16 +37,13 @@ const ModernSkillsSection: React.FC = () => {
     { id: "git", name: "Git", category: "Tools", experience: 85, related: [], color: "#F05032" },
   ];
 
-  // Get unique categories
   const categories = Array.from(new Set(skillsData.map(skill => skill.category)));
 
-  // Filter skills by active category
   const filteredSkills = activeCategory
     ? skillsData.filter(skill => skill.category === activeCategory)
     : skillsData;
 
 
-  // Handle category selection
   const handleCategoryClick = (category: string) => {
     setActiveCategory(activeCategory === category ? null : category);
     setActiveSkill(null);
@@ -65,7 +61,6 @@ const ModernSkillsSection: React.FC = () => {
           Minhas Habilidades Técnicas
         </motion.h2>
 
-        {/* Categories Navigation */}
         <motion.div 
           className="flex flex-wrap justify-center gap-3 mb-12"
           initial={{ opacity: 0, y: 20 }}
@@ -105,9 +100,7 @@ const ModernSkillsSection: React.FC = () => {
           ))}
         </motion.div>
 
-        {/* Skills Grid */}
         <div className="space-y-10">
-          {/* If no category is selected, group skills by category */}
           {!activeCategory && (
             <>
               {categories.map((category, i) => (
@@ -140,7 +133,6 @@ const ModernSkillsSection: React.FC = () => {
             </>
           )}
 
-          {/* If a category is selected, show those skills */}
           {activeCategory && (
             <motion.div 
               initial={{ opacity: 0 }}
@@ -160,7 +152,6 @@ const ModernSkillsSection: React.FC = () => {
           )}
         </div>
 
-        {/* Skill Details */}
         <AnimatePresence>
           {activeSkill && (
             <motion.div 

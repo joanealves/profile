@@ -58,28 +58,27 @@ interface MousePosition {
 const projectsData: Project[] = [
     {
         id: 1,
-        title: "Redesign App Bancário",
-        description: "Reformulação completa da experiência do usuário para um aplicativo bancário de grande porte.",
-        image: "/api/placeholder/600/400",
-        tags: ["Mobile", "Fintech", "Design System"]
+        title: "UX/UI Site de Portifólio de Desenvolvedora",
+        description: "Criação de experiência do usuário para um site de portifólio de Desenvolvimento.",
+        image: "/capa_portifolio.png",
+        tags: ["UX", "UI", "Design System"]
     },
     {
         id: 2,
         title: "Dashboard Analytics",
-        description: "Design de interface para dashboard com visualização de dados complexos.",
-        image: "/api/placeholder/600/400",
-        tags: ["Web", "Data Viz", "B2B"]
+        description: "Design de interface para dashboard com visualização de dados de agendamentos e desenvolvimento.",
+        image: "/dashboard_appoiments.jpg",
+        tags: ["Web", "Dashboard", "Frontend", "Backend", "Banco de Dados"]
     },
     {
         id: 3,
-        title: "E-commerce UI Kit",
-        description: "Kit de componentes para plataformas de comércio eletrônico.",
-        image: "/api/placeholder/600/400",
+        title: "E-commerce",
+        description: "Designer e UX/UI, simples para plataformas de comércio de moda. Para estudo",
+        image: "/ecomerce.png",
         tags: ["Design System", "E-commerce", "Components"]
     }
 ];
 
-// Componentes de design arrastáveis (expandido)
 const designElements: DesignElement[] = [
     { id: "btn-1", type: "button", label: "Botão Primário", color: "bg-blue-500", icon: <MagicWandIcon /> },
     { id: "btn-2", type: "button", label: "Botão Secundário", color: "bg-gray-500", icon: <MagicWandIcon /> },
@@ -191,11 +190,9 @@ const CanvasElement: React.FC<CanvasElementProps> = ({
     const [editableText, setEditableText] = useState("Nome");
     const [isEditing, setIsEditing] = useState(false);
 
-    // Cria motion values para controlar a posição
     const x = useMotionValue(item.x);
     const y = useMotionValue(item.y);
 
-    // Atualiza os motion values quando os props mudam
     useEffect(() => {
         x.set(item.x);
         y.set(item.y);
@@ -460,7 +457,6 @@ const DesignCanvas: React.FC<DesignCanvasProps> = ({
         <div className="bg-gray-700 rounded-lg p-6 min-h-[500px] h-[calc(100vh-300px)] relative overflow-hidden z-10"> 
             <div className="absolute top-4 left-4 opacity-20 text-lg">Canvas de Design</div>
 
-            {/* Grade de referência */}
             <div className="absolute inset-0 grid grid-cols-12 gap-1 pointer-events-none">
                 {Array(12).fill(0).map((_, i) => (
                     <div key={`col-${i}`} className="h-full border-l border-white/10" />
@@ -532,9 +528,6 @@ const ProjectShowcase: React.FC = () => {
                                 ))}
                             </div>
                         </CardContent>
-                        <CardFooter>
-                            <Button variant="outline" className="w-full">Ver Detalhes</Button>
-                        </CardFooter>
                     </Card>
                 </motion.div>
             ))}

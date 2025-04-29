@@ -78,21 +78,6 @@ const HeroSection = () => {
                 variants={fadeInUpVariants}
                 custom={3}
             >
-                <span className="text-sm mb-2">Scroll</span>
-                <motion.div
-                    animate={{
-                        y: [0, 10, 0],
-                        transition: {
-                            duration: 1.5,
-                            repeat: Infinity,
-                            repeatType: "loop"
-                        }
-                    }}
-                >
-                    <div className="w-6 h-10 border-2 border-gray-300 rounded-full flex justify-center pt-2">
-                        <div className="w-1 h-2 bg-gray-300 rounded-full"></div>
-                    </div>
-                </motion.div>
             </motion.div>
         </motion.section>
     );

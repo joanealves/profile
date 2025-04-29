@@ -75,49 +75,49 @@ const AboutSection = () => {
             title: "Design Gráfico",
             description: "Iniciei no design criando visuais e identidades para marcas em agências.",
             icon: <FaPalette className="h-5 w-5 text-white" />,
-            color: "#3182CE" // blue-600
+            color: "#3182CE" 
         },
         {
             title: "UX/UI Design",
             description: "Me apaixonei por entender como as pessoas interagem com interfaces digitais.",
             icon: <FaLaptopCode className="h-5 w-5 text-white" />,
-            color: "#805AD5" // purple-600
+            color: "#805AD5" 
         },
         {
             title: "Aprendizado",
             description: "Durante a pandemia, investi em cursos e bootcamps para ampliar conhecimentos.",
             icon: <FaBolt className="h-5 w-5 text-white" />,
-            color: "#DD6B20" // orange-600
+            color: "#DD6B20" 
         },
         {
             title: "Programação",
             description: "Comecei a programar para dar vida às minhas ideias e projetos.",
             icon: <FaCode className="h-5 w-5 text-white" />,
-            color: "#38B2AC" // teal-600
+            color: "#38B2AC" 
         },
         {
             title: "Frontend",
             description: "Desenvolvi habilidades criando interfaces interativas e responsivas.",
             icon: <FaLayerGroup className="h-5 w-5 text-white" />,
-            color: "#D53F8C" // pink-600
+            color: "#D53F8C" 
         },
         {
             title: "Backend",
             description: "Aprendi a construir o lado servidor dos aplicativos para soluções completas.",
             icon: <FaServer className="h-5 w-5 text-white" />,
-            color: "#2B6CB0" // blue-700
+            color: "#2B6CB0" 
         },
         {
             title: "Projetos Completos",
             description: "Participei de vários projetos desafiadores como desenvolvedora full stack.",
             icon: <FaRocket className="h-5 w-5 text-white" />,
-            color: "#00B5D8" // cyan-600
+            color: "#00B5D8" 
         },
         {
             title: "Experiências Intuitivas",
             description: "Foco em criar experiências intuitivas e soluções eficientes.",
             icon: <FaGlobe className="h-5 w-5 text-white" />,
-            color: "#4FD1C5" // teal-400
+            color: "#4FD1C5" 
         }
     ];
 
@@ -137,11 +137,12 @@ const AboutSection = () => {
                 >
                     <span className="relative inline-block">
                         Sobre Mim
-                        <span className="absolute bottom-0 left-0 w-full h-1 bg-blue-500 rounded-full mt-2"></span>
+                        
                     </span>
                 </motion.h2>
 
                 <motion.p
+
                     className="text-gray-300 text-lg mb-12 text-center max-w-2x0 mx-auto"
                     variants={fadeInUpVariants}
                     custom={1}
