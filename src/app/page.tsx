@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/card";
 
 import Image from "next/image";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection";
@@ -239,7 +240,6 @@ export default function Portfolio() {
         <ProjectsSection projects={projects} />
         <ModernSkillsSection />
 
-        {/* Contact Section */}
         <motion.section
           id="contact"
           className="p-12 bg-gray-800 text-center"
@@ -283,6 +283,8 @@ export default function Portfolio() {
             ))}
           </motion.div>
         </motion.section>
+
+        <WhatsAppButton />
 
         <Footer />
       </div>
