@@ -195,8 +195,8 @@ export default function Portfolio() {
       description: "Sistema de gerenciamento de relacionamento com clientes com automação de marketing.",
       technologies: ["Next.js", "Shadcn UI", "Tailwind", "MongoDB"],
       image: "",
-      githubUrl: "",
-      liveUrl: "https://"
+      githubUrl: "https://",
+      liveUrl: "https://",
     }
   ];
 

@@ -17,12 +17,12 @@ export const metadata: Metadata = {
   title: "Joane Alves | Desenvolvimento Web e UX/UI",
   description: "Desenvolvedora Full Stack com experiência em UX/UI, React, NestJS TypeScript, Api, Banco de Dados, Python.",
   keywords: ["Desenvolvimento Web", "UX/UI", "React", "Frontend", "NestJS", "Full Stack", "JavaScript",],
-  authors: [{ name: "Joane Alves", url: "https://seusite.com" }],
+  authors: [{ name: "Joane Alves", url: "https://profile-woad-nine.vercel.app/" }],
   robots: "index, follow",
   openGraph: {
     title: "Joane Alves | Desenvolvimento Web e UX/UI",
     description: "Especialista em desenvolvimento web moderno e experiência do usuário.",
-    url: "https://seusite.com",
+    url: "https://profile-woad-nine.vercel.app/",
     type: "website",
     images: [{ url: "/capa.jpg", width: 1200, height: 630, alt: "Joane Alves UX/UI e Desenvolvimento Web" }],
   },
@@ -45,7 +45,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Person",
               "name": "Joane Alves",
-              "url": "https://seusite.com",
+              "url": "https://profile-woad-nine.vercel.app/",
               "sameAs": [
                 "https://github.com/joanealves",
                 "https://www.linkedin.com/in/joane-alves-ribeiro/",
