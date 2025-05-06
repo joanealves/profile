@@ -192,11 +192,19 @@ export default function Portfolio() {
     },
     {
       title: "Plataforma CRM",
-      description: "Sistema de gerenciamento de relacionamento com clientes com automação de marketing.",
-      technologies: ["Next.js", "Shadcn UI", "Tailwind", "MongoDB"],
-      image: "",
+      description: "Solução completa de gestão de relacionamento com clientes que automatiza processos, centraliza informações e aumenta a eficiência das suas equipes de vendas e marketing..",
+      technologies: ["Next.js", "Shadcn UI", "Tailwind", "Em desenvolvimento"],
+      image: "/crm2.gif",
       githubUrl: "https://",
-      liveUrl: "https://",
+      liveUrl: "/crm2.gif",
+    },
+    {
+      title: "Website - Portifólio Desenvolvedora",
+      description: "Desenvolvimento Frontend, em Next.js e UX/UI Design, do site de Portifólio. Utilizando as melhores tecnologias.",
+      technologies: ["Next.js", "Shadcn UI", "Tailwind", "Em desenvolvimento"],
+      image: "/dev_portifolio.gif",
+      githubUrl: "https://",
+      liveUrl: "https://www.loom.com/share/b7ca1c3c2ace48cdab81b85ccc532f7e?sid=24c99233-ced0-49e3-8e2d-e49de9e9c89f",
     }
   ];
 
