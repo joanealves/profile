@@ -175,22 +175,6 @@ export default function Portfolio() {
 
   const projects: Project[] = [
     {
-      title: "Sistema ERP",
-      description: "Plataforma de gestão empresarial para agendamentos. Ainda em desenvolvimento, agora para contar com módulos de faturamento, estoque.",
-      technologies: ["React", "FastAPI", "TypeScript", "SQL"],
-      image: "/erp.jpg", 
-      githubUrl: "https://github.com/joanealves/erp_salao",
-      liveUrl: "https://"
-    },
-    {
-      title: "Mapas Interativos",
-      description: "Aplicação de visualização geoespacial para monitoramento de terremotos em tempo real. Aplicação em desenvolvimento",
-      technologies: ["React", "Mapbox", "OpenMap", "D3.js"],
-      image: "/maps-project.jpg.jpg",
-      githubUrl: "https://github.com/joanealves/geoview",
-      liveUrl: "https://geoview-2e33.vercel.app/"
-    },
-    {
       title: "Plataforma CRM",
       description: "Solução completa de gestão de relacionamento com clientes que automatiza processos, centraliza informações e aumenta a eficiência das suas equipes de vendas e marketing..",
       technologies: ["Next.js", "Shadcn UI", "Tailwind", "Em desenvolvimento"],
@@ -199,12 +183,36 @@ export default function Portfolio() {
       liveUrl: "/crm2.gif",
     },
     {
+      title: "Sistema ERP",
+      description: "Plataforma de gestão empresarial para agendamentos. Ainda em desenvolvimento, agora para contar com módulos de faturamento, estoque.",
+      technologies: ["React", "FastAPI", "TypeScript", "SQL"],
+      image: "/erp.jpg", 
+      githubUrl: "https://github.com/joanealves/erp_salao",
+      liveUrl: "https://"
+    },
+    {
+      title: "Website | Portifólio de UX/UI Designer",
+      description: "Desenvolvido em Next.js, pensado para além de demostrar conhecimento em UX/UI, criar um ambiente de aprendizagem divertida para o usuário",
+      technologies: ["Next.js", "Shadcn UI", "Tailwind", "Figma","Em desenvolvimento"],
+      image: "/ux_portifolio.gif", 
+      githubUrl: "https://github.com/joanealves/erp_salao",
+      liveUrl: "https://ux-portifolio.vercel.app/"
+    },
+    {
+      title: "Mapas Interativos",
+      description: "Aplicação de visualização geoespacial para monitoramento de terremotos em tempo real. Aplicação em desenvolvimento",
+      technologies: ["React", "Mapbox", "OpenMap", "D3.js"],
+      image: "/geo.gif",
+      githubUrl: "https://github.com/joanealves/geoview",
+      liveUrl: "https://geoview-pj9a.vercel.app/"
+    },
+    {
       title: "Website - Portifólio Desenvolvedora",
       description: "Desenvolvimento Frontend, em Next.js e UX/UI Design, do site de Portifólio. Utilizando as melhores tecnologias.",
       technologies: ["Next.js", "Shadcn UI", "Tailwind", "Em desenvolvimento"],
-      image: "/dev_portifolio.gif",
-      githubUrl: "https://",
-      liveUrl: "https://www.loom.com/share/b7ca1c3c2ace48cdab81b85ccc532f7e?sid=24c99233-ced0-49e3-8e2d-e49de9e9c89f",
+      image: "/capa_portifolio.png",
+      githubUrl: "https://github.com/joanealves/profile",
+      liveUrl: "https://profile-git-main-joanes-projects.vercel.app/",
     }
   ];
 
