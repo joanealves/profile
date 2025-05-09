@@ -93,6 +93,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
               alt={project.title}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-110"
+              unoptimized
             />
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-purple-900 to-blue-900 flex items-center justify-center">

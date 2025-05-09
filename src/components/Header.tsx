@@ -79,6 +79,7 @@ const Header = () => {
             width={40}
             height={40}
             className="mr-2"
+            unoptimized
           />
           <h1 className="text-2xl font-bold">Joane Alves</h1>
         </div>

@@ -89,7 +89,6 @@ const Footer = () => {
                         variants={fadeInUpVariants}
                         custom={1}
                     >
-                        {/* Links principais do site */}
                         <div>
                             <h4 className="text-white font-medium mb-2">Navegação</h4>
                             <ul className="grid grid-cols-2 gap-x-4 space-y-1">
