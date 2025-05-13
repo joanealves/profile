@@ -208,6 +208,14 @@ export default function Portfolio() {
       liveUrl: "https://geoview-pj9a.vercel.app/"
     },
     {
+      title: "Ai - Analyst",
+      description: "AI Analyst é uma aplicação que analisa arquivos PDF usando inteligência artificial. Ela extrai o texto dos documentos, identifica palavras-chave, sentimentos e padrões relevantes, oferecendo insights rápidos e automatizados a partir do conteúdo analisado.",
+      technologies: ["Python", "Openai", "Metplotlib", "Langchain", "streamlit"],
+      image: "/capa-ia.png",
+      githubUrl: "https://github.com/joanealves/ia-analyst",
+      liveUrl: ""
+    },
+    {
       title: "Website - Portifólio Desenvolvedora",
       description: "Desenvolvimento Frontend, em Next.js e UX/UI Design, do site de Portifólio. Utilizando as melhores tecnologias.",
       technologies: ["Next.js", "Shadcn UI", "Tailwind", "Em desenvolvimento"],
