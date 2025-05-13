@@ -181,12 +181,12 @@ export default function Portfolio() {
       technologies: ["Next.js", "Shadcn UI", "Tailwind", "Em desenvolvimento"],
       image: "/crm2.gif",
       githubUrl: "https://",
-      liveUrl: "/crm2.gif",
+      liveUrl: "https://crm-marketing-two.vercel.app/",
     },
     {
       title: "Sistema ERP",
       description: "Plataforma de gestão empresarial para agendamentos. Ainda em desenvolvimento, agora para contar com módulos de faturamento, estoque.",
-      technologies: ["React", "FastAPI", "TypeScript", "SQL"],
+      technologies: ["React", "Em desenvolvimento","FastAPI", "TypeScript", "SQL"],
       image: "/erp.jpg", 
       githubUrl: "https://github.com/joanealves/erp_salao",
       liveUrl: "https://"
