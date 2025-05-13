@@ -147,10 +147,8 @@ const AboutSection = () => {
                     variants={fadeInUpVariants}
                     custom={1}
                 >
-                    Desenvolvedora Full Stack, especializada em tecnologias front-end, como React, TypeScript, Next.js e Vite. Trabalho com bibliotecas de componentes modernas como ShadCN UI e Tailwind CSS , que seguem princípios de design systems, contribuindo para interfaces consistentes, acessíveis e eficientes. Minha trajetória profissional é marcada pela liderança de projetos full stack e pela colaboração próxima com equipes de UX/UI, onde implemento soluções tecnológicas que priorizam a experiência do usuário e a acessibilidade.
-                    Minha expertise técnica abrange tanto o front-end, com React, JavaScript, TypeScript, Tailwind CSS, Chakra UI e Styled-components, quanto o back-end, com Python, Django, FastAPI, Node.js e PHP. Também tenho experiência em bancos de dados como MySQL e PostgreSQL, além de integrações com APIs, incluindo Google Maps API e REST.
-                    Sou apaixonada por criar interfaces intuitivas e acessíveis que transformam a experiência digital
-                    dos usuários. Estou sempre em busca de aprender novas tecnologias.
+                    Desenvolvedora Full Stack, especializada em tecnologias front-end, como React, TypeScript, Next.js e Vite. Trabalho com tecnologias modernas como ShadCN UI e Tailwind, seguindo os princípios de design system. Com isso entrego interfaces consistentes, acessíveis e eficientes.. Minha trajetória profissional é marcada pela liderança de projetos full stack e pela colaboração próxima com equipes de UX/UI, onde implemento soluções tecnológicas que priorizam a experiência do usuário e a acessibilidade.
+                   
                     Comprometida com boas práticas de programação, e metodologias ágeis. Minha abordagem combina
                     criatividade e eficiência para entregar soluções robustas e alinhadas às necessidades do projeto
                 </motion.p>

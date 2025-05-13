@@ -484,7 +484,7 @@ const DesignCanvas: React.FC<DesignCanvasProps> = ({
                 <div className="absolute inset-0 flex items-center justify-center text-gray-400 pointer-events-none">
                     <div className="text-center">
                         <LayoutIcon className="w-12 h-12 mx-auto mb-4 opacity-30" />
-                        <p>Arraste elementos do painel esquerdo para começar a desenhar</p>
+                        <p>Arraste elementos do painel esquerdo, para a parte superior do Canvas e crie sua interface.</p>
                     </div>
                 </div>
             )}
@@ -895,7 +895,7 @@ export default function UXUI() {
                             <div className="col-span-1 bg-gray-800 rounded-lg p-4">
                                 <h3 className="text-lg font-medium mb-4 text-gray-300">Componentes</h3>
                                 <p className="text-sm text-gray-400 mb-6">
-                                    Arraste e solte os elementos para o canvas para criar sua interface.
+                                    Arraste elementos do painel esquerdo, para a parte superior do Canvas e crie sua interface..
                                 </p>
 
                                 {designElements.map((element) => (
@@ -913,7 +913,7 @@ export default function UXUI() {
                                     <ul className="text-xs text-gray-500 space-y-2">
                                         <li className="flex items-center gap-2">
                                             <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
-                                            Arraste elementos para o canvas
+                                            Arraste elementos do painel esquerdo, para a parte superior do Canvas e crie sua interface.
                                         </li>
                                         <li className="flex items-center gap-2">
                                             <span className="w-2 h-2 bg-blue-500 rounded-full"></span>
