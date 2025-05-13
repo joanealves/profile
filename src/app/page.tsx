@@ -186,7 +186,7 @@ export default function Portfolio() {
     {
       title: "Sistema ERP",
       description: "Plataforma de gestão empresarial para agendamentos. Ainda em desenvolvimento, agora para contar com módulos de faturamento, estoque.",
-      technologies: ["React", "Em desenvolvimento","FastAPI", "TypeScript", "SQL"],
+      technologies: ["React", "Em desenvolvimento","FastAPI", "TypeScript", "BD", "SQL"],
       image: "/erp.jpg", 
       githubUrl: "https://github.com/joanealves/erp_salao",
       liveUrl: "https://"
