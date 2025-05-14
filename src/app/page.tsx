@@ -194,7 +194,7 @@ export default function Portfolio() {
     {
       title: "Website | Portifólio de UX/UI Designer",
       description: "Desenvolvido em Next.js, pensado para além de demostrar conhecimento em UX/UI, criar um ambiente de aprendizagem divertida para o usuário",
-      technologies: ["Next.js", "Shadcn UI", "Tailwind", "Figma","Em desenvolvimento"],
+      technologies: ["Next.js", "Shadcn UI", "Tailwind", "Figma",],
       image: "/ux_portifolio.gif", 
       githubUrl: "https://github.com/joanealves/erp_salao",
       liveUrl: "https://ux-portifolio.vercel.app/"
