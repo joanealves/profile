@@ -60,7 +60,7 @@ const Header = () => {
   const navItems = [
     { label: "Sobre", href: "#about" },
     { label: "Projetos", href: "#projects" },
-    { label: "Skills", href: "#skills" },
+    { label: "Skills", href: "#modernskills" },
     { label: "Contato", href: "#contact" },
     { label: "UX/UI", href: "/uxui" }
   ];

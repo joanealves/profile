@@ -16,23 +16,23 @@ const ModernSkillsSection: React.FC = () => {
 
   const skillsData: Skill[] = [
     { id: "react", name: "React", category: "Frontend", experience: 90, related: ["javascript", "typescript", "nextjs"], color: "#61DAFB" },
-    { id: "javascript", name: "JavaScript", category: "Frontend", experience: 80, related: ["react", "typescript", "nodejs"], color: "#F7DF1E" },
+    { id: "javascript", name: "JavaScript", category: "Frontend", experience: 90, related: ["react", "typescript", "nodejs"], color: "#F7DF1E" },
     { id: "typescript", name: "TypeScript", category: "Frontend", experience: 80, related: ["javascript", "react", "nextjs"], color: "#3178C6" },
     { id: "nextjs", name: "Next.js", category: "Frontend", experience: 75, related: ["react", "typescript"], color: "#000000" },
     { id: "tailwind", name: "Tailwind", category: "Frontend", experience: 85, related: ["css", "react"], color: "#06B6D4" },
     { id: "css", name: "CSS", category: "Frontend", experience: 90, related: ["tailwind"], color: "#1572B6" },
     { id: "framer", name: "Framer Motion", category: "Frontend", experience: 70, related: ["react"], color: "#0055FF" },
 
-    { id: "python", name: "Python", category: "Backend", experience: 80, related: ["django", "fastapi"], color: "#3776AB" },
-    { id: "django", name: "Django", category: "Backend", experience: 70, related: ["python"], color: "#092E20" },
+    { id: "python", name: "Python", category: "Backend", experience: 70, related: ["django", "fastapi"], color: "#3776AB" },
+    { id: "django", name: "Django", category: "Backend", experience: 60, related: ["python"], color: "#092E20" },
     { id: "fastapi", name: "FastAPI", category: "Backend", experience: 70, related: ["python"], color: "#009688" },
-    { id: "nodejs", name: "Node.js", category: "Backend", experience: 80, related: ["javascript"], color: "#339933" },
+    { id: "nodejs", name: "Node.js", category: "Backend", experience: 60, related: ["javascript"], color: "#339933" },
 
     { id: "sql", name: "SQL", category: "Database", experience: 75, related: ["postgres"], color: "#4479A1" },
     { id: "postgres", name: "Postgres", category: "Database", experience: 60, related: ["sql"], color: "#336791" },
 
-    { id: "figma", name: "Figma", category: "Design", experience: 80, related: ["uxui"], color: "#F24E1E" },
-    { id: "uxui", name: "UX/UI Design", category: "Design", experience: 80, related: ["figma"], color: "#FF61F6" },
+    { id: "figma", name: "Figma", category: "Design", experience: 90, related: ["uxui"], color: "#F24E1E" },
+    { id: "uxui", name: "UX/UI Design", category: "Design", experience: 90, related: ["figma"], color: "#FF61F6" },
 
     { id: "git", name: "Git", category: "Tools", experience: 85, related: [], color: "#F05032" },
   ];

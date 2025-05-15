@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap:https://joanealves.vercel.app//sitemap.xml
