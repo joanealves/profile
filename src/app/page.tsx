@@ -184,13 +184,14 @@ export default function Portfolio() {
       liveUrl: "https://crm-marketing-two.vercel.app/",
     },
     {
-      title: "Sistema ERP",
-      description: "Plataforma de gestão empresarial para agendamentos. Ainda em desenvolvimento, agora para contar com módulos de faturamento, estoque.",
-      technologies: ["React", "Em desenvolvimento","FastAPI", "TypeScript", "BD", "SQL"],
-      image: "/erp.jpg", 
-      githubUrl: "https://github.com/joanealves/erp_salao",
-      liveUrl: "https://"
+      title: "Website - ForceFlow",
+      description: "Desenvolvimento Frontend, em Next.js, do site ForceFlow. Utilizando as melhores tecnologias.",
+      technologies: ["Next.js", "Tailwind", "Frontend"],
+      image: "/force.gif",
+      githubUrl: "https://github.com/joanealves/forceflow",
+      liveUrl: "https://forceflow.vercel.app/",
     },
+     
     {
       title: "Website | Portifólio de UX/UI Designer",
       description: "Desenvolvido em Next.js, pensado para além de demostrar conhecimento em UX/UI, criar um ambiente de aprendizagem divertida para o usuário",
@@ -198,6 +199,14 @@ export default function Portfolio() {
       image: "/ux_portifolio.gif", 
       githubUrl: "https://github.com/joanealves/erp_salao",
       liveUrl: "https://ux-portifolio.vercel.app/"
+    },
+    {
+      title: "Sistema ERP",
+      description: "Plataforma de gestão empresarial para agendamentos. Ainda em desenvolvimento, agora para contar com módulos de faturamento, estoque.",
+      technologies: ["React", "Em desenvolvimento","FastAPI", "TypeScript", "BD", "SQL"],
+      image: "/erp.jpg", 
+      githubUrl: "https://github.com/joanealves/erp_salao",
+      liveUrl: "https://"
     },
     {
       title: "Mapas Interativos",
@@ -215,14 +224,7 @@ export default function Portfolio() {
       githubUrl: "https://github.com/joanealves/ia-analyst",
       liveUrl: ""
     },
-    {
-      title: "Website - Portifólio Desenvolvedora",
-      description: "Desenvolvimento Frontend, em Next.js e UX/UI Design, do site de Portifólio. Utilizando as melhores tecnologias.",
-      technologies: ["Next.js", "Shadcn UI", "Tailwind", "Em desenvolvimento"],
-      image: "/capa_portifolio.png",
-      githubUrl: "https://github.com/joanealves/profile",
-      liveUrl: "https://profile-git-main-joanes-projects.vercel.app/",
-    }
+   
   ];
 
 
