@@ -200,14 +200,14 @@ export default function Portfolio() {
       githubUrl: "https://github.com/joanealves/erp_salao",
       liveUrl: "https://ux-portifolio.vercel.app/"
     },
-    {
-      title: "Sistema ERP",
-      description: "Plataforma de gestão empresarial para agendamentos. Ainda em desenvolvimento, agora para contar com módulos de faturamento, estoque.",
-      technologies: ["React", "Em desenvolvimento","FastAPI", "TypeScript", "BD", "SQL"],
-      image: "/erp.jpg", 
-      githubUrl: "https://github.com/joanealves/erp_salao",
-      liveUrl: "https://"
-    },
+    // {
+    //   title: "Sistema ERP",
+    //   description: "Plataforma de gestão empresarial para agendamentos. Ainda em desenvolvimento, agora para contar com módulos de faturamento, estoque.",
+    //   technologies: ["React", "Em desenvolvimento","FastAPI", "TypeScript", "BD", "SQL"],
+    //   image: "/erp.jpg", 
+    //   githubUrl: "https://github.com/joanealves/erp_salao",
+    //   liveUrl: "https://"
+    // },
     {
       title: "Mapas Interativos",
       description: "Aplicação de visualização geoespacial para monitoramento de terremotos em tempo real. Aplicação em desenvolvimento",
