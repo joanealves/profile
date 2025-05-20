@@ -177,8 +177,8 @@ export default function Portfolio() {
   const projects: Project[] = [
     {
       title: "Plataforma CRM",
-      description: "Solução completa de gestão de relacionamento com clientes que automatiza processos, centraliza informações e aumenta a eficiência das suas equipes de vendas e marketing..",
-      technologies: ["Next.js", "Shadcn UI", "Tailwind", "Em desenvolvimento"],
+      description: "Solução completa de gestão de relacionamento com clientes que automatiza processos, centraliza informações e aumenta a eficiência das suas equipes de vendas e marketing. Ele está em desenvolvimento e está aqui como demo.",
+      technologies: ["Em desenvolvimento ", "Next.js", "Shadcn UI", "Tailwind", ],
       image: "/crm2.gif",
       githubUrl: "https://",
       liveUrl: "https://crm-marketing-two.vercel.app/",
@@ -200,14 +200,14 @@ export default function Portfolio() {
       githubUrl: "https://github.com/joanealves/erp_salao",
       liveUrl: "https://ux-portifolio.vercel.app/"
     },
-    // {
-    //   title: "Sistema ERP",
-    //   description: "Plataforma de gestão empresarial para agendamentos. Ainda em desenvolvimento, agora para contar com módulos de faturamento, estoque.",
-    //   technologies: ["React", "Em desenvolvimento","FastAPI", "TypeScript", "BD", "SQL"],
-    //   image: "/erp.jpg", 
-    //   githubUrl: "https://github.com/joanealves/erp_salao",
-    //   liveUrl: "https://"
-    // },
+    {
+      title: "EyeCareAi | Inteligência Artificial aplicada ao bem-estar digital",
+      description: "O EyeCareAI é um sistema avançado de monitoramento de saúde ocular que utiliza inteligência artificial e visão computacional para detectar e prevenir fadiga visual, problemas posturais e hábitos prejudiciais durante o uso de computadores. Desenvolvido para promover bem-estar, o sistema monitora em tempo real diversos indicadores de saúde ocular e ergonomia.",
+      technologies: ["Em desenvolvimento","Python", "Opencv", "Mediapipe", "Pillow", "Ai"],
+      image: "/eye.png", 
+      githubUrl: "https://gamma.app/docs/EyeCareAI-Monitoramento-Inteligente-da-Saude-Ocular-6ha4mz8jhs1vkfn",
+      liveUrl: "/eyerai.gif"
+    },
     {
       title: "Mapas Interativos",
       description: "Aplicação de visualização geoespacial para monitoramento de terremotos em tempo real. Aplicação em desenvolvimento",
