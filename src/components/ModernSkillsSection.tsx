@@ -247,7 +247,6 @@ const SkillBadge: React.FC<SkillBadgeProps> = ({ skill, isActive, onClick }) => 
       <div className="flex items-center gap-2">
         <span className="font-medium">{skill.name}</span>
         
-        {/* Small experience indicator dot */}
         <div className="flex items-center justify-end">
           <div className="flex space-x-0.5">
             {[1, 2, 3, 4, 5].map((level) => (

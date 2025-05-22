@@ -9,7 +9,9 @@ import {
     FaLayerGroup,
     FaServer,
     FaRocket,
-    FaGlobe
+    FaGlobe,
+    FaUser,
+    FaHeart
 } from "react-icons/fa";
 
 const fadeInUpVariants = {
@@ -38,31 +40,36 @@ const SkillCard = ({ title, description, icon, color, index }: SkillCardProps) =
 
     return (
         <motion.div
-            className={`relative flex flex-col rounded-xl overflow-hidden cursor-pointer bg-gray-800/80 backdrop-blur-sm border border-white/10 transition-all duration-300 h-full ${isHovered ? "shadow-xl scale-105" : "shadow-md"
-                }`}
+            className={`relative flex flex-col rounded-xl overflow-hidden cursor-pointer bg-gray-800/50 backdrop-blur-sm border border-gray-700/50 transition-all duration-300 h-full group ${
+                isHovered ? "shadow-xl shadow-gray-900/50 scale-[1.02] border-gray-600/60" : "shadow-md"
+            }`}
             variants={fadeInUpVariants}
             custom={index}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
             <div
-                className={`absolute inset-0 opacity-0 transition-opacity duration-300 ${isHovered ? "opacity-10" : ""
-                    }`}
+                className={`absolute inset-0 opacity-0 transition-opacity duration-300 ${
+                    isHovered ? "opacity-5" : ""
+                }`}
                 style={{ background: color }}
             />
 
-            <div className="flex items-center p-4">
+            <div className="flex items-center p-4 pb-3">
                 <div
-                    className={`w-10 h-10 flex items-center justify-center rounded-lg mr-3`}
+                    className={`w-10 h-10 flex items-center justify-center rounded-lg mr-3 transition-all duration-300 ${
+                        isHovered ? "shadow-lg" : ""
+                    }`}
                     style={{ background: color }}
                 >
                     {icon}
                 </div>
-                <h3 className="text-lg font-bold text-white">{title}</h3>
+                <h3 className="text-base font-semibold text-white group-hover:text-gray-100 transition-colors">
+                    {title}
+                </h3>
             </div>
 
-            <div className={`p-4 pt-0 text-gray-300 transition-all duration-300 ${isHovered ? "opacity-100" : "opacity-70"
-                }`}>
+            <div className="px-4 pb-4 text-gray-400 text-sm leading-relaxed group-hover:text-gray-300 transition-colors">
                 <p>{description}</p>
             </div>
         </motion.div>
@@ -124,48 +131,105 @@ const AboutSection = () => {
     return (
         <motion.section
             id="about"
-            className="py-20 px-6 container mx-auto relative z-10"
+            className="py-16 md:py-20 px-4 container mx-auto relative z-10"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
         >
-            <div className="max-w-5xl mx-auto">
-                <motion.h2
-                    className="text-4xl font-bold mb-6 text-gray-200 text-center"
-                    variants={fadeInUpVariants}
-                    custom={0}
-                >
-                    <span className="relative inline-block">
+            <div className="max-w-6xl mx-auto">
+                <div className="text-center mb-12 md:mb-16">
+                    <motion.h2
+                        className="text-3xl md:text-4xl font-bold mb-6 text-white"
+                        variants={fadeInUpVariants}
+                        custom={0}
+                    >
                         Sobre Mim
-                        
-                    </span>
-                </motion.h2>
+                        <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-3 rounded-full"></div>
+                    </motion.h2>
 
-                <motion.p
+                    <motion.div
+                        className="max-w-4xl mx-auto space-y-6"
+                        variants={fadeInUpVariants}
+                        custom={1}
+                    >
+                        <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-gray-700/30">
+                            <div className="flex items-start gap-4 mb-4">
+                                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                                    <FaUser className="w-6 h-6 text-white" />
+                                </div>
+                                <div className="text-left">
+                                    <h3 className="text-xl font-semibold text-white mb-3">Minha Jornada</h3>
+                                    <p className="text-gray-300 leading-relaxed text-base">
+                                        <strong className="text-white">Desenvolvedora Full Stack</strong> com foco em front-end, 
+                                        atuo desde <strong className="text-blue-400">2022</strong> criando interfaces modernas e acessíveis. 
+                                        Trabalho com <strong className="text-white">React, TypeScript, Next.js</strong> e 
+                                        <strong className="text-white"> Tailwind CSS</strong>, seguindo princípios de design system.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
 
-                    className="text-gray-300 text-lg mb-12 text-center max-w-2x mx-auto"
-                    variants={fadeInUpVariants}
-                    custom={1}
-                >
-                    Desenvolvedora Full Stack com foco em front-end, atuo desde 2022 criando interfaces modernas e acessíveis com React , 
-                    TypeScript , Next.js , Vite , ShadCN UI e Tailwind CSS , seguindo princípios de design system.
-                    Há 1,5 ano também desenvolvo soluções no back-end com Python , Django , FastAPI , Node.js e bancos de dados como MySQL e PostgreSQL .
-                    Tenho experiência em UX/UI e web design desde 2014, colaborando com equipes multidisciplinares para entregar produtos com foco na experiência do usuário e acessibilidade (A11Y).
-                    Apaixonada por tecnologia e metodologias ágeis, sempre em busca de criar soluções inovadoras e eficientes.
-                </motion.p>
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/30">
+                                <div className="flex items-start gap-4">
+                                    <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-teal-500 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                                        <FaServer className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div className="text-left">
+                                        <h4 className="text-lg font-semibold text-white mb-2">Backend & Dados</h4>
+                                        <p className="text-gray-300 text-sm leading-relaxed">
+                                            Há <strong className="text-white">1,5 ano</strong> desenvolvo soluções com 
+                                            <strong className="text-white"> Python, Django, FastAPI, Node.js</strong> e 
+                                            bancos como <strong className="text-white">MySQL e PostgreSQL</strong>.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/30">
+                                <div className="flex items-start gap-4">
+                                    <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                                        <FaHeart className="w-6 h-6 text-white" />
+                                    </div>
+                                    <div className="text-left">
+                                        <h4 className="text-lg font-semibold text-white mb-2">Design & UX</h4>
+                                        <p className="text-gray-300 text-sm leading-relaxed">
+                                            Experiência em <strong className="text-white">UX/UI e web design desde 2014</strong>, 
+                                            colaborando com equipes para entregar produtos com foco em 
+                                            <strong className="text-white"> experiência do usuário e acessibilidade</strong>.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 backdrop-blur-sm rounded-2xl p-6 border border-blue-500/20 text-center">
+                            <p className="text-gray-200 text-base">
+                                <span className="text-blue-400 font-semibold">Apaixonada por tecnologia</span> e 
+                                metodologias ágeis, sempre em busca de criar 
+                                <strong className="text-white"> soluções inovadoras e eficientes</strong>.
+                            </p>
+                        </div>
+                    </motion.div>
+                </div>
 
                 <motion.div
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+                    className="mb-8"
                     variants={fadeInUpVariants}
                     custom={2}
                 >
-                    {skillsData.map((skill, index) => (
-                        <SkillCard
-                            key={index}
-                            {...skill}
-                            index={index + 2}
-                        />
-                    ))}
+                    <h3 className="text-2xl font-bold text-center text-white mb-8">
+                        Minha Trajetória
+                    </h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {skillsData.map((skill, index) => (
+                            <SkillCard
+                                key={index}
+                                {...skill}
+                                index={index + 3}
+                            />
+                        ))}
+                    </div>
                 </motion.div>
             </div>
         </motion.section>
