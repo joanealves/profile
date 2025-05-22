@@ -5,10 +5,12 @@ const NeuralNetworkBackground: React.FC = () => {
     const mousePositionRef = useRef({ x: 0, y: 0 });
     const animationFrameRef = useRef<number | null>(null);
     const particlesRef = useRef<any[]>([]);
+    const containerRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         const canvas = canvasRef.current;
-        if (!canvas) return;
+        const container = containerRef.current;
+        if (!canvas || !container) return;
 
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
@@ -94,9 +96,10 @@ const NeuralNetworkBackground: React.FC = () => {
         };
 
         const setCanvasDimensions = () => {
-            if (canvas) {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
+            if (canvas && container) {
+                const rect = container.getBoundingClientRect();
+                canvas.width = rect.width;
+                canvas.height = rect.height;
 
                 initParticles();
             }
@@ -145,22 +148,29 @@ const NeuralNetworkBackground: React.FC = () => {
         const throttleMs = 16;
 
         const handleMouseMove = (event: MouseEvent) => {
+            if (!container) return;
+            
             const currentTime = Date.now();
             if (currentTime - lastTime < throttleMs) return;
 
             lastTime = currentTime;
-            mousePositionRef.current = { x: event.clientX, y: event.clientY };
+            
+            const rect = container.getBoundingClientRect();
+            mousePositionRef.current = { 
+                x: event.clientX - rect.left, 
+                y: event.clientY - rect.top 
+            };
         };
 
         const handleResize = () => {
             setCanvasDimensions();
         };
 
-        window.addEventListener('mousemove', handleMouseMove);
+        container.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('resize', handleResize);
 
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
+            container.removeEventListener('mousemove', handleMouseMove);
             window.removeEventListener('resize', handleResize);
             if (animationFrameRef.current !== null) {
                 cancelAnimationFrame(animationFrameRef.current);
@@ -169,10 +179,15 @@ const NeuralNetworkBackground: React.FC = () => {
     }, []);
 
     return (
-        <canvas
-            ref={canvasRef}
-            className="fixed inset-0 z-0 opacity-40 pointer-events-none"
-        />
+        <div 
+            ref={containerRef}
+            className="absolute inset-0 w-full h-full overflow-hidden"
+        >
+            <canvas
+                ref={canvasRef}
+                className="absolute inset-0 w-full h-full opacity-40 pointer-events-none"
+            />
+        </div>
     );
 };
 

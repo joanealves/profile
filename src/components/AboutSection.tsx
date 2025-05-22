@@ -143,14 +143,15 @@ const AboutSection = () => {
 
                 <motion.p
 
-                    className="text-gray-300 text-lg mb-12 text-center max-w-2x0 mx-auto"
+                    className="text-gray-300 text-lg mb-12 text-center max-w-2x mx-auto"
                     variants={fadeInUpVariants}
                     custom={1}
                 >
-                    Desenvolvedora Full Stack, especializada em tecnologias front-end, como React, TypeScript, Next.js e Vite. Trabalho com tecnologias modernas como ShadCN UI e Tailwind, seguindo os princípios de design system. Com isso entrego interfaces consistentes, acessíveis e eficientes.. Minha trajetória profissional é marcada pela liderança de projetos full stack e pela colaboração próxima com equipes de UX/UI, onde implemento soluções tecnológicas que priorizam a experiência do usuário e a acessibilidade.
-                   
-                    Comprometida com boas práticas de programação, e metodologias ágeis. Minha abordagem combina
-                    criatividade e eficiência para entregar soluções robustas e alinhadas às necessidades do projeto.
+                    Desenvolvedora Full Stack com foco em front-end, atuo desde 2022 criando interfaces modernas e acessíveis com React , 
+                    TypeScript , Next.js , Vite , ShadCN UI e Tailwind CSS , seguindo princípios de design system.
+                    Há 1,5 ano também desenvolvo soluções no back-end com Python , Django , FastAPI , Node.js e bancos de dados como MySQL e PostgreSQL .
+                    Tenho experiência em UX/UI e web design desde 2014, colaborando com equipes multidisciplinares para entregar produtos com foco na experiência do usuário e acessibilidade (A11Y).
+                    Apaixonada por tecnologia e metodologias ágeis, sempre em busca de criar soluções inovadoras e eficientes.
                 </motion.p>
 
                 <motion.div

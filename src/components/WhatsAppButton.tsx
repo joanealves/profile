@@ -10,6 +10,7 @@ const WhatsAppButton = () => {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label="Abrir conversa no WhatsApp"
       className="fixed bottom-6 right-6 z-50"
     >
       <div className="backdrop-blur-md bg-white/30 hover:bg-white/40 text-white shadow-lg p-4 rounded-full transition-all duration-300 cursor-pointer">

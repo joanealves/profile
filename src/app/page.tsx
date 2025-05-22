@@ -26,7 +26,6 @@ import HeroSection from "../components/HeroSection";
 import AboutSection from "../components/AboutSection";
 import ProjectsSection from "../components/ProjectsSection"
 import ModernSkillsSection from "../components/ModernSkillsSection";
-import NeuralNetworkBackground from "../components/NeuralNetworkBackground";
 import Footer from "../components/Footer";
 
 const fadeInUpVariants = {
@@ -258,7 +257,6 @@ export default function Portfolio() {
 
   return (
     <div className="bg-gray-900 text-white min-h-screen relative">
-      <NeuralNetworkBackground />
 
       <div className="relative z-10">
         <Header />
