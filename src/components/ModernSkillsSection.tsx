@@ -1,268 +1,210 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface Skill {
   id: string;
   name: string;
   category: string;
-  experience: number; // 0-100
-  related: string[];
+  experience: number;
   color: string;
+  status: "Expert" | "Advanced" | "Intermediate";
 }
 
-const ModernSkillsSection: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-  const [activeSkill, setActiveSkill] = useState<string | null>(null);
+const CompactDashboardSkills: React.FC = () => {
+  const [activeTab, setActiveTab] = useState("overview");
 
   const skillsData: Skill[] = [
-    { id: "react", name: "React", category: "Frontend", experience: 90, related: ["javascript", "typescript", "nextjs"], color: "#61DAFB" },
-    { id: "javascript", name: "JavaScript", category: "Frontend", experience: 90, related: ["react", "typescript", "nodejs"], color: "#F7DF1E" },
-    { id: "typescript", name: "TypeScript", category: "Frontend", experience: 80, related: ["javascript", "react", "nextjs"], color: "#3178C6" },
-    { id: "nextjs", name: "Next.js", category: "Frontend", experience: 75, related: ["react", "typescript"], color: "#000000" },
-    { id: "tailwind", name: "Tailwind", category: "Frontend", experience: 85, related: ["css", "react"], color: "#06B6D4" },
-    { id: "css", name: "CSS", category: "Frontend", experience: 90, related: ["tailwind"], color: "#1572B6" },
-    { id: "framer", name: "Framer Motion", category: "Frontend", experience: 70, related: ["react"], color: "#0055FF" },
-
-    { id: "python", name: "Python", category: "Backend", experience: 70, related: ["django", "fastapi"], color: "#3776AB" },
-    { id: "django", name: "Django", category: "Backend", experience: 60, related: ["python"], color: "#092E20" },
-    { id: "fastapi", name: "FastAPI", category: "Backend", experience: 70, related: ["python"], color: "#009688" },
-    { id: "nodejs", name: "Node.js", category: "Backend", experience: 60, related: ["javascript"], color: "#339933" },
-
-    { id: "sql", name: "SQL", category: "Database", experience: 75, related: ["postgres"], color: "#4479A1" },
-    { id: "postgres", name: "Postgres", category: "Database", experience: 60, related: ["sql"], color: "#336791" },
-
-    { id: "figma", name: "Figma", category: "Design", experience: 90, related: ["uxui"], color: "#F24E1E" },
-    { id: "uxui", name: "UX/UI Design", category: "Design", experience: 90, related: ["figma"], color: "#FF61F6" },
-
-    { id: "git", name: "Git", category: "Tools", experience: 85, related: [], color: "#F05032" },
+    { id: "react", name: "React", category: "Frontend", experience: 90, color: "#61DAFB", status: "Expert" },
+    { id: "javascript", name: "JavaScript", category: "Frontend", experience: 90, color: "#F7DF1E", status: "Expert" },
+    { id: "Next", name: "Nextjs", category: "Frontend", experience: 90, color: "#F24E1E", status: "Expert" },
+    { id: "typescript", name: "TypeScript", category: "Frontend", experience: 80, color: "#3178C6", status: "Advanced" },
+    { id: "python", name: "Python", category: "Backend", experience: 70, color: "#3776AB", status: "Advanced" },
+    { id: "sql", name: "SQL", category: "Database", experience: 75, color: "#4479A1", status: "Advanced" },
   ];
 
-  const categories = Array.from(new Set(skillsData.map(skill => skill.category)));
-
-  const filteredSkills = activeCategory
-    ? skillsData.filter(skill => skill.category === activeCategory)
-    : skillsData;
-
-
-  const handleCategoryClick = (category: string) => {
-    setActiveCategory(activeCategory === category ? null : category);
-    setActiveSkill(null);
+  const categories = ["Frontend", "Backend", "Database", "Design"];
+  
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "Expert": return "text-green-400 bg-green-400/20";
+      case "Advanced": return "text-blue-400 bg-blue-400/20";
+      case "Intermediate": return "text-yellow-400 bg-yellow-400/20";
+      default: return "text-slate-400 bg-slate-400/20";
+    }
   };
 
   return (
-    <section className="py-16 px-4 md:px-8 bg-gray-900">
-      <div className="max-w-6xl mx-auto">
-        <motion.h2 
-          className="text-3xl font-bold mb-8 text-center"
+    <section className="py-16 bg-slate-900/95">
+      <div className="max-w-4xl mx-auto px-4">
+        <motion.div
+          className="text-center mb-8"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
         >
-          Minhas Habilidades Técnicas
-        </motion.h2>
-
-        <motion.div 
-          className="flex flex-wrap justify-center gap-3 mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-        >
-          <motion.button
-            className={`px-4 py-2 rounded-md transition-all ${
-              activeCategory === null 
-                ? "bg-purple-600 text-white font-medium shadow-lg shadow-purple-500/20" 
-                : "bg-gray-800 text-gray-300 hover:bg-gray-700"
-            }`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              setActiveCategory(null);
-              setActiveSkill(null);
-            }}
-          >
-            Todas
-          </motion.button>
-          
-          {categories.map((category) => (
-            <motion.button
-              key={category}
-              className={`px-4 py-2 rounded-md transition-all ${
-                activeCategory === category 
-                  ? "bg-purple-600 text-white font-medium shadow-lg shadow-purple-500/20" 
-                  : "bg-gray-800 text-gray-300 hover:bg-gray-700"
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => handleCategoryClick(category)}
-            >
-              {category}
-            </motion.button>
-          ))}
+          <h2 className="text-2xl md:text-3xl font-bold text-slate-200 mb-2">
+            Tech Stack Dashboard
+          </h2>
+          <p className="text-slate-400 text-sm">
+            Skills overview • Real-time proficiency
+          </p>
         </motion.div>
 
-        <div className="space-y-10">
-          {!activeCategory && (
-            <>
-              {categories.map((category, i) => (
-                <motion.div 
-                  key={category}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 + i * 0.1 }}
-                  className="mb-8"
-                >
-                  <div className="flex items-center mb-4">
-                    <h3 className="text-xl font-semibold text-gray-100">{category}</h3>
-                    <div className="ml-4 h-px bg-gray-700 flex-grow"></div>
-                  </div>
-                  
-                  <div className="flex flex-wrap gap-3">
+        <motion.div
+          className="bg-slate-800/80 rounded-xl border border-slate-700/50 overflow-hidden shadow-2xl"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
+          <div className="bg-slate-700/50 px-4 md:px-6 py-3 border-b border-slate-600/50">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="flex gap-1">
+                  <div className="w-2 h-2 rounded-full bg-red-400"></div>
+                  <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
+                  <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                </div>
+                <span className="text-slate-300 text-sm font-medium ml-2">skills-dashboard</span>
+              </div>
+              <div className="text-xs text-slate-400 hidden md:block">
+                Last updated: now
+              </div>
+            </div>
+          </div>
+
+          <div className="flex border-b border-slate-700/50">
+            <button
+              className={`px-4 py-2 text-sm font-medium transition-colors ${
+                activeTab === "overview"
+                  ? "text-blue-400 border-b-2 border-blue-400 bg-slate-700/30"
+                  : "text-slate-400 hover:text-slate-300"
+              }`}
+              onClick={() => setActiveTab("overview")}
+            >
+              Overview
+            </button>
+            <button
+              className={`px-4 py-2 text-sm font-medium transition-colors ${
+                activeTab === "details"
+                  ? "text-blue-400 border-b-2 border-blue-400 bg-slate-700/30"
+                  : "text-slate-400 hover:text-slate-300"
+              }`}
+              onClick={() => setActiveTab("details")}
+            >
+              Details
+            </button>
+          </div>
+
+          <div className="p-4 md:p-6">
+            {activeTab === "overview" && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="space-y-6"
+              >
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {categories.map((category) => {
+                    const categorySkills = skillsData.filter(s => s.category === category);
+                    const avgExp = Math.round(
+                      categorySkills.reduce((sum, skill) => sum + skill.experience, 0) / categorySkills.length
+                    );
+                    
+                    return (
+                      <div key={category} className="bg-slate-700/40 rounded-lg p-3 text-center">
+                        <div className="text-lg font-bold text-slate-200">{categorySkills.length}</div>
+                        <div className="text-xs text-slate-400 mb-1">{category}</div>
+                        <div className="text-xs text-blue-400">{avgExp}% avg</div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div>
+                  <h3 className="text-sm font-medium text-slate-300 mb-3">Top Skills</h3>
+                  <div className="space-y-2">
                     {skillsData
-                      .filter(skill => skill.category === category)
-                      .map((skill) => (
-                        <SkillBadge 
-                          key={skill.id} 
-                          skill={skill} 
-                          isActive={activeSkill === skill.id}
-                          onClick={() => setActiveSkill(activeSkill === skill.id ? null : skill.id)}
-                        />
+                      .sort((a, b) => b.experience - a.experience)
+                      .slice(0, 4)
+                      .map((skill, index) => (
+                        <motion.div
+                          key={skill.id}
+                          className="flex items-center gap-3"
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                        >
+                          <div 
+                            className="w-2 h-2 rounded-full"
+                            style={{ backgroundColor: skill.color }}
+                          />
+                          <span className="text-sm text-slate-300 min-w-0 flex-1">{skill.name}</span>
+                          <span className={`text-xs px-2 py-0.5 rounded ${getStatusColor(skill.status)}`}>
+                            {skill.status}
+                          </span>
+                          <span className="text-xs text-slate-400 w-8 text-right">{skill.experience}%</span>
+                        </motion.div>
                       ))}
                   </div>
-                </motion.div>
-              ))}
-            </>
-          )}
-
-          {activeCategory && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="flex flex-wrap gap-3"
-            >
-              {filteredSkills.map((skill) => (
-                <SkillBadge 
-                  key={skill.id} 
-                  skill={skill} 
-                  isActive={activeSkill === skill.id}
-                  onClick={() => setActiveSkill(activeSkill === skill.id ? null : skill.id)}
-                />
-              ))}
-            </motion.div>
-          )}
-        </div>
-
-        <AnimatePresence>
-          {activeSkill && (
-            <motion.div 
-              className="mt-12 p-6 rounded-xl bg-gray-800 border border-gray-700 shadow-xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 10 }}
-              transition={{ duration: 0.3 }}
-            >
-              {skillsData.filter(skill => skill.id === activeSkill).map(skill => (
-                <div key={skill.id}>
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-xl font-bold" style={{ color: skill.color }}>{skill.name}</h3>
-                    <div className="px-3 py-1 rounded-full text-sm" style={{ backgroundColor: `${skill.color}20`, color: skill.color }}>
-                      {skill.category}
-                    </div>
-                  </div>
-                  
-                  <div className="mb-6">
-                    <div className="flex justify-between text-sm mb-1">
-                      <span className="text-gray-400">Experiência</span>
-                      <span className="text-gray-300">{skill.experience}%</span>
-                    </div>
-                    <div className="w-full h-2 bg-gray-700 rounded-full overflow-hidden">
-                      <motion.div 
-                        className="h-full rounded-full"
-                        style={{ backgroundColor: skill.color }}
-                        initial={{ width: 0 }}
-                        animate={{ width: `${skill.experience}%` }}
-                        transition={{ duration: 0.8, ease: "easeOut" }}
-                      />
-                    </div>
-                  </div>
-                  
-                  {skill.related.length > 0 && (
-                    <div>
-                      <h4 className="text-sm text-gray-400 mb-2">Relacionado com:</h4>
-                      <div className="flex flex-wrap gap-2">
-                        {skill.related.map(relId => {
-                          const relatedSkill = skillsData.find(s => s.id === relId);
-                          return relatedSkill ? (
-                            <span
-                              key={relId}
-                              className="text-xs px-2 py-1 rounded-full cursor-pointer"
-                              style={{
-                                backgroundColor: `${relatedSkill.color}20`,
-                                color: relatedSkill.color,
-                                border: `1px solid ${relatedSkill.color}50`
-                              }}
-                              onClick={() => setActiveSkill(relId)}
-                            >
-                              {relatedSkill.name}
-                            </span>
-                          ) : null;
-                        })}
-                      </div>
-                    </div>
-                  )}
                 </div>
-              ))}
-            </motion.div>
-          )}
-        </AnimatePresence>
+              </motion.div>
+            )}
+
+            {activeTab === "details" && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="space-y-3"
+              >
+                {skillsData.map((skill, index) => (
+                  <motion.div
+                    key={skill.id}
+                    className="flex items-center justify-between py-2 px-3 bg-slate-700/30 rounded-lg hover:bg-slate-700/50 transition-colors"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <div className="flex items-center gap-3 min-w-0 flex-1">
+                      <div 
+                        className="w-2 h-2 rounded-full flex-shrink-0"
+                        style={{ backgroundColor: skill.color }}
+                      />
+                      <span className="text-sm text-slate-200 truncate">{skill.name}</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-3">
+                      <div className="hidden md:block w-16 h-1 bg-slate-600 rounded-full overflow-hidden">
+                        <motion.div
+                          className="h-full rounded-full"
+                          style={{ backgroundColor: skill.color }}
+                          initial={{ width: 0 }}
+                          animate={{ width: `${skill.experience}%` }}
+                          transition={{ duration: 0.8, delay: index * 0.1 }}
+                        />
+                      </div>
+                      <span className="text-xs text-slate-400 w-8 text-right">{skill.experience}%</span>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            )}
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="text-center mt-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+        >
+          <p className="text-xs text-slate-500">
+            Dashboard simulado • Dados atualizados automaticamente
+          </p>
+        </motion.div>
       </div>
     </section>
   );
 };
 
-interface SkillBadgeProps {
-  skill: Skill;
-  isActive: boolean;
-  onClick: () => void;
-}
-
-const SkillBadge: React.FC<SkillBadgeProps> = ({ skill, isActive, onClick }) => {
-  return (
-    <motion.div
-      className={`px-4 py-2 rounded-lg cursor-pointer transition-all shadow-sm ${
-        isActive 
-          ? "shadow-lg" 
-          : "hover:shadow-md"
-      }`}
-      style={{
-        backgroundColor: isActive ? `${skill.color}30` : "rgba(31, 41, 55, 0.8)",
-        border: `1px solid ${isActive ? skill.color : "rgba(75, 85, 99, 0.4)"}`,
-        color: isActive ? skill.color : "#e5e7eb"
-      }}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      onClick={onClick}
-      layout
-    >
-      <div className="flex items-center gap-2">
-        <span className="font-medium">{skill.name}</span>
-        
-        <div className="flex items-center justify-end">
-          <div className="flex space-x-0.5">
-            {[1, 2, 3, 4, 5].map((level) => (
-              <div
-                key={level}
-                className="w-1 h-1 rounded-full"
-                style={{
-                  backgroundColor: skill.experience >= level * 20 ? skill.color : "rgba(75, 85, 99, 0.4)"
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-export default ModernSkillsSection;
+export default CompactDashboardSkills;
