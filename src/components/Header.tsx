@@ -85,19 +85,15 @@ const Header = () => {
   const navItems = useMemo(() => [
     { label: "Sobre", href: "#about", id: "about" },
     { label: "Projetos", href: "#projects", id: "projects" },
-    { label: "Skills", href: "#modernskills", id: "modernskills" },
+    { label: "Skills", href: "#modernSkills", id: "modernSkills" },
     { label: "Contato", href: "#contact", id: "contact" },
-    { label: "UX/UI", href: "/uxui", id: "uxui", external: true }
+    { label: "UX/UI", href: "#uxshowcase", id: "uxshowcase" },
   ], []);
 
   const NavItem = React.memo(({ item, isMobile = false }: { item: typeof navItems[0], isMobile?: boolean }) => {
     const handleClick = useCallback((e: React.MouseEvent) => {
       e.preventDefault();
-      if (item.external) {
-        window.location.href = item.href;
-      } else {
-        handleNavItemClick(item.id);
-      }
+      handleNavItemClick(item.id);
     }, [item]);
 
     const baseClasses = isMobile 

@@ -52,7 +52,7 @@ const ModernSkillsSection: React.FC = () => {
 
   return (
     <section 
-      id="skills"
+      id="modernSkills"
       className="py-16 bg-gradient-to-br from-gray-900 via-gray-800 to-slate-900"
       aria-labelledby="skills-heading"
     >

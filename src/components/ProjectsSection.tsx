@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
-import { ArrowRightIcon, ExternalLinkIcon, GitHubLogoIcon } from "@radix-ui/react-icons";
+import { ArrowRightIcon, ExternalLinkIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 
 interface Project {
@@ -84,14 +84,6 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 
                 <CardFooter className="pt-0 group-hover:opacity-100 transition-all duration-300 -mt-4 group-hover:mt-0">
                     <div className="flex gap-3">
-                        {project.githubUrl && (
-                            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                                <Button size="sm" variant="outline" className="bg-gray-700 hover:bg-gray-600 border-gray-600 text-white">
-                                    <GitHubLogoIcon className="mr-2 h-4 w-4" />
-                                    Código
-                                </Button>
-                            </a>
-                        )}
                         {project.liveUrl && (
                             <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                                 <Button size="sm" variant="outline" className="bg-blue-400 hover:bg-blue-300 border-blue-400 text-white">

@@ -1,93 +1,144 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import NeuralNetworkBackground from "../components/NeuralNetworkBackground"
+import { ChevronDownIcon, DownloadIcon, EyeOpenIcon, GitHubLogoIcon, LinkedInLogoIcon } from '@radix-ui/react-icons';
 
-const HeroSection = () => {
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    useEffect(() => {
-        setIsLoaded(true);
-    }, []);
-
-    const staggerContainerVariants = {
-        hidden: {},
-        visible: {
-            transition: {
-                staggerChildren: 0.3
-            }
-        }
-    };
-
-    const fadeInUpVariants = {
-        hidden: {
-            opacity: 0,
-            y: 20
-        },
-        visible: (custom: number) => ({
-            opacity: 1,
-            y: 0,
-            transition: {
-                delay: custom * 0.2,
-                duration: 0.5
-            }
-        })
+const MinimalHeroSection = () => {
+    const scrollToSection = (sectionId: string) => {
+        document.getElementById(sectionId)?.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
     };
 
     return (
-        <div className="relative bg-gray-900 text-white h-screen overflow-hidden">
-            <div className="absolute inset-0 z-0">
-                <NeuralNetworkBackground />
+        <section className="relative bg-gradient-to-b from-gray-900 to-gray-800 min-h-screen flex items-center">
+            <div className="absolute inset-0 opacity-5">
+                <div className="absolute inset-0" style={{
+                    backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+                    backgroundSize: '40px 40px'
+                }}></div>
             </div>
-            
-            <motion.section
-                className="relative flex flex-col items-center justify-center text-center h-full px-4 z-20"
-                initial="hidden"
-                animate={isLoaded ? "visible" : "hidden"}
-                variants={staggerContainerVariants}
-            >
-                <motion.h2
-                    className="text-4xl md:text-6xl font-bold relative z-30"
-                    variants={fadeInUpVariants}
-                    custom={0}
-                >
-                    Desenvolvedora Full Stack
-                </motion.h2>
-                <motion.p
-                    className="mt-4 text-lg md:text-xl text-gray-300 max-w-xl relative z-30"
-                    variants={fadeInUpVariants}
-                    custom={1}
-                >
-                    Especialista em Front-end, React e UX/UI Design, transformando ideias em experiências digitais incríveis.
-                </motion.p>
-                <motion.div
-                    variants={fadeInUpVariants}
-                    custom={2}
-                    className="relative z-30"
-                >
-                    <Button
-                        className="mt-8 px-6 py-6 text-lg bg-purple-600 hover:bg-purple-500 transition-colors"
-                        aria-label="Ver Projetos"
-                        onClick={() => {
-                            document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-                        }}
-                    >
-                        Ver Projetos
-                    </Button>
-                </motion.div>
 
-                <motion.div
-                    className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-300 flex flex-col items-center cursor-pointer"
-                    onClick={() => {
-                        document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
-                    variants={fadeInUpVariants}
-                    custom={3}
-                >
-                </motion.div>
-            </motion.section>
-        </div>    
+            <div className="container mx-auto px-4 py-20 relative z-10">
+                <div className="max-w-4xl mx-auto text-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1.0] }}
+                        className="space-y-8"
+                    >
+                        
+
+                        <div className="space-y-4">
+                            <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+                                <span className="text-white">Joane</span>
+                                <br />
+                                <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                                    Alves
+                                </span>
+                            </h1>
+                            
+                            <h2 className="text-xl md:text-2xl text-gray-300 font-light max-w-2xl mx-auto">
+                                Desenvolvedora Full Stack & UX/UI Designer
+                                <br />
+                                <span className="text-gray-400 text-lg">
+                                    Criando experiências digitais memoráveis
+                                </span>
+                            </h2>
+                        </div>
+                        
+
+                        <motion.div 
+                            className="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4, duration: 0.6 }}
+                        >
+                            {['React', 'Next.js', 'Python', 'UX/UI Design'].map((skill) => (
+                                <span
+                                    key={skill}
+                                    className="px-4 py-2 bg-gray-800/60 border border-gray-700/50 rounded-full text-sm text-gray-300 backdrop-blur-sm hover:bg-gray-700/60 transition-colors"
+                                >
+                                    {skill}
+                                </span>
+                            ))}
+                        </motion.div>
+
+                        <motion.div 
+                            className="flex flex-wrap justify-center gap-4"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.6, duration: 0.6 }}
+                        >
+                            <Button
+                                size="lg"
+                                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-xl font-medium transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105"
+                                onClick={() => scrollToSection('projects')}
+                            >
+                                <EyeOpenIcon className="mr-2 h-4 w-4" />
+                                Ver Projetos
+                            </Button>
+                            
+                           
+                        </motion.div>
+                        
+
+
+                        <motion.div 
+                            className="flex justify-center gap-6 pt-4"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 1, duration: 0.6 }}
+                        >
+                            <a
+                                href="https://github.com/joanealves"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-gray-800 rounded-lg"
+                                aria-label="GitHub"
+                            >
+                                <GitHubLogoIcon className="h-6 w-6" />
+                            </a>
+                            <a
+                                href="https://www.linkedin.com/in/joane-alves-ribeiro/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-gray-400 hover:text-blue-400 transition-colors p-2 hover:bg-gray-800 rounded-lg"
+                                aria-label="LinkedIn"
+                            >
+                                <LinkedInLogoIcon className="h-6 w-6" />
+                            </a>
+                        </motion.div>
+                    </motion.div>
+                    
+
+                    <motion.div
+                        className="flex justify-center mt-16"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.2, duration: 0.6 }}
+                    >
+                        <motion.button
+                            onClick={() => scrollToSection('about')}
+                            className="flex flex-col items-center text-gray-400 hover:text-gray-300 transition-colors group cursor-pointer"
+                            animate={{
+                                y: [0, 8, 0]
+                            }}
+                            transition={{
+                                duration: 2,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                        >
+                            <span className="text-sm mb-2 group-hover:text-gray-300">Saiba mais</span>
+                            <ChevronDownIcon className="h-6 w-6" />
+                        </motion.button>
+                    </motion.div>
+                </div>
+            </div>
+        </section>
     );
 };
 
-export default HeroSection;
+export default MinimalHeroSection;

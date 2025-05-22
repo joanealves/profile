@@ -134,12 +134,6 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
 
         <CardFooter className="pt-0 opacity-0 group-hover:opacity-100 transition-all duration-300 -mt-4 group-hover:mt-0">
           <div className="flex gap-3">
-            {project.githubUrl && (
-              <Button size="sm" variant="outline" className="bg-gray-700 hover:bg-gray-600">
-                <GitHubLogoIcon className="mr-2 h-4 w-4" />
-                Código
-              </Button>
-            )}
             {project.liveUrl && (
               <Button size="sm" variant="outline" className="bg-purple-800 hover:bg-purple-700">
                 <ExternalLinkIcon className="mr-2 h-4 w-4" />
@@ -409,15 +403,6 @@ export default function Portfolio() {
           <p className="text-sm text-white font-medium">LinkedIn</p>
         </motion.a>
 
-        <motion.div className="bg-gray-800/20 backdrop-blur-sm rounded-lg p-3 border border-gray-700/20 text-center">
-          <div className="text-xl font-bold text-slate-400 mb-1">01h</div>
-          <p className="text-xs text-gray-400">Resposta</p>
-        </motion.div>
-
-        <motion.div className="bg-gray-800/20 backdrop-blur-sm rounded-lg p-3 border border-gray-700/20 text-center">
-          <div className="text-xl font-bold text-slate-400 mb-1">+3</div>
-          <p className="text-xs text-gray-400">Anos exp.</p>
-        </motion.div>
       </motion.div>
     </div>
   </div>
