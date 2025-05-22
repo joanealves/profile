@@ -267,46 +267,177 @@ export default function Portfolio() {
 
         <motion.section
           id="contact"
-          className="p-12 bg-gray-800 text-center"
+          className="relative py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-slate-900 overflow-hidden"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainerVariants}
         >
-          <motion.h2
-            className="text-3xl font-bold mb-4"
-            variants={fadeInUpVariants}
-            custom={0}
-          >
-            Contato
-          </motion.h2>
-          <motion.p
-            className="text-gray-400 mb-8"
-            variants={fadeInUpVariants}
-            custom={1}
-          >
-            Vamos construir algo incrível juntos!
-          </motion.p>
-          <motion.div
-            className="flex justify-center gap-8"
-            variants={fadeInUpVariants}
-            custom={2}
-          >
-            {contactLinks.map(({ href, icon, label }) => (
-              <motion.a
-                key={label}
-                href={href}
-                aria-label={`Link para ${label}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-3xl hover:text-purple-400 transition-colors"
-                whileHover={{ scale: 1.2 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+          <div className="absolute inset-0">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-slate-500/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-10 w-96 h-96 bg-gray-500/10 rounded-full blur-3xl"></div>
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="text-center mb-16">
+              <motion.h2
+                className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white via-gray-200 to-slate-400 bg-clip-text text-transparent"
+                variants={fadeInUpVariants}
+                custom={0}
               >
-                {icon}
-              </motion.a>
-            ))}
-          </motion.div>
+                Vamos Conversar?
+              </motion.h2>
+              <motion.p
+                className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed"
+                variants={fadeInUpVariants}
+                custom={1}
+              >
+                Estou sempre aberta para discutir novos projetos, oportunidades criativas ou apenas para trocar uma ideia sobre tecnologia.
+              </motion.p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <motion.div
+                className="space-y-8"
+                variants={fadeInUpVariants}
+                custom={2}
+              >
+                <div className="bg-gray-800/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-700/50">
+                  <h3 className="text-2xl font-bold mb-6 text-white">Entre em Contato</h3>
+                  <div className="space-y-6">
+                    <motion.div 
+                      className="flex items-center space-x-4 group cursor-pointer"
+                      whileHover={{ x: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <div className="w-12 h-12 bg-gradient-to-r from-slate-500 to-slate-600 rounded-xl flex items-center justify-center group-hover:shadow-lg group-hover:shadow-slate-500/25 transition-all">
+                        <EnvelopeClosedIcon className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-400">Email</p>
+                        <p className="text-white font-medium">joane.desenvolvimentoweb@gmail.com</p>
+                      </div>
+                    </motion.div>
+
+                    <motion.div 
+                      className="flex items-center space-x-4 group cursor-pointer"
+                      whileHover={{ x: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center group-hover:shadow-lg group-hover:shadow-green-500/25 transition-all">
+                        <ChatBubbleIcon className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <p className="text-sm text-gray-400">WhatsApp</p>
+                        <p className="text-white font-medium">+55 (31) 98520-1743</p>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  <motion.a
+                    href="https://github.com/joanealves"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 group text-center hover:border-slate-500/50 transition-all"
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <div className="w-12 h-12 bg-gradient-to-r from-gray-700 to-gray-800 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:shadow-lg transition-all">
+                      <GitHubLogoIcon className="w-6 h-6 text-white" />
+                    </div>
+                    <p className="text-white font-medium">GitHub</p>
+                    <p className="text-sm text-gray-400">Meus projetos</p>
+                  </motion.a>
+
+                  <motion.a
+                    href="https://www.linkedin.com/in/joane-alves-ribeiro/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/50 group text-center hover:border-slate-500/50 transition-all"
+                    whileHover={{ y: -5, scale: 1.02 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl flex items-center justify-center mx-auto mb-3 group-hover:shadow-lg group-hover:shadow-blue-500/25 transition-all">
+                      <LinkedInLogoIcon className="w-6 h-6 text-white" />
+                    </div>
+                    <p className="text-white font-medium">LinkedIn</p>
+                    <p className="text-sm text-gray-400">Conecte-se</p>
+                  </motion.a>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="bg-gradient-to-br from-slate-600 to-slate-800 rounded-2xl p-8 text-center relative overflow-hidden"
+                variants={fadeInUpVariants}
+                custom={3}
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-400/20 to-transparent"></div>
+                <div className="relative z-10">
+                  <div className="w-20 h-20 bg-white/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <motion.div
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                    >
+                      <ChatBubbleIcon className="w-10 h-10 text-white" />
+                    </motion.div>
+                  </div>
+                  
+                  <h3 className="text-3xl font-bold mb-4 text-white">
+                    Pronta para começar?
+                  </h3>
+                  <p className="text-slate-100 mb-8 leading-relaxed">
+                    Tenho disponibilidade para novos projetos e adoraria saber mais sobre sua ideia. 
+                    Vamos transformar seu conceito em realidade!
+                  </p>
+                  
+                  <div className="space-y-4">
+                    <motion.a
+                      href="https://wa.me/5531985201743"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center w-full bg-white text-slate-600 font-bold py-4 px-8 rounded-xl hover:bg-gray-400 transition-all shadow-lg"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <ChatBubbleIcon className="mr-3 w-5 h-5" />
+                      Vamos conversar no WhatsApp
+                    </motion.a>
+                    
+                    <motion.a
+                      href="mailto:joane.desenvolvimentoweb@gmail.com"
+                      className="inline-flex items-center justify-center w-full bg-transparent border-2 border-white text-white font-bold py-4 px-8 rounded-xl hover:bg-white hover:text-slate-600 transition-all"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <EnvelopeClosedIcon className="mr-3 w-5 h-5" />
+                      Enviar um email
+                    </motion.a>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            <motion.div
+              className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
+              variants={fadeInUpVariants}
+              custom={4}
+            >
+              <div className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30">
+                <div className="text-3xl font-bold text-slate-400 mb-2">01h</div>
+                <p className="text-gray-300">Tempo médio de resposta</p>
+              </div>
+              <div className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30">
+                <div className="text-3xl font-bold text-slate-400 mb-2">100%</div>
+                <p className="text-gray-300">Projetos entregues</p>
+              </div>
+              <div className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30">
+                <div className="text-3xl font-bold text-slate-400 mb-2">+3</div>
+                <p className="text-gray-300">Anos de experiência</p>
+              </div>
+            </motion.div>
+          </div>
         </motion.section>
 
         <WhatsAppButton />
