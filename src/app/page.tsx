@@ -268,13 +268,13 @@ export default function Portfolio() {
         <UXShowcaseSection />
 
        <motion.section
-  id="contact"
-  className="relative py-12 md:py-16 bg-gradient-to-br from-gray-900 via-gray-800 to-slate-900 overflow-hidden"
-  initial="hidden"
-  whileInView="visible"
-  viewport={{ once: true }}
-  variants={staggerContainerVariants}
->
+        id="contact"
+        className="relative py-12 md:py-16 bg-gradient-to-br from-gray-900 via-gray-800 to-slate-900 overflow-hidden"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={staggerContainerVariants}
+      >
   <div className="absolute inset-0">
     <div className="absolute top-10 left-5 w-32 h-32 md:w-48 md:h-48 bg-slate-500/5 rounded-full blur-2xl"></div>
     <div className="absolute bottom-10 right-5 w-40 h-40 md:w-56 md:h-56 bg-gray-500/5 rounded-full blur-2xl"></div>
@@ -301,7 +301,6 @@ export default function Portfolio() {
     <div className="max-w-4xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-8">
         
-        {/* Card principal de contato */}
         <motion.div
           className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-gray-700/50"
           variants={fadeInUpVariants}
@@ -311,6 +310,7 @@ export default function Portfolio() {
           <div className="space-y-3">
             <motion.a
               href="mailto:joane.desenvolvimentoweb@gmail.com"
+              aria-label="Link email"
               className="flex items-center space-x-3 group cursor-pointer p-2 rounded-lg hover:bg-gray-700/30 transition-all"
               whileHover={{ x: 3 }}
             >
@@ -327,6 +327,7 @@ export default function Portfolio() {
               href="https://wa.me/5531985201743"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Botão de whatsapp"
               className="flex items-center space-x-3 group cursor-pointer p-2 rounded-lg hover:bg-gray-700/30 transition-all"
               whileHover={{ x: 3 }}
             >
@@ -341,7 +342,6 @@ export default function Portfolio() {
           </div>
         </motion.div>
 
-        {/* CTA Card */}
         <motion.div
           className="bg-gradient-to-br from-slate-600 to-slate-800 rounded-xl p-4 md:p-6 text-center relative overflow-hidden"
           variants={fadeInUpVariants}
@@ -364,6 +364,7 @@ export default function Portfolio() {
               href="https://wa.me/5531985201743"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Link Para conversar no whatsapp"
               className="inline-flex items-center justify-center w-full bg-white text-slate-600 font-medium py-2.5 px-4 rounded-lg hover:bg-gray-100 transition-all text-sm"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -375,7 +376,6 @@ export default function Portfolio() {
         </motion.div>
       </div>
 
-      {/* Links sociais */}
       <motion.div
         className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8"
         variants={fadeInUpVariants}
@@ -385,6 +385,7 @@ export default function Portfolio() {
           href="https://github.com/joanealves"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Gihub Joane"
           className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-3 border border-gray-700/30 group text-center hover:border-slate-500/50 transition-all"
           whileHover={{ y: -2 }}
         >
@@ -398,6 +399,7 @@ export default function Portfolio() {
           href="https://www.linkedin.com/in/joane-alves-ribeiro/"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Linkedin Joane"
           className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-3 border border-gray-700/30 group text-center hover:border-blue-500/50 transition-all"
           whileHover={{ y: -2 }}
         >
