@@ -1,5 +1,5 @@
 export async function GET() {
-  const baseUrl = 'https://profile-woad-nine.vercel.app';
+  const baseUrl = 'https://joanealves.vercel.app/';
 
   const routes = [
     '',       

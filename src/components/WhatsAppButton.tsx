@@ -32,7 +32,6 @@ const WhatsAppButton = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
-        {/* Pulso de fundo */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-r from-slate-500 to-slate-600 rounded-full"
           animate={{
@@ -46,7 +45,6 @@ const WhatsAppButton = () => {
           }}
         />
         
-        {/* Anel externo animado */}
         <motion.div
           className="absolute -inset-2 bg-gradient-to-r from-slate-400 to-slate-500 rounded-full opacity-20"
           animate={{
@@ -59,7 +57,6 @@ const WhatsAppButton = () => {
           }}
         />
 
-        {/* Botão principal */}
         <motion.div
           className="relative backdrop-blur-lg bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-500 hover:to-slate-600 text-white shadow-2xl p-4 rounded-full transition-all duration-300 cursor-pointer border border-slate-400/20"
           whileHover={{
@@ -78,7 +75,6 @@ const WhatsAppButton = () => {
             <MessageCircle className="w-6 h-6" />
           </motion.div>
           
-          {/* Partículas flutuantes */}
           <motion.div
             className="absolute -top-1 -right-1 w-2 h-2 bg-slate-400 rounded-full"
             animate={{
@@ -105,7 +101,6 @@ const WhatsAppButton = () => {
           />
         </motion.div>
 
-        {/* Tooltip */}
         <motion.div
           className="absolute right-full mr-3 top-1/2 -translate-y-1/2 whitespace-nowrap"
           initial={{ opacity: 0, x: 10 }}

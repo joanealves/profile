@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Portfólio de Joane Alves  
 
-## Getting Started
+Transformando ideias em experiências digitais incríveis.  
 
-First, run the development server:
+Este é o repositório do meu portfólio pessoal, onde compartilho minha trajetória como **Desenvolvedora Full Stack**, com foco em **UX/UI Design**, **React**, **Next.js** e outras tecnologias modernas.  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+🔗 **[View Live](#)**  
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+📝 **License**  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 💡 Sobre Este Projeto  
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Este portfólio foi construído utilizando as mais recentes tecnologias da web, incluindo:  
 
-## Learn More
+- **Next.js 15** (com Turbopack)  
+- **TypeScript**  
+- **Tailwind CSS**  
+- **Framer Motion** para animações  
+- **Radix UI** para componentes acessíveis  
+- **ShadCN UI**  
+- SEO otimizado com **next-sitemap**, metadados **OpenGraph** e **Schema.org**  
 
-To learn more about Next.js, take a look at the following resources:
+O design é totalmente responsivo, rápido e ideal para mostrar meus projetos, habilidades e para conectar com oportunidades de trabalho.  
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔧 Tecnologias Utilizadas  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Frontend  
+- React, Next.js, TypeScript  
 
-## Deploy on Vercel
+### Styling  
+- Tailwind CSS, ShadCN UI  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Animação  
+- Framer Motion  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Acessibilidade  
+- Radix UI  
+
+### SEO  
+- next-sitemap, OpenGraph, JSON-LD  
+
+### Build Tool  
+- Vercel  
+
+### Design System  
+- UX/UI com Figma  
+
+## 📦 Estrutura do Projeto  
+
+PROFILE/
+├── public/ # Assets estáticos (imagens, favicon, fontes)
+├── src/ # Código-fonte principal
+│ ├── app/ # Configurações e rotas do Next.js
+│ │ ├── sitemap/ # Gerador de sitemap
+│ │ ├── global/ # Estilos globais e variáveis
+│ │ ├── layout.tsx # Layout global
+│ │ ├── page.tsx # Página inicial
+│ ├── componentes/ # Componentes reutilizáveis
+│ ├── lib/ # Bibliotecas e utilitários
+├── components.json # Configuração de componentes
+├── tsconfig.json # Configurações do TypeScript
+├── next-sitemap.js # Configuração do next-sitemap
+├── README.md # Documentação do projeto
+├── package.json # Dependências e scripts do projeto
+
+
+
+## 📞 Contato  
+
+- 💼 [LinkedIn](https://www.linkedin.com/in/joane-alves-ribeiro/)  
+- 📧 Email: **joane.desenvolvimentoweb@gmail.com**  
+- 🌐 [Portfólio Online](https://joanealves.vercel.app/)  
+
+Se você quiser colaborar, dar feedbacks ou conversar sobre novas oportunidades, estou à disposição!  
+
+---
+
+Desenvolvido com ❤️ por **Joane Alves**  
