@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/capa.jpg",
+        url: "/capa.png",
         width: 1200,
         height: 630,
         alt: "Joane Alves -  Desenvolvimento Web | UX/UI"
