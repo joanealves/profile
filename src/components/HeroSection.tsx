@@ -32,22 +32,16 @@ const MinimalHeroSection = () => {
 
                         <div className="space-y-4">
                             <h1 className="text-5xl md:text-7xl font-bold leading-tight">
-                                <span className="text-white">Joane</span>
+                                <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Joane 
+                                    Alves</span>
                                 <br />
-                                <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                                    Alves
-                                </span>
                             </h1>
                             
                             <h2 className="text-xl md:text-2xl text-gray-300 font-light max-w-2xl mx-auto">
                                 Desenvolvedora Full Stack & UX/UI Designer
                                 <br />
-                                <span className="text-gray-400 text-lg">
-                                    Criando experiências digitais memoráveis
-                                </span>
                             </h2>
                         </div>
-                        
 
                         <motion.div 
                             className="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto"

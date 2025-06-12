@@ -90,7 +90,7 @@ const Footer = () => {
                         custom={1}
                     >
                         <div>
-                            <h4 className="text-white font-medium mb-2">Navegação</h4>
+                            <h3 className="text-white font-medium mb-2">Navegação</h3>
                             <ul className="grid grid-cols-2 gap-x-4 space-y-1">
                                 <li><a href="#about" className="hover:text-purple-400 transition-colors">Sobre</a></li>
                                 <li><a href="#projects" className="hover:text-purple-400 transition-colors">Projetos</a></li>

@@ -158,12 +158,11 @@ const AboutSection = () => {
                                     <FaUser className="w-6 h-6 text-white" />
                                 </div>
                                 <div className="text-left">
-                                    <h3 className="text-xl font-semibold text-white mb-3">Minha Jornada</h3>
                                     <p className="text-gray-300 leading-relaxed text-base">
                                         <strong className="text-white">Desenvolvedora Full Stack</strong> com foco em front-end, 
                                         atuo desde <strong className="text-blue-400">2022</strong> criando interfaces modernas e acessíveis. 
-                                        Trabalho com <strong className="text-white">React, TypeScript, Next.js</strong> e 
-                                        <strong className="text-white"> Tailwind CSS</strong>, seguindo princípios de design system.
+                                        Trabalho com <strong className="text-white">React, TypeScript, Next.js, Vite</strong> e 
+                                        <strong className="text-white"> Tailwind CSS</strong>, seguindo princípios de design system. Me preocupando sempre com acessibilidade.
                                     </p>
                                 </div>
                             </div>
@@ -176,11 +175,11 @@ const AboutSection = () => {
                                         <FaServer className="w-6 h-6 text-white" />
                                     </div>
                                     <div className="text-left">
-                                        <h4 className="text-lg font-semibold text-white mb-2">Backend & Dados</h4>
+                                        <h2 className="text-lg font-semibold text-white mb-2">Backend & Dados</h2>
                                         <p className="text-gray-300 text-sm leading-relaxed">
-                                            Há <strong className="text-white">1,5 ano</strong> desenvolvo soluções com 
+                                           Em 2021 comecei a trabalhar com PHP. Desde <strong className="text-white">2023</strong> desenvolvo soluções com 
                                             <strong className="text-white"> Python, Django, FastAPI, Node.js</strong> e 
-                                            bancos como <strong className="text-white">MySQL e PostgreSQL</strong>.
+                                            bancos como <strong className="text-white">MySQL e PostgreSQL</strong>. E agora estou aprofundando em Mongo.
                                         </p>
                                     </div>
                                 </div>
@@ -192,24 +191,17 @@ const AboutSection = () => {
                                         <FaHeart className="w-6 h-6 text-white" />
                                     </div>
                                     <div className="text-left">
-                                        <h4 className="text-lg font-semibold text-white mb-2">Design & UX</h4>
+                                        <h2 className="text-lg font-semibold text-white mb-2">Design & UX</h2>
                                         <p className="text-gray-300 text-sm leading-relaxed">
                                             Experiência em <strong className="text-white">UX/UI e web design desde 2014</strong>, 
                                             colaborando com equipes para entregar produtos com foco em 
-                                            <strong className="text-white"> experiência do usuário e acessibilidade</strong>.
+                                            <strong className="text-white"> experiência do usuário e acessibilidade</strong>. Mas sempre trabalhei com design, fotografia e audiovisual.
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 backdrop-blur-sm rounded-2xl p-6 border border-blue-500/20 text-center">
-                            <p className="text-gray-200 text-base">
-                                <span className="text-blue-400 font-semibold">Apaixonada por tecnologia</span> e 
-                                metodologias ágeis, sempre em busca de criar 
-                                <strong className="text-white"> soluções inovadoras e eficientes</strong>.
-                            </p>
-                        </div>
                     </motion.div>
                 </div>
 

@@ -18,7 +18,7 @@ const fadeInUpVariants = {
 
 export default function UXShowcaseSection() {
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-slate-900" aria-labelledby="ux-journey-heading">
+    <section id='uxshowcase' className="py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-slate-900" aria-labelledby="ux-journey-heading">
       <div className="container mx-auto px-4">
         <motion.div
           className="max-w-4xl mx-auto text-center"
@@ -34,7 +34,7 @@ export default function UXShowcaseSection() {
             variants={fadeInUpVariants}
             custom={1}
           >
-            Minha Jornada no Design
+            Minha Jornada no UX Design
           </motion.h2>
           
           <motion.div 

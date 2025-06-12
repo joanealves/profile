@@ -186,14 +186,7 @@ export default function Portfolio() {
       liveUrl: "https://forceflow.vercel.app/",
     },
      
-    {
-      title: "Website | Portifólio de UX/UI Designer",
-      description: "Desenvolvido em Next.js, pensado para além de demostrar conhecimento em UX/UI, criar um ambiente de aprendizagem divertida para o usuário",
-      technologies: ["Next.js", "Shadcn UI", "Tailwind", "Figma",],
-      image: "/ux_portifolio.gif", 
-      githubUrl: "https://github.com/joanealves/erp_salao",
-      liveUrl: "https://ux-portifolio.vercel.app/"
-    },
+    
     {
       title: "EyeCareAi | Inteligência Artificial aplicada ao bem-estar digital",
       description: "O EyeCareAI é um sistema avançado de monitoramento de saúde ocular que utiliza inteligência artificial e visão computacional para detectar e prevenir fadiga visual, problemas posturais e hábitos prejudiciais durante o uso de computadores. Desenvolvido para promover bem-estar, o sistema monitora em tempo real diversos indicadores de saúde ocular e ergonomia.",
@@ -201,6 +194,14 @@ export default function Portfolio() {
       image: "/eye.png", 
       githubUrl: "https://gamma.app/docs/EyeCareAI-Monitoramento-Inteligente-da-Saude-Ocular-6ha4mz8jhs1vkfn",
       liveUrl: "/eyerai.gif"
+    },
+    {
+      title: "Website | Portifólio de UX/UI Designer",
+      description: "Desenvolvido em Next.js, pensado para além de demostrar conhecimento em UX/UI, criar um ambiente de aprendizagem divertida para o usuário",
+      technologies: ["Next.js", "Shadcn UI", "Tailwind", "Figma",],
+      image: "/ux_portifolio.gif", 
+      githubUrl: "https://github.com/joanealves/erp_salao",
+      liveUrl: "https://ux-portifolio.vercel.app/"
     },
     {
       title: "Mapas Interativos",
