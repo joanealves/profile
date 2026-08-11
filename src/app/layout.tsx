@@ -4,13 +4,13 @@ import "./globals.css";
 import { perfil } from "@/content/perfil";
 
 const inter = Inter({
-  variable: "--font-inter",
+  variable: "--font-sans",
   subsets: ["latin"],
   display: "swap",
 });
 
 const mono = JetBrains_Mono({
-  variable: "--font-mono-code",
+  variable: "--font-mono",
   subsets: ["latin"],
   display: "swap",
 });
