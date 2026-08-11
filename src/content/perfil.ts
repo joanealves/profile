@@ -35,15 +35,27 @@ export const sobre = {
     "Na Realize atuo como frontend sênior e Product Owner: conduzo o time de produto, backlog, sprints e stakeholders, junto da evolução da arquitetura frontend, revisão de código e apoio técnico ao time.",
   ],
   pilares: [
-    ["Frontend sênior", "React, Next.js e TypeScript em produção"],
-    ["Produto & liderança", "Backlog, sprints e time de produto"],
-    ["UX & design system", "Do wireframe ao componente"],
-    ["Backend & IA", "Python, Django e RAG aplicado"],
+    {
+      icone: "Blocks",
+      titulo: "Frontend sênior",
+      desc: "React, Next.js e TypeScript em produção, com arquitetura documentada e revisão de código.",
+    },
+    {
+      icone: "Users",
+      titulo: "Produto & liderança",
+      desc: "Backlog, sprints, stakeholders e condução do time de produto no dia a dia.",
+    },
+    {
+      icone: "PenTool",
+      titulo: "UX & design system",
+      desc: "Base de design desde 2014 — do wireframe ao componente em produção.",
+    },
+    {
+      icone: "BrainCircuit",
+      titulo: "Backend & IA",
+      desc: "Python, Django, FastAPI e RAG aplicado dentro de produto real.",
+    },
   ],
-  foto: {
-    src: "/perfil.jpg",
-    alt: "Joane Alves Ribeiro",
-  },
 } as const;
 
 /** O que eu faço — seis capacidades, com nome de ícone lucide. */

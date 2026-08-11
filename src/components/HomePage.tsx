@@ -6,7 +6,6 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import {
   Accessibility,
   ArrowRight,
-  ArrowUpRight,
   Blocks,
   BrainCircuit,
   Compass,
@@ -352,38 +351,32 @@ export default function HomePage() {
                     </p>
                   </Reveal>
                 ))}
-                <Reveal i={4}>
-                  <div className="mt-8 grid grid-cols-2 gap-3">
-                    {sobre.pilares.map(([t, d]) => (
-                      <div
-                        key={t}
-                        className="rounded-xl border border-[var(--border)] bg-[var(--surface)]/60 p-4"
-                      >
-                        <div className="text-sm font-semibold text-white">{t}</div>
-                        <div className="mt-1 text-sm text-[var(--fg-muted)]">{d}</div>
-                      </div>
-                    ))}
-                  </div>
-                </Reveal>
               </div>
 
-              <Reveal i={2}>
-                <div className="relative">
-                  <div className="pointer-events-none absolute -inset-6 aura" />
-                  <div className="card relative overflow-hidden p-1.5">
-                    <div className="relative aspect-square w-full overflow-hidden rounded-xl border border-[var(--border)]">
-                      <Image
-                        src={sobre.foto.src}
-                        alt={sobre.foto.alt}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 500px"
-                        className="object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)]/80 via-transparent to-transparent" />
-                    </div>
-                  </div>
+              {/* Pilares como cards — no lugar da foto */}
+              <div className="relative">
+                <div className="pointer-events-none absolute -inset-6 aura" />
+                <div className="relative grid gap-4 sm:grid-cols-2">
+                  {sobre.pilares.map((pilar, i) => {
+                    const Icone = ICONES[pilar.icone] ?? Blocks;
+                    return (
+                      <Reveal key={pilar.titulo} i={i}>
+                        <div className="card group h-full p-6">
+                          <div className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--border-strong)] bg-[var(--blue-500)]/10 text-[var(--blue-300)] transition-colors group-hover:bg-[var(--blue-500)]/20">
+                            <Icone className="h-5 w-5" />
+                          </div>
+                          <h3 className="mt-4 font-semibold text-white">
+                            {pilar.titulo}
+                          </h3>
+                          <p className="mt-1.5 text-sm leading-relaxed text-[var(--fg-muted)]">
+                            {pilar.desc}
+                          </p>
+                        </div>
+                      </Reveal>
+                    );
+                  })}
                 </div>
-              </Reveal>
+              </div>
             </div>
           </div>
         </section>
@@ -509,20 +502,9 @@ export default function HomePage() {
             <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {projetos.map((p, i) => {
                 const isGif = p.imagem?.endsWith(".gif");
-                const externo = Boolean(p.link);
-                const Wrapper = externo ? "a" : "article";
                 return (
                   <Reveal key={p.slug} i={i % 3}>
-                    <Wrapper
-                      {...(externo
-                        ? {
-                            href: p.link,
-                            target: "_blank",
-                            rel: "noopener noreferrer",
-                          }
-                        : {})}
-                      className="card group flex h-full flex-col overflow-hidden"
-                    >
+                    <article className="card group flex h-full flex-col overflow-hidden">
                       <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-[var(--border)]">
                         {p.imagem ? (
                           <Image
@@ -555,11 +537,8 @@ export default function HomePage() {
                             </span>
                           )}
                         </div>
-                        <h3 className="mt-3 flex items-center gap-1.5 text-xl font-semibold text-white">
+                        <h3 className="mt-3 text-xl font-semibold text-white">
                           {p.nome}
-                          {externo && (
-                            <ArrowUpRight className="h-4 w-4 text-[var(--fg-subtle)] transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[var(--blue-300)]" />
-                          )}
                         </h3>
                         <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--fg-muted)]">
                           {p.resumo}
@@ -575,7 +554,7 @@ export default function HomePage() {
                           ))}
                         </div>
                       </div>
-                    </Wrapper>
+                    </article>
                   </Reveal>
                 );
               })}
@@ -599,19 +578,31 @@ export default function HomePage() {
 
             <div className="mx-auto mt-16 max-w-3xl">
               <ol className="relative border-l border-[var(--border-strong)]/60 pl-8">
-                {trajetoria.map((item, i) => (
-                  <Reveal key={`${item.empresa}-${item.periodo}`} i={i % 3}>
-                    <li className="group relative pb-12 last:pb-0">
-                      <span
-                        aria-hidden="true"
-                        className={`absolute -left-[38.5px] top-1.5 grid h-5 w-5 place-items-center rounded-full border-2 border-[var(--bg)] transition-transform duration-300 group-hover:scale-110 ${
-                          item.atual
-                            ? "bg-[var(--blue-500)] shadow-[0_0_16px_2px_rgba(37,99,235,0.5)]"
-                            : "bg-[var(--border-strong)]"
-                        }`}
-                      />
+                {trajetoria.map((item) => (
+                  <li
+                    key={`${item.empresa}-${item.periodo}`}
+                    className="group relative pb-14 last:pb-0"
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={`absolute -left-[38.5px] top-1 grid h-5 w-5 place-items-center rounded-full border-2 border-[var(--bg)] transition-transform duration-300 group-hover:scale-110 ${
+                        item.atual
+                          ? "bg-[var(--blue-500)] shadow-[0_0_16px_2px_rgba(37,99,235,0.5)]"
+                          : "bg-[var(--border-strong)]"
+                      }`}
+                    />
 
-                      <div className="flex flex-wrap items-center gap-2">
+                    <Reveal>
+                      {/* Empresa primeiro; o período abaixo, junto do item a que pertence */}
+                      <h3 className="text-lg font-semibold text-white">
+                        {item.empresa}
+                        <span className="font-normal text-[var(--fg-muted)]">
+                          {" "}
+                          · {item.papel}
+                        </span>
+                      </h3>
+
+                      <div className="mt-1.5 flex flex-wrap items-center gap-2">
                         <span className="font-mono text-sm text-[var(--fg-subtle)]">
                           {item.periodo}
                         </span>
@@ -622,19 +613,11 @@ export default function HomePage() {
                         )}
                       </div>
 
-                      <h3 className="mt-2 text-lg font-semibold text-white">
-                        {item.empresa}
-                        <span className="font-normal text-[var(--fg-muted)]">
-                          {" "}
-                          · {item.papel}
-                        </span>
-                      </h3>
-
-                      <p className="mt-2 text-pretty text-sm leading-relaxed text-[var(--fg-muted)]">
+                      <p className="mt-2.5 text-pretty text-sm leading-relaxed text-[var(--fg-muted)]">
                         {item.descricao}
                       </p>
-                    </li>
-                  </Reveal>
+                    </Reveal>
+                  </li>
                 ))}
               </ol>
             </div>
