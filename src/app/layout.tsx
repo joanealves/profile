@@ -16,7 +16,7 @@ const mono = JetBrains_Mono({
 });
 
 const DESCRICAO =
-  "Senior Frontend Engineer. Arquitetura de UI, tempo real resiliente e acessibilidade com React, Next.js e TypeScript.";
+  "Portfolio de Joane Alves Ribeiro. Projetos em React, Next.js, TypeScript e Python, com foco em frontend e base em design.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(perfil.site),
@@ -64,8 +64,8 @@ const jsonLd = {
     "Next.js",
     "TypeScript",
     "Acessibilidade Web",
-    "Arquitetura Frontend",
-    "WebSocket",
+    "Python",
+    "UX/UI",
   ],
 };
 

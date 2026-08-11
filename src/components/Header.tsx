@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { perfil } from "@/content/perfil";
 
 const NAV = [
-  { href: "#cases", rotulo: "Cases" },
-  { href: "#como-trabalho", rotulo: "Como trabalho" },
-  { href: "#stack", rotulo: "Stack" },
+  { href: "#projetos", rotulo: "Projetos" },
   { href: "#trajetoria", rotulo: "Trajetória" },
+  { href: "#stack", rotulo: "Ferramentas" },
+  { href: "#contato", rotulo: "Contato" },
 ];
 
 /**
@@ -57,10 +57,12 @@ export function Header() {
         </nav>
 
         <a
-          href={`mailto:${perfil.email}`}
-          className="rounded-[var(--radius-pill)] border border-line bg-surface px-4 py-2 text-sm font-medium transition-all duration-300 ease-[var(--ease-out-soft)] hover:-translate-y-0.5 hover:border-line-strong hover:bg-surface-hover"
+          href={perfil.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded-[var(--radius-chip)] px-3 py-2 text-sm text-ink-muted transition-colors duration-300 hover:bg-surface hover:text-ink"
         >
-          Contato
+          GitHub
         </a>
       </div>
     </header>
