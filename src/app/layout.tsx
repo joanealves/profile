@@ -1,76 +1,86 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { perfil } from "@/content/perfil";
+import A11yProvider from "@/components/A11yProvider";
 
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"]
+const inter = Inter({
+  variable: "--font-sans",
+  subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"]
+const mono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  display: "swap",
 });
+
+const DESCRICAO =
+  "Portfolio de Joane Alves Ribeiro. Projetos em React, Next.js, TypeScript e Python, com foco em frontend e base em design.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://joanealves.vercel.app/"),
-  title: "Joane Alves | Desenvolvimento Web e UX/UI",
-  description: "Desenvolvedora Full Stack com experiência em UX/UI, React, NestJS TypeScript, Api, Banco de Dados, Python.",
-  keywords: ["Desenvolvimento Web", "UX/UI", "React", "Frontend", "NestJS", "Full Stack", "JavaScript"],
-  authors: [{ name: "Joane Alves", url: "https://joanealves.vercel.app/" }],
-  robots: "index, follow",
+  metadataBase: new URL(perfil.site),
+  title: {
+    default: `${perfil.nome} — ${perfil.cargo}`,
+    template: `%s — ${perfil.nome}`,
+  },
+  description: DESCRICAO,
+  authors: [{ name: perfil.nome, url: perfil.site }],
+  creator: perfil.nome,
+  robots: { index: true, follow: true },
+  alternates: { canonical: perfil.site },
   openGraph: {
-    title: "Joane Alves | Desenvolvimento Web e UX/UI",
-    description: "Especialista em desenvolvimento web moderno e experiência do usuário.",
-    url: "https://joanealves.vercel.app/",
-    type: "website",
-    images: [
-      {
-        url: "/capa.png",
-        width: 1200,
-        height: 630,
-        alt: "Joane Alves -  Desenvolvimento Web | UX/UI"
-      }
-    ],
+    type: "profile",
+    locale: "pt_BR",
+    url: perfil.site,
+    siteName: perfil.nome,
+    title: `${perfil.nome} — ${perfil.cargo}`,
+    description: DESCRICAO,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${perfil.nome} — ${perfil.cargo}`,
+    description: DESCRICAO,
   },
 };
 
+/** JSON-LD: dados batendo com o conteúdo real do site, sem empregador inventado. */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: perfil.nome,
+  url: perfil.site,
+  jobTitle: perfil.cargo,
+  email: `mailto:${perfil.email}`,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Belo Horizonte",
+    addressRegion: "MG",
+    addressCountry: "BR",
+  },
+  sameAs: [perfil.github, perfil.linkedin],
+  knowsAbout: [
+    "React",
+    "Next.js",
+    "TypeScript",
+    "Acessibilidade Web",
+    "Python",
+    "UX/UI",
+  ],
+};
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="pt-BR">
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <link rel="icon" href="/favicon_b.png" sizes="any" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      <body className={`${inter.variable} ${mono.variable}`}>
+        <A11yProvider>{children}</A11yProvider>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Joane Alves",
-              "url": "https://joanealves.vercel.app/",
-              "sameAs": [
-                "https://github.com/joanealves",
-                "https://www.linkedin.com/in/joane-alves-ribeiro/",
-              ],
-              "jobTitle": "Desenvolvedora Full Stack | UXUI Design",
-              "worksFor": { "@type": "Organization", "name": "Schema Desenvolvimento" },
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
       </body>
     </html>
   );
