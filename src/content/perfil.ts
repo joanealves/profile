@@ -2,10 +2,11 @@ import type { GrupoStack, ItemTrajetoria } from "./types";
 
 export const perfil = {
   nome: "Joane Alves Ribeiro",
-  cargo: "Software Engineer",
-  eyebrow: "Software Engineer · Frontend Sênior & Produto",
+  cargo: "Software & Product Engineer",
+  eyebrow: "Software & Product Engineer",
   local: "Belo Horizonte, MG",
   email: "joanealves2011@gmail.com",
+  whatsapp: "https://wa.me/5531985201743",
   github: "https://github.com/joanealves",
   linkedin: "https://www.linkedin.com/in/joane-alves-ribeiro/",
   site: "https://joanealves.vercel.app",
@@ -15,7 +16,7 @@ export const perfil = {
 export const hero = {
   titulo: ["Construo ", "produtos digitais", " da arquitetura à interface."],
   subtitulo:
-    "Engenheira de software com base em design desde 2014. Hoje conduzo frontend e produto na Realize e construo dois SaaS próprios — Agro IA e Schema — decidindo arquitetura, UX e modelo de negócio.",
+    "Engenheira de software com base em design desde 2014. Hoje conduzo frontend e produto no dia a dia, além de construir dois SaaS próprios — Agro IA e Schema — decidindo arquitetura, UX e modelo de negócio.",
   janela: {
     titulo: "agro-ia · mapa de satélite",
     badge: "Produto próprio",
@@ -32,28 +33,28 @@ export const sobre = {
   titulo: "Doze anos entre o design e a engenharia.",
   paragrafos: [
     "Comecei no design em 2014 — identidade visual, motion, interfaces — e migrei para o código para construir o que desenhava. Essa dupla formação define como eu trabalho até hoje: arquitetura pensada desde o wireframe, interface pensada desde o modelo de dados.",
-    "Na Realize atuo como frontend sênior e Product Owner: conduzo o time de produto, backlog, sprints e stakeholders, junto da evolução da arquitetura frontend, revisão de código e apoio técnico ao time.",
+    "Hoje atuo entre engenharia e produto, com responsabilidade sobre a evolução de produtos digitais de ponta a ponta — da priorização e experiência à arquitetura frontend e entrega. Como Frontend Engineer e Product Owner, conduzo backlog, sprints e alinhamentos com stakeholders, além de decisões técnicas, revisão de código e suporte ao time.",
   ],
   pilares: [
     {
       icone: "Blocks",
-      titulo: "Frontend sênior",
-      desc: "React, Next.js e TypeScript em produção, com arquitetura documentada e revisão de código.",
+      titulo: "Frontend Engineering",
+      desc: "React, Next.js e TypeScript em produtos reais, com arquitetura escalável, design systems, performance e revisão de código.",
     },
     {
       icone: "Users",
       titulo: "Produto & liderança",
-      desc: "Backlog, sprints, stakeholders e condução do time de produto no dia a dia.",
+      desc: "Visão de produto, priorização, backlog, sprints e alinhamento entre negócio, design e engenharia.",
     },
     {
       icone: "PenTool",
-      titulo: "UX & design system",
-      desc: "Base de design desde 2014 — do wireframe ao componente em produção.",
+      titulo: "UX & Design Systems",
+      desc: "Base em design desde 2014 — da descoberta e wireframe à arquitetura de componentes em produção.",
     },
     {
       icone: "BrainCircuit",
       titulo: "Backend & IA",
-      desc: "Python, Django, FastAPI e RAG aplicado dentro de produto real.",
+      desc: "Python, Django e FastAPI para APIs, integrações e recursos de IA aplicados a produtos reais.",
     },
   ],
 } as const;

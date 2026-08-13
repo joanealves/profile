@@ -49,46 +49,6 @@ export const projetos: Projeto[] = [
     stack: ["Pesquisa", "WCAG", "Figma", "Design system"],
     verificacao: "confirmado",
   },
-  {
-    slug: "eyecare-ai",
-    nome: "EyeCare AI",
-    tipo: "Visão computacional",
-    ano: "2025",
-    resumo:
-      "Monitoramento de fadiga visual e postura por visão computacional durante o uso do computador.",
-    descricao:
-      "Acompanha sinais de cansaço ocular e postura pela webcam e avisa na hora de parar. Nasceu de um incômodo real com jornadas longas de tela.",
-    stack: ["Python", "OpenCV", "MediaPipe"],
-    imagem: "/eye.png",
-    verificacao: "confirmado",
-  },
-  {
-    slug: "geoview",
-    nome: "GeoView",
-    tipo: "Geoespacial",
-    ano: "2025",
-    resumo: "Visualização de terremotos em tempo real sobre mapa interativo.",
-    descricao:
-      "Consome dados sismográficos públicos com filtro por magnitude e período — e foi onde aprendi a renderizar milhares de pontos num mapa sem travar o navegador.",
-    stack: ["React", "Mapbox", "D3.js"],
-    imagem: "/geo.gif",
-    link: "https://geoview-pj9a.vercel.app/",
-    repo: "https://github.com/joanealves/geoview",
-    verificacao: "confirmado",
-  },
-  {
-    slug: "ai-analyst",
-    nome: "AI Analyst",
-    tipo: "IA · Documentos",
-    ano: "2025",
-    resumo: "Análise automática de PDFs: palavras-chave, sentimento e padrões.",
-    descricao:
-      "Extrai o texto de documentos e devolve o que importa — a ideia era ler relatório longo sem ter que ler relatório longo.",
-    stack: ["Python", "LangChain", "OpenAI", "Streamlit"],
-    imagem: "/capa-ia.png",
-    repo: "https://github.com/joanealves/ia-analyst",
-    verificacao: "confirmado",
-  },
 ];
 
 export const projetosDestaque = projetos.filter((p) => p.destaque);

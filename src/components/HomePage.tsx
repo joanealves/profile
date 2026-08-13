@@ -15,6 +15,7 @@ import {
   Linkedin,
   Mail,
   Menu,
+  MessageCircle,
   PenTool,
   Radio,
   TrendingUp,
@@ -676,6 +677,15 @@ export default function HomePage() {
                 >
                   <Mail className="h-4 w-4" />
                   {perfil.email}
+                </a>
+                <a
+                  href={perfil.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[var(--border-strong)] bg-white/5 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 sm:w-auto"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  WhatsApp
                 </a>
                 <a
                   href={perfil.linkedin}
