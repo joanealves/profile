@@ -177,3 +177,35 @@ html {
     scroll-behavior: auto !important;
   }
 }
+
+/* ============================================================
+   Barra de acessibilidade — classes aplicadas no <html>
+   ============================================================ */
+
+/* Alto contraste: fundo mais escuro, textos e bordas mais claros */
+html.a11y-contrast {
+  --bg: #000105;
+  --bg-elevated: #01060f;
+  --surface: #040b18;
+  --surface-2: #081226;
+  --border: #3b4f7d;
+  --border-strong: #5c74ab;
+  --fg: #ffffff;
+  --fg-muted: #d7e0f4;
+  --fg-subtle: #b3c2e4;
+  --blue-400: #8ab8ff;
+  --blue-300: #b8d4ff;
+}
+
+/* Reduzir animações: mesmo efeito do prefers-reduced-motion,
+   mas por escolha explícita na barra */
+html.a11y-reduce-motion *,
+html.a11y-reduce-motion *::before,
+html.a11y-reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+html.a11y-reduce-motion {
+  scroll-behavior: auto !important;
+}

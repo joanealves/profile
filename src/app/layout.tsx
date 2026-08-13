@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { perfil } from "@/content/perfil";
+import A11yProvider from "@/components/A11yProvider";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -75,7 +76,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`${inter.variable} ${mono.variable}`}>
-        {children}
+        <A11yProvider>{children}</A11yProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

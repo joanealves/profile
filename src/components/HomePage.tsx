@@ -143,6 +143,14 @@ export default function HomePage() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Escape fecha o menu mobile
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
+
   return (
     <div id="top" className="min-h-screen bg-[var(--bg)] text-[var(--fg)]">
       {/* Skip link (a11y) */}
@@ -163,7 +171,10 @@ export default function HomePage() {
             : "border-b border-transparent"
         }`}
       >
-        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+        <nav
+          aria-label="Navegação principal"
+          className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4"
+        >
           <a href="#top" className="flex items-center gap-2.5">
             <span className="grid h-9 w-9 place-items-center rounded-lg border border-[var(--border-strong)] bg-[var(--surface)] font-mono text-sm font-semibold text-[var(--blue-400)]">
               JA
@@ -198,15 +209,25 @@ export default function HomePage() {
           <button
             className="grid h-10 w-10 place-items-center rounded-lg border border-[var(--border)] text-white md:hidden"
             onClick={() => setMenuOpen((v) => !v)}
-            aria-label="Menu"
+            aria-label={
+              menuOpen ? "Fechar menu de navegação" : "Abrir menu de navegação"
+            }
             aria-expanded={menuOpen}
+            aria-controls="menu-mobile"
           >
-            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {menuOpen ? (
+              <X className="h-5 w-5" aria-hidden="true" />
+            ) : (
+              <Menu className="h-5 w-5" aria-hidden="true" />
+            )}
           </button>
         </nav>
 
         {menuOpen && (
-          <div className="border-t border-[var(--border)] bg-[var(--bg)]/95 backdrop-blur-xl md:hidden">
+          <div
+            id="menu-mobile"
+            className="border-t border-[var(--border)] bg-[var(--bg)]/95 backdrop-blur-xl md:hidden"
+          >
             <div className="mx-auto flex max-w-6xl flex-col gap-1 px-6 py-4">
               {NAV.map((item) => (
                 <a
@@ -241,7 +262,7 @@ export default function HomePage() {
           <div className="relative mx-auto max-w-5xl px-6 text-center">
             <Reveal>
               <span className="eyebrow">
-                <span className="relative flex h-2 w-2">
+                <span aria-hidden="true" className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--blue-400)] opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-[var(--blue-400)]" />
                 </span>
@@ -287,14 +308,14 @@ export default function HomePage() {
                 <div className="pointer-events-none absolute -inset-x-10 -top-10 bottom-0 aura" />
                 <div className="card relative overflow-hidden !border-[var(--border-strong)] p-2">
                   <div className="flex items-center gap-1.5 px-3 py-2">
-                    <span className="h-3 w-3 rounded-full bg-[#ff5f57]/70" />
-                    <span className="h-3 w-3 rounded-full bg-[#febc2e]/70" />
-                    <span className="h-3 w-3 rounded-full bg-[#28c840]/70" />
+                    <span aria-hidden="true" className="h-3 w-3 rounded-full bg-[#ff5f57]/70" />
+                    <span aria-hidden="true" className="h-3 w-3 rounded-full bg-[#febc2e]/70" />
+                    <span aria-hidden="true" className="h-3 w-3 rounded-full bg-[#28c840]/70" />
                     <span className="ml-3 font-mono text-xs text-[var(--fg-subtle)]">
                       {hero.janela.titulo}
                     </span>
                     <span className="ml-auto inline-flex items-center gap-1.5 rounded-full border border-emerald-400/30 bg-emerald-400/10 px-2.5 py-0.5 text-[11px] font-medium text-emerald-300">
-                      <span className="relative flex h-1.5 w-1.5">
+                      <span aria-hidden="true" className="relative flex h-1.5 w-1.5">
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                         <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
                       </span>
