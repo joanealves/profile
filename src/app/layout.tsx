@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import { perfil } from "@/content/perfil";
+import { perfil, sobre, stack } from "@/content/perfil";
 import A11yProvider from "@/components/A11yProvider";
 
 const inter = Inter({
@@ -48,25 +48,33 @@ export const metadata: Metadata = {
 /** JSON-LD: dados batendo com o conteúdo real do site, sem empregador inventado. */
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: perfil.nome,
-  url: perfil.site,
-  jobTitle: perfil.cargo,
-  email: `mailto:${perfil.email}`,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "Belo Horizonte",
-    addressRegion: "MG",
-    addressCountry: "BR",
-  },
-  sameAs: [perfil.github, perfil.linkedin],
-  knowsAbout: [
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Acessibilidade Web",
-    "Python",
-    "UX/UI",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${perfil.site}/#pessoa`,
+      name: perfil.nome,
+      url: perfil.site,
+      jobTitle: perfil.cargo,
+      description: sobre.paragrafos[0],
+      email: `mailto:${perfil.email}`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Belo Horizonte",
+        addressRegion: "MG",
+        addressCountry: "BR",
+      },
+      sameAs: [perfil.github, perfil.linkedin],
+      knowsAbout: stack.flatMap((g) => g.itens),
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${perfil.site}/#site`,
+      url: perfil.site,
+      name: perfil.nome,
+      description: DESCRICAO,
+      inLanguage: "pt-BR",
+      author: { "@id": `${perfil.site}/#pessoa` },
+    },
   ],
 };
 
