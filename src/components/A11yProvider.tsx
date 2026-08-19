@@ -2,15 +2,8 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { MotionConfig } from "framer-motion";
-import {
-  Accessibility,
-  Contrast,
-  Minus,
-  Plus,
-  RotateCcw,
-  X,
-  ZapOff,
-} from "lucide-react";
+import { Contrast, Minus, Plus, RotateCcw, X, ZapOff } from "lucide-react";
+import AccessibilityIcon from "@/components/icons/AccessibilityIcon";
 
 /* ------------------------------------------------------------------ */
 /*  Barra de acessibilidade — fonte, contraste e animação.             */
@@ -252,7 +245,7 @@ export default function A11yProvider({
           aria-label="Opções de acessibilidade"
           className="btn-glow grid h-12 w-12 place-items-center rounded-full border border-[var(--blue-500)]/50 bg-[var(--blue-600)] text-white transition-colors hover:bg-[var(--blue-500)]"
         >
-          <Accessibility className="h-6 w-6" aria-hidden="true" />
+          <AccessibilityIcon className="h-6 w-6" />
         </button>
       </div>
     </MotionConfig>

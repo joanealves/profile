@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import {
-  Accessibility,
   ArrowRight,
   Blocks,
   BrainCircuit,
@@ -21,8 +20,8 @@ import {
   TrendingUp,
   Users,
   X,
-  type LucideIcon,
 } from "lucide-react";
+import AccessibilityIcon from "@/components/icons/AccessibilityIcon";
 import {
   capacidades,
   disponibilidade,
@@ -86,13 +85,13 @@ const NAV = [
   { label: "Trajetória", href: "#trajetoria" },
 ];
 
-const ICONES: Record<string, LucideIcon> = {
+const ICONES: Record<string, React.ComponentType<{ className?: string }>> = {
   Blocks,
   PenTool,
   Users,
   Radio,
   BrainCircuit,
-  Accessibility,
+  Accessibility: AccessibilityIcon,
   Compass,
   DraftingCompass,
   Hammer,
