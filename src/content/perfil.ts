@@ -28,6 +28,9 @@ export const hero = {
 export const faixaConfianca =
   "Frontend · Arquitetura · Produto · UX · IA · Acessibilidade";
 
+/** Sinal discreto de disponibilidade no hero — editar ou remover aqui, sem tocar no JSX. */
+export const disponibilidade = "Aberta a novas oportunidades";
+
 /** Quem sou — texto da coluna esquerda + grade 2x2. */
 export const sobre = {
   titulo: "Doze anos entre o design e a engenharia.",

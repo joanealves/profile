@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import {
   capacidades,
+  disponibilidade,
   faixaConfianca,
   hero,
   perfil,
@@ -285,6 +286,12 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal i={3}>
+              <p className="mt-4 text-sm text-[var(--fg-subtle)]">
+                {disponibilidade}
+              </p>
+            </Reveal>
+
+            <Reveal i={4}>
               <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <a
                   href="#sobre"
@@ -303,7 +310,7 @@ export default function HomePage() {
             </Reveal>
 
             {/* Janela de produto real — Agro IA */}
-            <Reveal i={4}>
+            <Reveal i={5}>
               <div className="relative mx-auto mt-20 max-w-4xl">
                 <div className="pointer-events-none absolute -inset-x-10 -top-10 bottom-0 aura" />
                 <div className="card relative overflow-hidden !border-[var(--border-strong)] p-2">
