@@ -36,7 +36,7 @@ export const sobre = {
   titulo: "Doze anos entre o design e a engenharia.",
   paragrafos: [
     "Comecei no design em 2014 — identidade visual, motion, interfaces — e migrei para o código para construir o que desenhava. Essa dupla formação define como eu trabalho até hoje: arquitetura pensada desde o wireframe, interface pensada desde o modelo de dados.",
-    "Hoje atuo entre engenharia e produto, com responsabilidade sobre a evolução de produtos digitais de ponta a ponta — da priorização e experiência à arquitetura frontend e entrega. Como Frontend Engineer e Product Owner, conduzo backlog, sprints e alinhamentos com stakeholders, além de decisões técnicas, revisão de código e suporte ao time.",
+    "Hoje atuo entre engenharia e produto, com responsabilidade sobre a evolução do produto de ponta a ponta. Conduzo backlog, sprints e alinhamentos com stakeholders, decido escopo e prioridades, e sigo na arquitetura front-end, nas decisões técnicas e na revisão de entregas do time.",
   ],
   pilares: [
     {
@@ -47,7 +47,7 @@ export const sobre = {
     {
       icone: "Users",
       titulo: "Produto & liderança",
-      desc: "Visão de produto, priorização, backlog, sprints e alinhamento entre negócio, design e engenharia.",
+      desc: "Responsável pelas decisões de produto: visão, priorização, backlog e sprints, com alinhamento direto entre negócio, design e engenharia — e condução do time de produto.",
     },
     {
       icone: "PenTool",
@@ -128,9 +128,9 @@ export const trajetoria: ItemTrajetoria[] = [
   {
     periodo: "2026 — atual",
     empresa: "Realize",
-    papel: "Frontend Sênior & Product Owner",
+    papel: "Front-end Engineer & Product Manager",
     descricao:
-      "Conduzo o time de produto — backlog, sprints e stakeholders — e a evolução da arquitetura frontend, com revisão de código e apoio técnico ao time. Na prática, a ponte entre a engenharia e o negócio.",
+      "Respondo pelo produto: backlog, sprints, prioridades e alinhamento direto com os donos do negócio — além da evolução da arquitetura front-end, revisão de código e apoio técnico ao time. Participo das reuniões de liderança e sou a ponte entre engenharia e negócio.",
     atual: true,
   },
   {
