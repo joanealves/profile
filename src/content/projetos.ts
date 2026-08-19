@@ -19,6 +19,7 @@ export const projetos: Projeto[] = [
       "A telemetria IoT chega por WebSocket com reconexão em backoff exponencial — e recusa de autenticação não reconecta, porque rede caída é transitório e token inválido não é. Detalhe pequeno, mas é o tipo de decisão que separa tempo real de demo de tempo real de produção.",
     stack: ["Next.js 15", "TypeScript", "Django", "WebSocket", "PostgreSQL", "Playwright"],
     imagem: "/agro-mapa.gif",
+    link: "https://agroiatecnologia.com.br/",
     destaque: true,
     verificacao: "confirmado",
   },

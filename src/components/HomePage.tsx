@@ -581,6 +581,17 @@ export default function HomePage() {
                             </span>
                           ))}
                         </div>
+                        {p.link && (
+                          <a
+                            href={p.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group/link mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--blue-300)] transition-colors hover:text-white"
+                          >
+                            Ver site
+                            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-0.5" />
+                          </a>
+                        )}
                       </div>
                     </article>
                   </Reveal>
