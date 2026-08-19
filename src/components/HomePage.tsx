@@ -748,7 +748,7 @@ export default function HomePage() {
             © {new Date().getFullYear()} {perfil.nome} · {perfil.local}
           </p>
           <p className="font-mono text-xs">
-            Next.js · TypeScript · Tailwind — código próprio, sem template
+            Next.js · TypeScript · Tailwind
           </p>
         </div>
       </footer>
