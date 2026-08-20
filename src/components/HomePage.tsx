@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import {
-  Accessibility,
   ArrowRight,
   Blocks,
   BrainCircuit,
@@ -21,10 +20,11 @@ import {
   TrendingUp,
   Users,
   X,
-  type LucideIcon,
 } from "lucide-react";
+import AccessibilityIcon from "@/components/icons/AccessibilityIcon";
 import {
   capacidades,
+  disponibilidade,
   faixaConfianca,
   hero,
   perfil,
@@ -85,13 +85,13 @@ const NAV = [
   { label: "Trajetória", href: "#trajetoria" },
 ];
 
-const ICONES: Record<string, LucideIcon> = {
+const ICONES: Record<string, React.ComponentType<{ className?: string }>> = {
   Blocks,
   PenTool,
   Users,
   Radio,
   BrainCircuit,
-  Accessibility,
+  Accessibility: AccessibilityIcon,
   Compass,
   DraftingCompass,
   Hammer,
@@ -285,6 +285,12 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal i={3}>
+              <p className="mt-4 text-sm text-[var(--fg-subtle)]">
+                {disponibilidade}
+              </p>
+            </Reveal>
+
+            <Reveal i={4}>
               <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <a
                   href="#sobre"
@@ -303,7 +309,7 @@ export default function HomePage() {
             </Reveal>
 
             {/* Janela de produto real — Agro IA */}
-            <Reveal i={4}>
+            <Reveal i={5}>
               <div className="relative mx-auto mt-20 max-w-4xl">
                 <div className="pointer-events-none absolute -inset-x-10 -top-10 bottom-0 aura" />
                 <div className="card relative overflow-hidden !border-[var(--border-strong)] p-2">
@@ -575,6 +581,17 @@ export default function HomePage() {
                             </span>
                           ))}
                         </div>
+                        {p.link && (
+                          <a
+                            href={p.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group/link mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-[var(--blue-300)] transition-colors hover:text-white"
+                          >
+                            Ver site
+                            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover/link:translate-x-0.5" />
+                          </a>
+                        )}
                       </div>
                     </article>
                   </Reveal>
@@ -741,7 +758,7 @@ export default function HomePage() {
             © {new Date().getFullYear()} {perfil.nome} · {perfil.local}
           </p>
           <p className="font-mono text-xs">
-            Next.js · TypeScript · Tailwind — código próprio, sem template
+            Next.js · TypeScript · Tailwind
           </p>
         </div>
       </footer>
