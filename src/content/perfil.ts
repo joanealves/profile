@@ -128,9 +128,9 @@ export const trajetoria: ItemTrajetoria[] = [
   {
     periodo: "2026 — atual",
     empresa: "Realize",
-    papel: "Front-end Engineer & Product Manager",
+    papel: "Frontend Engineer & Product Owner",
     descricao:
-      "Respondo pelo produto: backlog, sprints, prioridades e alinhamento direto com os donos do negócio — além da evolução da arquitetura front-end, revisão de código e apoio técnico ao time. Participo das reuniões de liderança e sou a ponte entre engenharia e negócio.",
+      "Atuo entre engenharia e produto, conduzindo backlog, priorização, refinamentos, planejamento de sprints e alinhamento com stakeholders. Acompanho as entregas da definição à release, incluindo QA e homologação, enquanto também participo da evolução da arquitetura frontend, code reviews e suporte técnico ao time.",
     atual: true,
   },
   {

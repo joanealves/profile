@@ -611,8 +611,8 @@ export default function HomePage() {
           <div className="mx-auto max-w-6xl px-6">
             <SectionHead
               eyebrow="Trajetória"
-              title="Do design de 2014 à liderança de produto"
-              subtitle="Cada etapa somou uma camada: design, código, backend, UX de produto — e agora a condução de time."
+              title="Do design ao código. Do código ao produto."
+              subtitle="Cada etapa somou uma camada: design, frontend, backend e produto — hoje conecto essas experiências na construção e evolução de produtos digitais."
             />
 
             <div className="mx-auto mt-16 max-w-3xl">
